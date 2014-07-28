@@ -13,7 +13,6 @@ public class DefaultAction extends ActionSupport{
 
 	@Override
 	public String execute(){
-		System.out.println("默认action");
 		log.info("跳转到默认页面");
 		return SUCCESS;
 	}

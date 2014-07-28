@@ -22,9 +22,11 @@
         <global-exception-mappings>
             <exception-mapping exception="java.lang.Exception" result="error"/>
         </global-exception-mappings>
+        
 		<action name="index" class="cn.com.dhcc.cgn.mobins.action.DefaultAction">
             <result>/index.jsp</result>
 		</action>
+		
     </package>
 
     <!-- Add packages here -->
