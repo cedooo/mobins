@@ -1,8 +1,8 @@
-package cn.com.dhcc.cgn.mobins.conf.action;
+package cn.com.dhcc.cgn.mobins.setting.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ConfigManageAction extends ActionSupport{
+public class SettingAction extends ActionSupport{
 
 	/**
 	 * 
