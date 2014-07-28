@@ -1,19 +1,19 @@
-package cn.com.dhcc.cgn.mobins.action;
+package cn.com.dhcc.cgn.mobins.commons.action;
 
 import org.apache.log4j.Logger;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class DefaultAction extends ActionSupport{
+public class IndexAction extends ActionSupport{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4538380752869892985L;
-	private static final Logger log = Logger.getLogger(DefaultAction.class.getClass());
+	private static final Logger log = Logger.getLogger(IndexAction.class.getClass());
 
 	@Override
 	public String execute(){
-		log.info("Ìø×ªµ½Ä¬ÈÏÒ³Ãæ");
+		log.info("ï¿½ï¿½×ªï¿½ï¿½Ä¬ï¿½ï¿½Ò³ï¿½ï¿½");
 		return SUCCESS;
 	}
 }

@@ -23,7 +23,7 @@
             <exception-mapping exception="java.lang.Exception" result="error"/>
         </global-exception-mappings>
         
-		<action name="index" class="cn.com.dhcc.cgn.mobins.action.DefaultAction">
+		<action name="index" class="cn.com.dhcc.cgn.mobins.commons.action.IndexAction">
             <result>/index.jsp</result>
 		</action>
 		
