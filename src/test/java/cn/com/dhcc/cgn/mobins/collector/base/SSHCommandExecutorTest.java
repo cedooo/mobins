@@ -6,6 +6,8 @@ import java.util.Vector;
 
 import org.junit.Test;
 
+import cn.com.dhcc.cgn.mobins.collector.client.base.SSHCommandExecutor;
+
 public class SSHCommandExecutorTest {
 
 	@Test

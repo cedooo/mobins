@@ -1,4 +1,4 @@
-package cn.com.dhcc.cgn.mobins.collector.base;
+package cn.com.dhcc.cgn.mobins.collector.client.base;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Vector;
