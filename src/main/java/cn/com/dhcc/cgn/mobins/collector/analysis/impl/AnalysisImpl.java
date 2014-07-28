@@ -2,7 +2,11 @@ package cn.com.dhcc.cgn.mobins.collector.analysis.impl;
 
 import cn.com.dhcc.cgn.mobins.collector.analysis.Analysis;
 import cn.com.dhcc.cgn.mobins.collector.analysis.rules.AnalysisRules;
-
+/**
+ * Ω‚Œˆ µœ÷
+ * @author CeDo
+ *
+ */
 public class AnalysisImpl extends Analysis{
 
 	@Override
