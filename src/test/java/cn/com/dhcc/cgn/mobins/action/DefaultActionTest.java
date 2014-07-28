@@ -1,9 +1,12 @@
 package cn.com.dhcc.cgn.mobins.action;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
-public class DefaultActionTest extends TestCase {
+import org.junit.Test;
 
+public class DefaultActionTest {
+
+	@Test
 	public void testExecute() {
 		DefaultAction da = new DefaultAction();
 		assertEquals("success", da.execute());
