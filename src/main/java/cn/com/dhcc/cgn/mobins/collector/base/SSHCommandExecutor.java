@@ -91,25 +91,6 @@ public class SSHCommandExecutor {
     	this.stdout.clear();
     }
 
-    public static void main(final String [] args) {
-        SSHCommandExecutor sshExecutor = new SSHCommandExecutor("192.168.1.113", "root", "g667259");
-        sshExecutor.execute("ifconfig");
-        
-        Vector<String> stdout = sshExecutor.getStandardOutput();
-        for (String str : stdout) {
-            System.out.println(str);
-        }
-        sshExecutor.execute("pwd");
-        stdout = sshExecutor.getStandardOutput();
-        for (String str : stdout) {
-            System.out.println(str);
-        }
-        sshExecutor.execute("ping baidu.com -c 5 -i 0.4");
-        stdout = sshExecutor.getStandardOutput();
-        for (String str : stdout) {
-            System.out.println(str);
-        }
-    }
 }
 class MyUserInfo implements UserInfo {
     @Override
