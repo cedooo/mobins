@@ -14,14 +14,14 @@ public final class DBDelegate {
 	static private SqlSessionFactory sqlSessionFactory;
 	static private final String resource = "cn/com/dhcc/cgn/mobins/db/mybatis-config.xml";
 	static{
-		log.info("==============Êı¾İ¿âÁ¬½Ó³õÊ¼»¯==============");
+		log.info("==============æ•°æ®åº“è¿æ¥åˆå§‹åŒ–==============");
 		InputStream inputStream = null;
 		try {
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		} catch (IOException e) {
 			e.printStackTrace();
-			log.fatal("²É¼¯Êı¾İ¿âÁ¬½Ó³ö´í£¬ÎŞ·¨²É¼¯£¡");
+			log.fatal("æ•°æ®åº“è¿æ¥åˆå§‹åŒ–å¤±è´¥");
 		}finally{
 			if(inputStream!=null){
 				try {
@@ -32,8 +32,8 @@ public final class DBDelegate {
 			}
 		}
 		Configuration conf = sqlSessionFactory.getConfiguration();
-		log.info("Êı¾İ¿â»·¾³£º" + conf.getEnvironment().getId());
-		log.info("===========Êı¾İ¿âÁ¬½Ó³õÊ¼»¯--Íê³É£¡===========");
+		log.info("æ•°æ®åº“ç¯å¢ƒ: " + conf.getEnvironment().getId());
+		log.info("===========åˆå§‹åŒ–å®Œæˆ===========");
 	}
 	private DBDelegate(){}
 	static public SqlSessionFactory getSqlSessionFactory() {
