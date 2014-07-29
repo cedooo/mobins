@@ -4,6 +4,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<bean
+		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
 	<!-- 方法二 适用于Quartz2.X版本，耦合性还低 -->
 	<bean id="exampleJob2" class="com.mhy.quartz.ExampleJob2"></bean>
 	<bean id="exampleJob2Detail"
@@ -28,7 +31,8 @@
 			</list>
 		</property>
 	</bean>
-	
-	
+
+	<import resource="daos.xml" />
+	<import resource="services.xml" />
 
 </beans>

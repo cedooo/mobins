@@ -30,6 +30,9 @@
     </package>
 
     <!-- Add packages here -->
+    
+    <include file="cn/com/dhcc/cgn/mobins/report/struts-report.xml"/>
+
     <!-- <include file="tk/cedoo/search/struts-search.xml"/>
     
     <include file="tk/cedoo/manage/struts-manage.xml"/>

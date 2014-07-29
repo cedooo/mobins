@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import cn.com.dhcc.cgn.mobins.db.DBDelegate;
+import cn.com.dhcc.cgn.mobins.db.DBProxy;
 import cn.com.dhcc.cgn.mobins.report.dao.InspectionReport;
 import cn.com.dhcc.cgn.mobins.report.dao.InspectionReportDao;
 
@@ -16,7 +16,7 @@ public class InspectionReportDaoImpl implements InspectionReportDao {
 		List<InspectionReport> list = new ArrayList<InspectionReport>();
 		SqlSession session = null;
 		try{
-			session = DBDelegate.getSqlSessionFactory().openSession();
+			session = DBProxy.getSqlSessionFactory().openSession();
 			List<InspectionReport> listR = session.selectList("cn.com.dhcc.cgn.mobins.report.dao.InspectionReport.selectAll");
 			session.commit();
 			if(listR!=null){
