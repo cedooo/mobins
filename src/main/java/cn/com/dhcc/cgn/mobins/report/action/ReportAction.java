@@ -1,8 +1,8 @@
-package cn.com.dhcc.cgn.mobins.result.action;
+package cn.com.dhcc.cgn.mobins.report.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ResultAction extends ActionSupport{
+public class ReportAction extends ActionSupport{
 
 	/**
 	 * 
