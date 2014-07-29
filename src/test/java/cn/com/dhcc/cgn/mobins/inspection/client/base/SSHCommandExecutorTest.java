@@ -1,4 +1,4 @@
-package cn.com.dhcc.cgn.mobins.inspection.base;
+package cn.com.dhcc.cgn.mobins.inspection.client.base;
 
 import static org.junit.Assert.*;
 
