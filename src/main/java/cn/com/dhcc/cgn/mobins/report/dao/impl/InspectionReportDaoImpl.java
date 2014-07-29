@@ -18,6 +18,7 @@ public class InspectionReportDaoImpl implements InspectionReportDao {
 		try{
 			session = DBDelegate.getSqlSessionFactory().openSession();
 			List<InspectionReport> listR = session.selectList("cn.com.dhcc.cgn.mobins.report.dao.InspectionReport.selectAll");
+			session.commit();
 			if(listR!=null){
 				list.addAll(listR);
 			}
