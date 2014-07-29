@@ -1,6 +1,6 @@
-package cn.com.dhcc.cgn.mobins.collector.analysis.rules;
+package cn.com.dhcc.cgn.mobins.inspection.analysis.rules;
 /**
- * ½âÎö¹æÔò
+ * è§£æè§„åˆ™
  * @author CeDo
  *
  */

@@ -1,30 +1,31 @@
-package cn.com.dhcc.cgn.mobins.collector.analysis;
+package cn.com.dhcc.cgn.mobins.inspection.analysis;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.dhcc.cgn.mobins.collector.analysis.rules.AnalysisRules;
+import cn.com.dhcc.cgn.mobins.inspection.analysis.rules.AnalysisRules;
+
 
 /**
- * ½âÎöÆ÷
+ * è§£æå™¨
  * @author CeDo
  *
  */
 public abstract class Analysis {
-	protected List<AnalysisRules> listRules = new ArrayList<AnalysisRules>();     //½âÎö¹æÔò¼¯ºÏ
+	protected List<AnalysisRules> listRules = new ArrayList<AnalysisRules>();     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò¼¯ºï¿½
 
 	public List<AnalysisRules> getListRules() {
 		return listRules;
 	}
 	/**
-	 * Ìí¼Ó¹æÔò
+	 * æ·»åŠ è§£æè§„åˆ™
 	 * @param rule
 	 * @throws Exception
 	 */
 	public abstract void addRules(AnalysisRules rule) throws Exception;
 	/**
-	 * Ìí¼Ó¹æÔò
-	 * @param list¹æÔò¼¯ºÏ
+	 * æ·»åŠ è§£æè§„åˆ™é›†åˆ
+	 * @param list è§„åˆ™é›†åˆ
 	 * @throws Exception
 	 */
 	public void addAllRules(List<AnalysisRules> list) throws Exception{

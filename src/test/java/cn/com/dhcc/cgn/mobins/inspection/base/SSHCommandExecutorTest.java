@@ -1,4 +1,4 @@
-package cn.com.dhcc.cgn.mobins.collector.base;
+package cn.com.dhcc.cgn.mobins.inspection.base;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,8 @@ import java.util.Vector;
 
 import org.junit.Test;
 
-import cn.com.dhcc.cgn.mobins.collector.client.base.SSHCommandExecutor;
+import cn.com.dhcc.cgn.mobins.inspection.client.base.SSHCommandExecutor;
+
 
 public class SSHCommandExecutorTest {
 
