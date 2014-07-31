@@ -4,29 +4,29 @@ import java.util.List;
 
 import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
 
-public abstract class TargetService {
+public interface TargetService {
 	/**
 	 * 添加巡检目标
 	 * @param target
 	 * @return
 	 */
-	public abstract boolean addTarget(MobInsTarget target);
+	public boolean addTarget(MobInsTarget target);
 	/**
 	 * 删除巡检目标
 	 * @param target
 	 * @return
 	 */
-	public abstract boolean delTarget(MobInsTarget target);
+	public boolean delTarget(MobInsTarget target);
 	/**
 	 * 修改巡检目标
 	 * @param target
 	 * @return
 	 */
-	public abstract boolean modTarget(MobInsTarget target);
+	public boolean modTarget(MobInsTarget target);
 	/**
 	 * 查找巡检目标
 	 * @return
 	 */
-	public abstract List<MobInsTarget> query(MobInsTarget target);
+	public List<MobInsTarget> query(MobInsTarget target);
 	
 }

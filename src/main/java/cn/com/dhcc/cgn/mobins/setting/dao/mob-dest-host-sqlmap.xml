@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.mobins.po.MobDestHost">
+
+	<insert id="insert" parameterType="cn.com.dhcc.cgn.mobins.po.MobDestHost">
+		<![CDATA[
+			INSERT INTO T_MOB_DEST_HOST(
+		       N_TARGET_ID, VC_MOB_DEST_HOST_IP, VC_HOST_USER, VC_HOST_PASSWD		
+				,VC_HOST_NOTE, N_HOST_TYPE, DT_HOST_ADD_TIME
+		    )
+		    VALUES (
+				#{targetID}, 
+				#{mobDestHostIP}, 
+				#{hostUser}, 
+				#{hostPasswd}, 
+				#{hostNote}, 
+				#{hostType}, 
+				getdate()
+			)
+		]]>
+	</insert>
+
+	<update id="del" parameterType="cn.com.dhcc.cgn.mobins.po.MobDestHost">
+		<![CDATA[
+			UPDATE T_MOB_DEST_HOST
+			SET DT_HOST_DEL_TIME = getdate()
+			WHERE N_MOB_DEST_HOST_ID = #{mobDestHostID} AND DT_HOST_DEL_TIME IS NULL
+		]]>
+	</update>
+
+	<update id="update" parameterType="cn.com.dhcc.cgn.mobins.po.MobDestHost">
+		<![CDATA[
+			UPDATE T_MOB_DEST_HOST
+			SET N_TARGET_ID = #{targetID}, VC_MOB_DEST_HOST_IP = #{mobDestHostIP}, VC_HOST_USER = #{hostUser}, 
+				VC_HOST_PASSWD	= #{hostPasswd}, VC_HOST_NOTE = #{hostNote}, N_HOST_TYPE = #{hostType}
+			WHERE N_MOB_DEST_HOST_ID = #{mobDestHostID} AND DT_HOST_DEL_TIME IS NULL
+		]]>
+	</update>
+
+	<resultMap type="cn.com.dhcc.cgn.mobins.po.MobDestHost" id="targetMap">
+		<result column="N_MOB_DEST_HOST_ID" property="mobDestHostID" />
+		<result column="N_TARGET_ID" property="targetID" />
+		<result column="VC_MOB_DEST_HOST_IP" property="mobDestHostIP" />
+		<result column="VC_HOST_USER" property="hostUser" />
+		<result column="VC_HOST_PASSWD" property="hostPasswd" />
+		<result column="VC_HOST_NOTE" property="hostNote" />
+		<result column="N_HOST_TYPE" property="hostType" />
+		<result column="DT_HOST_ADD_TIME" property="hostAddTime" />
+		<result column="DT_HOST_DEL_TIME" property="hostDelTime" />
+	</resultMap>
+
+	<select id="query" resultMap="targetMap">
+		<![CDATA[
+			SELECT * 
+			FROM T_MOB_DEST_HOST
+			WHERE DT_HOST_DEL_TIME IS NULL
+		]]>
+	</select>
+</mapper>

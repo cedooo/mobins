@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
 		<mapper resource="cn/com/dhcc/cgn/mobins/report/dao/report-sqlmap.xml" />
 		<mapper resource="cn/com/dhcc/cgn/mobins/setting/dao/target-sqlmap.xml" />
+		<mapper resource="cn/com/dhcc/cgn/mobins/setting/dao/mob-dest-host-sqlmap.xml" />
 		<!-- 
 		<mapper resource="cn/com/dhcc/inspection/collector/cnf/sqlmap/cnf-sqlmap.xml" />
 		-->
