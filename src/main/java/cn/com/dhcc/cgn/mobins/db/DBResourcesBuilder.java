@@ -9,8 +9,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.Logger;
 
 
-public final class DBProxy {
-	static final private Logger log = Logger.getLogger(DBProxy.class.getClass());
+public final class DBResourcesBuilder {
+	static final private Logger log = Logger.getLogger(DBResourcesBuilder.class.getClass());
 	static private SqlSessionFactory sqlSessionFactory;
 	static private final String resource = "cn/com/dhcc/cgn/mobins/db/mybatis-config.xml";
 	static{
@@ -35,7 +35,7 @@ public final class DBProxy {
 		log.info("数据库环境: " + conf.getEnvironment().getId());
 		log.info("===========初始化完成===========");
 	}
-	private DBProxy(){}
+	private DBResourcesBuilder(){}
 	static public SqlSessionFactory getSqlSessionFactory() {
 		return sqlSessionFactory;
 	}

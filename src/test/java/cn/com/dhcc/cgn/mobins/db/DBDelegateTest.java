@@ -11,7 +11,7 @@ public class DBDelegateTest {
 	public void testGetSqlSessionFactory() {
 		SqlSession session = null;
 		try{
-			session = DBProxy.getSqlSessionFactory().openSession();
+			session = DBResourcesBuilder.getSqlSessionFactory().openSession();
 			session.commit();
 			assertEquals(true, session!=null);
 		}finally{
