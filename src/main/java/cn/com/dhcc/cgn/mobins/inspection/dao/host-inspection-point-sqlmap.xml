@@ -31,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[
 			SELECT * 
 			FROM V_HOST_INSPECTION_POINT
+			ORDER BY N_MOB_DEST_HOST_ID
 		]]>
 	</select>
 </mapper>

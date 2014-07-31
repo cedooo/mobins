@@ -4,35 +4,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean
-		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
-	<!-- 方法二 适用于Quartz2.X版本，耦合性还低 -->
-	<bean id="exampleJob2" class="com.mhy.quartz.ExampleJob2"></bean>
-	<bean id="exampleJob2Detail"
-		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<!-- 指定任务类 -->
-		<property name="targetObject" ref="exampleJob2" />
-		<!-- 指定任务执行的方法 -->
-		<property name="targetMethod" value="execute" />
-	</bean>
-	<bean id="exampleJob2Trigger"
-		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="exampleJob2Detail" />
-		<!-- 每10秒运行一次 -->
-		<property name="cronExpression" value="0/30 * * * * ?" />
-	</bean>
+	
+	<import resource="inspectionJob.xml" />
 
-	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="triggers">
-			<list>
-				<!-- <ref bean="exampleJobTrigger" /> -->
-				<ref bean="exampleJob2Trigger" />
-			</list>
-		</property>
-	</bean>
-
-	<import resource="daos.xml" />
 	<import resource="services.xml" />
 
 </beans>

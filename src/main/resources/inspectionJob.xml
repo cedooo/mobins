@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 巡检点  -->
+	<bean id="hostInspectionPointService"
+		class="cn.com.dhcc.cgn.mobins.inspection.service.impl.HostInspectionPointServiceImpl" >
+	</bean>
+	<!-- 执行 -->
+	<bean id="commandExecutor"
+		class="cn.com.dhcc.cgn.mobins.job.executor.impl.SSHCommandsExecutor" >
+	</bean>
+	<!-- 巡检任务 -->
+	<bean id="inspectionJob"
+		class="cn.com.dhcc.cgn.mobins.job.impl.InspectionJobImpl" >
+		<property name="hostInspectionPointService" ref="hostInspectionPointService"></property>
+		<property name="commandExecutor" ref="commandExecutor"></property>
+	</bean>
+	
+	<!-- =================== -->
+	<!-- 巡检调度 -->
+	<!-- =================== -->
+	<bean id="inspectionJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 指定任务类 -->
+		<property name="targetObject" ref="inspectionJob" />
+		<!-- 指定任务执行的方法 -->
+		<property name="targetMethod" value="execute" />
+	</bean>
+	<bean id="inspectionJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="inspectionJobDetail" />
+		<!-- 每10秒运行一次 -->
+		<property name="cronExpression" value="0 0/1 * * * ?" />
+	</bean>
+	
+	<!-- 执行列表 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- <ref bean="exampleJob2Trigger" /> -->
+				<ref bean="inspectionJobTrigger" />
+			</list>
+		</property>
+	</bean>
+
+</beans>
