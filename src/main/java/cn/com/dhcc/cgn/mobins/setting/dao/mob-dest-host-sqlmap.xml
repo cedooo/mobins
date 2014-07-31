@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</update>
 
-	<resultMap type="cn.com.dhcc.cgn.mobins.po.MobDestHost" id="targetMap">
+	<resultMap type="cn.com.dhcc.cgn.mobins.po.MobDestHost" id="MobDestHostMap">
 		<result column="N_MOB_DEST_HOST_ID" property="mobDestHostID" />
 		<result column="N_TARGET_ID" property="targetID" />
 		<result column="VC_MOB_DEST_HOST_IP" property="mobDestHostIP" />
@@ -51,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="DT_HOST_DEL_TIME" property="hostDelTime" />
 	</resultMap>
 
-	<select id="query" resultMap="targetMap">
+	<select id="query" resultMap="MobDestHostMap">
 		<![CDATA[
 			SELECT * 
 			FROM T_MOB_DEST_HOST

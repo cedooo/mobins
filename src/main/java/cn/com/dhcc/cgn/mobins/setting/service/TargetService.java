@@ -10,23 +10,23 @@ public interface TargetService {
 	 * @param target
 	 * @return
 	 */
-	public boolean addTarget(MobInsTarget target);
+	boolean addTarget(MobInsTarget target);
 	/**
 	 * 删除巡检目标
 	 * @param target
 	 * @return
 	 */
-	public boolean delTarget(MobInsTarget target);
+	boolean delTarget(MobInsTarget target);
 	/**
 	 * 修改巡检目标
 	 * @param target
 	 * @return
 	 */
-	public boolean modTarget(MobInsTarget target);
+	boolean modTarget(MobInsTarget target);
 	/**
 	 * 查找巡检目标
 	 * @return
 	 */
-	public List<MobInsTarget> query(MobInsTarget target);
+	List<MobInsTarget> query(MobInsTarget target);
 	
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.mobins.po.HostInspectionPoint">
+
+	<resultMap type="cn.com.dhcc.cgn.mobins.po.HostInspectionPoint" id="HostInspectionPointMap" >
+		<result column="N_MOB_DEST_HOST_ID" property="mobDestHostID" />
+		<result column="VC_MOB_DEST_HOST_IP" property="mobDestHostIP" />
+		<result column="VC_HOST_USER" property="hostUser" />
+		<result column="VC_HOST_PASSWD" property="hostPasswd" />
+		<result column="VC_HOST_NOTE" property="hostNote" />
+		<result column="N_HOST_TYPE" property="hostType" />
+		<result column="VC_STRAGE_NAME" property="strageName" />
+		<result column="VC_STRAGE_VALID" property="strageValid" />
+		<result column="VC_STRAGE_NOTE" property="strageNote" />
+		<result column="VC_ITEM_NAME" property="itemName" />
+		<result column="VC_INSPECTION_TYPE" property="inspectionType" />
+		<result column="VC_INSPECTION_ITEM_NOTE" property="inspectionItemNote" />
+		<result column="VC_OPER_COMMAND" property="operCommand" />
+		<result column="VC_OPER_NOTE" property="operNote" />
+		<result column="VC_CHECK_POINT_NAME" property="checkPointName" />
+		<result column="VC_INSPECTION_CODE" property="inspectionCode" />
+		<result column="VC_KEY_REGEX" property="keyRegex" />
+		<result column="D_VAL_COMPARE_MIN" property="valCompareMin" />
+		<result column="D_VAL_COMPARE_MAX" property="valCompareMax" />
+		<result column="N_MATCH_TYPE" property="matchType" />
+	</resultMap>
+
+	<select id="queryAll" resultMap="HostInspectionPointMap">
+		<![CDATA[
+			SELECT * 
+			FROM V_HOST_INSPECTION_POINT
+		]]>
+	</select>
+</mapper>

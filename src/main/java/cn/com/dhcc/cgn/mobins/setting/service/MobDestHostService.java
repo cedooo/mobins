@@ -10,24 +10,24 @@ public interface MobDestHostService {
 	 * @param host
 	 * @return
 	 */
-	public boolean add(MobDestHost host);
+	boolean add(MobDestHost host);
 	/**
 	 * 删除主机
 	 * @param host
 	 * @return
 	 */
-	public boolean del(MobDestHost host);
+	boolean del(MobDestHost host);
 	/**
 	 * 修改主机
 	 * @param host
 	 * @return
 	 */
-	public boolean mod(MobDestHost host);
+	boolean mod(MobDestHost host);
 	/**
 	 * 查询主机
 	 * @param host
 	 * @return
 	 */
-	public List<MobDestHost> query(MobDestHost host);
+	List<MobDestHost> query(MobDestHost host);
 	
 }
