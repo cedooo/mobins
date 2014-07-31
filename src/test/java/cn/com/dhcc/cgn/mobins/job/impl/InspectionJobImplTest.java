@@ -11,8 +11,8 @@ public class InspectionJobImplTest {
 	@Test
 	public void testExecute() {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:inspectionJob.xml"); 
-		int i = 1;
-		while(i++<10000){
+		int i = 0;
+		while(i++<120){
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

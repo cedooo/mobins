@@ -32,7 +32,7 @@
 	<bean id="inspectionJobTrigger"
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="inspectionJobDetail" />
-		<!-- 每10秒运行一次 -->
+		<!-- 每1分钟运行一次 -->
 		<property name="cronExpression" value="0 0/1 * * * ?" />
 	</bean>
 	
@@ -40,7 +40,6 @@
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<!-- <ref bean="exampleJob2Trigger" /> -->
 				<ref bean="inspectionJobTrigger" />
 			</list>
 		</property>
