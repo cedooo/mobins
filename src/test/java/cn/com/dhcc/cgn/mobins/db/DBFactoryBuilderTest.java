@@ -5,13 +5,13 @@ import static org.junit.Assert.*;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-public class DBDelegateTest {
+public class DBFactoryBuilderTest {
 
 	@Test
 	public void testGetSqlSessionFactory() {
 		SqlSession session = null;
 		try{
-			session = DBResourcesBuilder.getSqlSessionFactory().openSession();
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession();
 			session.commit();
 			assertEquals(true, session!=null);
 		}finally{

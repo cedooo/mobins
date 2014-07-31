@@ -8,9 +8,13 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.Logger;
 
-
-public final class DBResourcesBuilder {
-	static final private Logger log = Logger.getLogger(DBResourcesBuilder.class.getClass());
+/**
+ * 单例
+ * @author CeDo
+ *
+ */
+public final class DBFactoryBuilder {
+	static final private Logger log = Logger.getLogger(DBFactoryBuilder.class.getClass());
 	static private SqlSessionFactory sqlSessionFactory;
 	static private final String resource = "cn/com/dhcc/cgn/mobins/db/mybatis-config.xml";
 	static{
@@ -35,7 +39,7 @@ public final class DBResourcesBuilder {
 		log.info("数据库环境: " + conf.getEnvironment().getId());
 		log.info("===========初始化完成===========");
 	}
-	private DBResourcesBuilder(){}
+	private DBFactoryBuilder(){}
 	static public SqlSessionFactory getSqlSessionFactory() {
 		return sqlSessionFactory;
 	}

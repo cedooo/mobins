@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import cn.com.dhcc.cgn.mobins.db.DBResourcesBuilder;
+import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.inspection.service.HostInspectionPointService;
 import cn.com.dhcc.cgn.mobins.po.HostInspectionPoint;
 
@@ -17,7 +17,7 @@ public class HostInspectionPointServiceImpl implements
 		List<HostInspectionPoint> list = new ArrayList<HostInspectionPoint>();
 		SqlSession session = null;
 		try {
-			session = DBResourcesBuilder.getSqlSessionFactory().openSession(false);
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
 			List<HostInspectionPoint> li = session
 					.selectList("cn.com.dhcc.cgn.mobins.po.HostInspectionPoint.queryAll");
 			if (li != null) {
