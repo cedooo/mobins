@@ -6,9 +6,13 @@
 
 	<!-- services -->
 	<bean id="reportService"
-		class="cn.com.dhcc.cgn.mobins.report.service.impl.ReportServiceImpl">
+		class="cn.com.dhcc.cgn.mobins.report.service.impl.ReportServiceImpl" scope="singleton">
 		<property name="dao" ref="InspectionReportDao" />
 	</bean>
-	<!-- more bean definitions for services go here -->
+
+
+	<bean id="targetService"
+		class="cn.com.dhcc.cgn.mobins.setting.service.impl.TargetServiceImpl" >
+	</bean>
 
 </beans>

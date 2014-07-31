@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.mobins.po.MobInsTarget">
+	
+	<insert id="insert" parameterType="cn.com.dhcc.cgn.mobins.po.MobInsTarget" >
+		<![CDATA[
+			INSERT INTO T_MOB_INS_TARGET(VC_TARGET_NAME, VC_TARGET_NOTE, DT_TARGET_ADD_TIME)
+			VALUES (#{targetName},#{targetNote}, getdate())
+		]]>
+	</insert>
+	
+	<update id="del" parameterType="cn.com.dhcc.cgn.mobins.po.MobInsTarget" >
+		<![CDATA[
+			UPDATE T_MOB_INS_TARGET
+			SET DT_TARGET_DEL_TIME = getdate()
+			WHERE N_TARGET_ID = #{targetID} AND DT_TARGET_DEL_TIME IS NULL
+		]]>
+	</update>
+
+	<update id="update" parameterType="cn.com.dhcc.cgn.mobins.po.MobInsTarget" >
+		<![CDATA[
+			UPDATE T_MOB_INS_TARGET
+			SET VC_TARGET_NAME = #{targetName}, VC_TARGET_NOTE = #{targetNote}
+			WHERE N_TARGET_ID = #{targetID} AND DT_TARGET_DEL_TIME IS NULL
+		]]>
+	</update>
+	
+	<resultMap type="cn.com.dhcc.cgn.mobins.po.MobInsTarget" id="targetMap">
+		<result column="N_TARGET_ID" property="targetID" />
+		<result column="VC_TARGET_NAME" property="targetName" />
+		<result column="VC_TARGET_NOTE" property="targetNote" />
+		<result column="DT_TARGET_ADD_TIME" property="targetAddTime" />
+		<result column="DT_TARGET_DEL_TIME" property="targetDelTime" />
+	</resultMap>
+	
+	<select id="query" resultMap="targetMap">
+		<![CDATA[
+			SELECT * 
+			FROM T_MOB_INS_TARGET
+			WHERE DT_TARGET_DEL_TIME IS NULL
+		]]>
+	</select>
+</mapper>
