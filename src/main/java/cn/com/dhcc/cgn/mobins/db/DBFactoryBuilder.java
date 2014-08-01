@@ -6,7 +6,10 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.log4j.Logger;
+
+import com.opensymphony.xwork2.util.logging.Logger;
+import com.opensymphony.xwork2.util.logging.LoggerFactory;
+
 
 /**
  * 单例
@@ -14,7 +17,9 @@ import org.apache.log4j.Logger;
  *
  */
 public final class DBFactoryBuilder {
-	static final private Logger log = Logger.getLogger(DBFactoryBuilder.class.getClass());
+	//static final private Logger log = Logger.getLogger(DBFactoryBuilder.class.getClass());
+	static final private Logger log = LoggerFactory.getLogger(DBFactoryBuilder.class.getClass());
+	
 	static private SqlSessionFactory sqlSessionFactory;
 	static private final String resource = "cn/com/dhcc/cgn/mobins/db/mybatis-config.xml";
 	static{

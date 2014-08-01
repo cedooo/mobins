@@ -32,12 +32,9 @@ public class InspectionJobImpl implements InspectionJob{
 
 	@Override
 	public void execute() {
-		System.out.println("执行巡检任务");
 		List<HostInspectionPoint> list = hostInspectionPointService.getList();
-		System.out.println("巡检点列表:" + list);
 		Map<HostInspectionPoint, ExecutorResult> maps = commandExecutor.execute(list);
 		System.out.println(maps);
-		System.out.println("执行完成");
 	}
 
 }

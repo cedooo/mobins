@@ -12,7 +12,7 @@ public class InspectionJobImplTest {
 	public void testExecute() {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:inspectionJob.xml"); 
 		int i = 0;
-		while(i++<120){
+		while(i++<160){
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

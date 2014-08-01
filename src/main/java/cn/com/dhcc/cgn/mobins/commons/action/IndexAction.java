@@ -1,19 +1,19 @@
 package cn.com.dhcc.cgn.mobins.commons.action;
 
-import org.apache.log4j.Logger;
-
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.util.logging.Logger;
+import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
 public class IndexAction extends ActionSupport{
+	static final private Logger LOG = LoggerFactory.getLogger(IndexAction.class.getClass());
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4538380752869892985L;
-	private static final Logger log = Logger.getLogger(IndexAction.class.getClass());
 
 	@Override
 	public String execute(){
-		log.info("��ת��Ĭ��ҳ��");
+		LOG.info("跳转主页(index.jsp)");
 		return SUCCESS;
 	}
 }
