@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import cn.com.dhcc.cgn.mobins.po.HostInspectionPoint;
+import cn.com.dhcc.cgn.mobins.po.MobDestHost;
 
 public class HostInspectionPointServiceImplTest {
 
@@ -17,5 +18,12 @@ public class HostInspectionPointServiceImplTest {
 		System.out.println(list);
 		assertEquals(true, list!=null&&list.size()>0);
 	}
-
+	@Test
+	public void getListByMobDestHost() {
+		MobDestHost MHost = new MobDestHost();
+		MHost.setMobDestHostID("3");
+		List<HostInspectionPoint> list = serviceImpl.getListByMobDestHost(MHost);
+		System.out.println(list);
+		assertEquals(true, list!=null&&list.size()>0);
+	}
 }

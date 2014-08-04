@@ -50,6 +50,14 @@ public class InspectionReport {
 	public void setInspectionIsException(String inspectionIsException) {
 		this.inspectionIsException = inspectionIsException;
 	}
+	@Override
+	public String toString() {
+		return "InspectionReport [inspectionReportID=" + inspectionReportID
+				+ ", mobDestHostID=" + mobDestHostID + ", inspectionTime="
+				+ inspectionTime + ", maintAccount=" + maintAccount
+				+ ", maintUser=" + maintUser + ", generateTime=" + generateTime
+				+ ", inspectionIsException=" + inspectionIsException + "]";
+	}
 	
 	
 	

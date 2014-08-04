@@ -119,4 +119,18 @@ public class InspectionRecords {
 		this.checkCode = checkCode;
 	}
 
+	@Override
+	public String toString() {
+		return "InspectionRecords [inspectionRecordsID=" + inspectionRecordsID
+				+ ", inspectionReportID=" + inspectionReportID + ", checkItem="
+				+ checkItem + ", checkPoint=" + checkPoint + ", checkNote="
+				+ checkNote + ", operNote=" + operNote + ", isException="
+				+ isException + ", checkResult=" + checkResult + ", protoData="
+				+ protoData + ", dealResult=" + dealResult
+				+ ", inspectionType=" + inspectionType + ", addTime=" + addTime
+				+ ", checkCode=" + checkCode + "]";
+	}
+
+	
+	
 }

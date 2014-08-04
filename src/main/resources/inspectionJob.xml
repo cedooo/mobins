@@ -20,6 +20,11 @@
 	<bean id="mobDestHostService"
 		class="cn.com.dhcc.cgn.mobins.setting.service.impl.MobDestHostServiceImpl" >
 	</bean>
+	
+	<!-- 巡检记录 -->
+	<bean id="recordsService"
+		class="cn.com.dhcc.cgn.mobins.report.service.impl.InspectionRecordsServiceImpl" >
+	</bean>
 	<!-- 巡检任务 -->
 	<bean id="inspectionJob"
 		class="cn.com.dhcc.cgn.mobins.job.impl.InspectionJobImpl" >
@@ -27,6 +32,7 @@
 		<property name="reportService" ref="reportService"></property>
 		<property name="mobHostService" ref="mobDestHostService"></property>
 		<property name="commandExecutor" ref="commandExecutor"></property>
+		<property name="recordsService" ref="recordsService"></property>
 	</bean>
 	
 	<!-- =================== -->
@@ -43,7 +49,7 @@
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="inspectionJobDetail" />
 		<!-- 每1分钟运行一次 -->
-		<property name="cronExpression" value="0 0/1 * * * ?" />
+		<property name="cronExpression" value="0/15 * * * * ?" />
 	</bean>
 	
 	<!-- 执行列表 -->

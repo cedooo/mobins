@@ -38,4 +38,11 @@ public class ExecutorResult {
 				+ resultString + ", resultVector=" + resultVector + "]";
 	}
 
+	public String getStrResultVector() {
+		StringBuilder strBuilder = new StringBuilder();
+		for (String str : resultVector) {
+			strBuilder.append(str);
+		}
+		return strBuilder.toString();
+	}
 }

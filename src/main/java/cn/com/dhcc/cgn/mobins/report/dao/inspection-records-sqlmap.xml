@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.mobins.po.InspectionRecords">
+	
+	<insert id="insert" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionRecords">
+		INSERT INTO T_INSPECTION_RECORDS(
+			N_INSPECTION_REPORT_ID
+			,VC_CHECK_ITEM
+			,VC_CHECK_POINT
+			,VC_CHECK_NOTE
+			,VC_OPER_NOTE
+			,VC_IS_EXCEPTION
+			,VC_CHECK_RESULT
+			,VC_PROTO_DATA
+			,VC_DEAL_RESULT
+			,VC_INSPECTION_TYPE
+			,DT_ADD_TIME
+			,VC_CHECK_CODE
+		)
+		VALUES(
+			#{inspectionReportID},
+			#{checkItem},
+			#{checkPoint},
+			#{checkNote},
+			#{operNote},
+			#{isException},
+			#{checkResult},
+			#{protoData},
+			#{dealResult},
+			#{inspectionType},
+			getdate(),
+			#{checkCode}
+		)
+		<selectKey resultType="String" order="AFTER" keyProperty="inspectionRecordsID">  
+        	select @@IDENTITY as inspectionRecordsID  
+    	</selectKey>
+	</insert>
+	
+</mapper>

@@ -34,4 +34,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			ORDER BY N_MOB_DEST_HOST_ID
 		]]>
 	</select>
+	
+	
+	<select id="queryByDestHost" resultMap="HostInspectionPointMap" parameterType="cn.com.dhcc.cgn.mobins.po.MobDestHost" >
+		<![CDATA[
+			SELECT * 
+			FROM V_HOST_INSPECTION_POINT
+			WHERE N_MOB_DEST_HOST_ID = #{mobDestHostID}
+			ORDER BY N_MOB_DEST_HOST_ID
+		]]>
+	</select>
 </mapper>
