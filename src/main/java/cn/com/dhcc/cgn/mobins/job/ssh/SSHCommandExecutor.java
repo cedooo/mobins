@@ -1,4 +1,4 @@
-package cn.com.dhcc.cgn.mobins.job.ssh.impl;
+package cn.com.dhcc.cgn.mobins.job.ssh;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Vector;
@@ -9,12 +9,15 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.UserInfo;
+import com.opensymphony.xwork2.util.logging.Logger;
+import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
 /**
  * This class provide interface to execute command on remote Linux.
  */
 
 public class SSHCommandExecutor {
+	static final private Logger LOG = LoggerFactory.getLogger(SSHCommandExecutor.class.getClass());
     private String ipAddress;
 
     private String username;
@@ -55,7 +58,7 @@ public class SSHCommandExecutor {
                     .getInputStream()));
 
             channel.connect();
-            System.out.println("[" + session.getUserName() + "@" + session.getHost() + " ~]# " + command);
+            LOG.info("[" + session.getUserName() + "@" + session.getHost() + " ~]# " + command);
 
             // Get the output of remote command.
             String line;
@@ -92,7 +95,7 @@ public class SSHCommandExecutor {
     }
 
     public static void main(final String [] args) {
-        SSHCommandExecutor sshExecutor = new SSHCommandExecutor("192.168.1.113", "root", "g667259");
+        SSHCommandExecutor sshExecutor = new SSHCommandExecutor("192.168.1.118", "root", "g667259");
         sshExecutor.execute("ifconfig");
         
         Vector<String> stdout = sshExecutor.getStandardOutput();

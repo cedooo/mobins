@@ -13,7 +13,7 @@ public class HostInspectionPointServiceImpl implements
 		HostInspectionPointService {
 
 	@Override
-	public List<HostInspectionPoint> getList() {
+	public List<HostInspectionPoint> getListAll() {
 		List<HostInspectionPoint> list = new ArrayList<HostInspectionPoint>();
 		SqlSession session = null;
 		try {

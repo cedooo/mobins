@@ -5,11 +5,8 @@
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- services -->
-	<bean id="InspectionReportDao"
-		class="cn.com.dhcc.cgn.mobins.report.dao.impl.InspectionReportDaoImpl"></bean>
 	<bean id="reportService"
-		class="cn.com.dhcc.cgn.mobins.report.service.impl.ReportServiceImpl" scope="singleton">
-		<property name="dao" ref="InspectionReportDao" />
+		class="cn.com.dhcc.cgn.mobins.report.service.impl.ReportServiceImpl" >
 	</bean>
 
 	<!-- 巡检目标  -->

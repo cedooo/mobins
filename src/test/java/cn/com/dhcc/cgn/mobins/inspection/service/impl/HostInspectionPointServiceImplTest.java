@@ -13,7 +13,7 @@ public class HostInspectionPointServiceImplTest {
 	private HostInspectionPointServiceImpl serviceImpl = new HostInspectionPointServiceImpl();
 	@Test
 	public void testGetList() {
-		List<HostInspectionPoint> list = serviceImpl.getList();
+		List<HostInspectionPoint> list = serviceImpl.getListAll();
 		System.out.println(list);
 		assertEquals(true, list!=null&&list.size()>0);
 	}

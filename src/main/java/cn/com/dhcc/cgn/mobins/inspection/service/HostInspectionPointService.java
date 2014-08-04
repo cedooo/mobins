@@ -9,5 +9,5 @@ public interface HostInspectionPointService {
 	 * 得到巡检列表
 	 * @return
 	 */
-	List<HostInspectionPoint> getList();
+	List<HostInspectionPoint> getListAll();
 }

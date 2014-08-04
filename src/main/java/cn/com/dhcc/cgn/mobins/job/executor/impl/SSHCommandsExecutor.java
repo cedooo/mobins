@@ -7,7 +7,7 @@ import java.util.Vector;
 
 import cn.com.dhcc.cgn.mobins.job.executor.CommandExecutor;
 import cn.com.dhcc.cgn.mobins.job.executor.result.ExecutorResult;
-import cn.com.dhcc.cgn.mobins.job.ssh.impl.SSHCommandExecutor;
+import cn.com.dhcc.cgn.mobins.job.ssh.SSHCommandExecutor;
 import cn.com.dhcc.cgn.mobins.po.HostInspectionPoint;
 
 public class SSHCommandsExecutor implements CommandExecutor{

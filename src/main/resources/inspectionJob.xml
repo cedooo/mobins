@@ -12,10 +12,20 @@
 	<bean id="commandExecutor"
 		class="cn.com.dhcc.cgn.mobins.job.executor.impl.SSHCommandsExecutor" >
 	</bean>
+	<!-- 报告 -->
+	<bean id="reportService"
+		class="cn.com.dhcc.cgn.mobins.report.service.impl.ReportServiceImpl" >
+	</bean>
+	<!-- 巡检目标 -->
+	<bean id="mobDestHostService"
+		class="cn.com.dhcc.cgn.mobins.setting.service.impl.MobDestHostServiceImpl" >
+	</bean>
 	<!-- 巡检任务 -->
 	<bean id="inspectionJob"
 		class="cn.com.dhcc.cgn.mobins.job.impl.InspectionJobImpl" >
 		<property name="hostInspectionPointService" ref="hostInspectionPointService"></property>
+		<property name="reportService" ref="reportService"></property>
+		<property name="mobHostService" ref="mobDestHostService"></property>
 		<property name="commandExecutor" ref="commandExecutor"></property>
 	</bean>
 	

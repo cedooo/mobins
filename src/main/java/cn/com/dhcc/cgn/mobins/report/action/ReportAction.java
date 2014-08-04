@@ -25,7 +25,7 @@ public class ReportAction  extends ActionSupport {
 
 	@Override 
 	public String execute(){
-		System.out.println(reportService.listReport());
+		System.out.println(reportService.listReportAll());
 		return SUCCESS;
 	}
 }

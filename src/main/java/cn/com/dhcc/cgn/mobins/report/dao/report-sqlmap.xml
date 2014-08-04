@@ -2,24 +2,44 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.com.dhcc.cgn.mobins.report.dao.InspectionReport">
-	<resultMap type="cn.com.dhcc.cgn.mobins.report.dao.InspectionReport" id="InspectionReportMap">
+<mapper namespace="cn.com.dhcc.cgn.mobins.po.InspectionReport">
+	<resultMap type="cn.com.dhcc.cgn.mobins.po.InspectionReport"
+		id="InspectionReportMap">
 		<result property="inspectionReportID" column="N_INSPECTION_REPORT_ID" />
 		<result property="maintAccount" column="VC_MAINT_ACOUNT" />
 		<result property="maintUser" column="VC_MAINT_USER" />
 		<result property="generateTime" column="DT_GENERATE_TIME" />
 		<result property="inspectionTime" column="DT_INSPECTION_TIME" />
-		<result property="isException" column="VC_INSPECTION_IS_EXCEPTION" />
+		<result property="inspectionIsException" column="VC_INSPECTION_IS_EXCEPTION" />
+		<result property="mobDestHostID" column="N_MOB_DEST_HOST_ID" />
 	</resultMap>
 
-	<select id="selectAll" resultMap="InspectionReportMap">
-		SELECT N_INSPECTION_REPORT_ID
-	      ,VC_MAINT_ACOUNT
-	      ,VC_MAINT_USER
-	      ,DT_GENERATE_TIME
-	      ,DT_INSPECTION_TIME
-	      ,VC_INSPECTION_IS_EXCEPTION
-	  	FROM T_INSPECTION_REPORT
+	<select id="queryAll" resultMap="InspectionReportMap">
+		<![CDATA[
+			SELECT *
+			FROM T_INSPECTION_REPORT	
+		]]>
 	</select>
 
+	<insert id="insert" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionReport">
+		INSERT INTO T_INSPECTION_REPORT(
+			N_MOB_DEST_HOST_ID
+			,DT_INSPECTION_TIME
+			,VC_MAINT_ACOUNT
+			,VC_MAINT_USER
+			,DT_GENERATE_TIME
+			,VC_INSPECTION_IS_EXCEPTION
+		)
+		VALUES(
+			#{mobDestHostID},
+			#{inspectionTime},
+			#{maintAccount},
+			#{maintUser},
+			getdate(),
+			#{inspectionIsException}
+		)
+		<selectKey resultType="String" order="AFTER" keyProperty="inspectionReportID">  
+        	select @@IDENTITY as inspectionReportID  
+    	</selectKey>
+	</insert>
 </mapper>
