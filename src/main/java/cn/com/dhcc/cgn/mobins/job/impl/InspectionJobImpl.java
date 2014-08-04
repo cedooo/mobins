@@ -1,7 +1,5 @@
 package cn.com.dhcc.cgn.mobins.job.impl;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +63,8 @@ public class InspectionJobImpl implements InspectionJob{
 					recordsService.addInspectionRecord(record);
 					LOG.info("添加成功：" + record);
 				}
+			}else{
+				LOG.warn("巡检报告-报告头入库失败,巡检记录无法入库。");
 			}
 		}
 		
@@ -80,11 +80,7 @@ public class InspectionJobImpl implements InspectionJob{
 		report.setMaintAccount(host.getHostUser());
 		report.setMaintUser(host.getHostUser());
 		report.setMobDestHostID(host.getMobDestHostID());
-		report.setGenerateTime(getNowTime());
 		return report;
-	}
-	static private String getNowTime(){
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 	}
 	/**
 	 * 根据主机巡检点生成巡检点巡检记录
@@ -93,7 +89,6 @@ public class InspectionJobImpl implements InspectionJob{
 	 */
 	static private InspectionRecords generateInspectionRecord(HostInspectionPoint hostPoint){
 		InspectionRecords records = new InspectionRecords();
-		records.setAddTime(getNowTime());
 		records.setCheckCode(hostPoint.getInspectionCode());
 		records.setCheckItem(hostPoint.getItemName());
 		records.setCheckNote(hostPoint.getInspectionItemNote());
