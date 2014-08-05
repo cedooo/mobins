@@ -15,11 +15,14 @@
             <result type="json"></result>
 		</action>
 		
-		<action name="hostListOfTarget" class="cn.com.dhcc.cgn.mobins.report.action.HostOfTargetAction">
+		<action name="hostListOfTarget" class="cn.com.dhcc.cgn.mobins.report.action.ListHostOfTargetAction">
             <result type="json"></result>
 		</action>
 		
 		<action name="reportList" class="cn.com.dhcc.cgn.mobins.report.action.ReportListAction">
+            <result type="json"></result>
+		</action>
+		<action name="recordListOfReport" class="cn.com.dhcc.cgn.mobins.report.action.listRecordAction">
             <result type="json"></result>
 		</action>
     </package>

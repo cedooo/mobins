@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.po.HostInspectionPoint;
+import cn.com.dhcc.cgn.mobins.po.InspectionRecords;
 import cn.com.dhcc.cgn.mobins.po.InspectionReport;
 import cn.com.dhcc.cgn.mobins.po.MobDestHost;
 import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
@@ -113,6 +114,26 @@ public class ReportServiceImpl implements ReportService{
 			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
 			List<InspectionReport> li = session
 					.selectList("cn.com.dhcc.cgn.mobins.po.InspectionReport.queryReport", para);
+			if (li != null) {
+				list.addAll(li);
+			}
+			session.commit();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<InspectionRecords> listRecord(String reportID) {
+		List<InspectionRecords> list = new ArrayList<InspectionRecords>();
+		SqlSession session = null;
+		try {
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			List<InspectionRecords> li = session
+					.selectList("cn.com.dhcc.cgn.mobins.po.InspectionReport.queryRecordsByReportID", reportID);
 			if (li != null) {
 				list.addAll(li);
 			}

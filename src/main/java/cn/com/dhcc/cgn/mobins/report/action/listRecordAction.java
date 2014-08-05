@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cn.com.dhcc.cgn.mobins.po.MobDestHost;
+import cn.com.dhcc.cgn.mobins.po.InspectionRecords;
 import cn.com.dhcc.cgn.mobins.report.service.ReportService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class HostOfTargetAction extends ActionSupport {
+public class listRecordAction extends ActionSupport {
 
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class HostOfTargetAction extends ActionSupport {
 	@Autowired
 	private ReportService reportService  = null;
 
-	private List<MobDestHost> listHost = new ArrayList<MobDestHost>();
+	private List<InspectionRecords> listRecord = new ArrayList<InspectionRecords>();
 	
 	public ReportService getReportService() {
 		return reportService;
@@ -29,27 +29,27 @@ public class HostOfTargetAction extends ActionSupport {
 		this.reportService = reportService;
 	}
 
-	private String targetID = "0";
+	private String inspectionReportID = "0";
 
-	public List<MobDestHost> getListHost() {
-		return listHost;
+	public List<InspectionRecords> getListRecord() {
+		return listRecord;
 	}
 
-	public void setListHost(List<MobDestHost> listHost) {
-		this.listHost = listHost;
+	public void setListRecord(List<InspectionRecords> listRecord) {
+		this.listRecord = listRecord;
 	}
 
-	public String getTargetID() {
-		return targetID;
+	public String getInspectionReportID() {
+		return inspectionReportID;
 	}
 
-	public void setTargetID(String targetID) {
-		this.targetID = targetID;
+	public void setInspectionReportID(String inspectionReportID) {
+		this.inspectionReportID = inspectionReportID;
 	}
 
 	@Override
 	public String execute(){
-		listHost = reportService.listMobDestHost(targetID);
+		listRecord = reportService.listRecord(inspectionReportID);
 		return SUCCESS;
 	}
 

@@ -2,6 +2,7 @@ package cn.com.dhcc.cgn.mobins.report.service;
 
 import java.util.List;
 
+import cn.com.dhcc.cgn.mobins.po.InspectionRecords;
 import cn.com.dhcc.cgn.mobins.po.InspectionReport;
 import cn.com.dhcc.cgn.mobins.po.MobDestHost;
 import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
@@ -34,5 +35,10 @@ public interface ReportService {
 	 * @return 报告信息
 	 */
 	List<InspectionReport> listReportByDate(String hostID, String formatDate);
-	
+	/**
+	 * 查找巡检记录
+	 * @param reportID 巡检报告ID
+	 * @return
+	 */
+	List<InspectionRecords> listRecord(String reportID);
 }
