@@ -8,7 +8,7 @@ public class ReportActionTest {
 
 	@Test
 	public void testExecute() {
-		ReportAction action = new ReportAction();
+		ReportDefaultAction action = new ReportDefaultAction();
 		String r = action.execute();
 		assertEquals("success", r);
 	}
