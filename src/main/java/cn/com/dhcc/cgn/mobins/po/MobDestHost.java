@@ -83,4 +83,13 @@ public class MobDestHost {
 		this.hostDelTime = hostDelTime;
 	}
 
+	@Override
+	public String toString() {
+		return "MobDestHost [mobDestHostID=" + mobDestHostID + ", targetID="
+				+ targetID + ", mobDestHostIP=" + mobDestHostIP + ", hostUser="
+				+ hostUser + ", hostPasswd=" + hostPasswd + ", hostNote="
+				+ hostNote + ", hostType=" + hostType + ", hostAddTime="
+				+ hostAddTime + ", hostDelTime=" + hostDelTime + "]";
+	}
+
 }

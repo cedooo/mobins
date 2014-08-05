@@ -10,6 +10,9 @@ import org.apache.ibatis.session.SqlSession;
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.po.HostInspectionPoint;
 import cn.com.dhcc.cgn.mobins.po.InspectionReport;
+import cn.com.dhcc.cgn.mobins.po.MobDestHost;
+import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
+import cn.com.dhcc.cgn.mobins.report.dao.QueryReportParam;
 import cn.com.dhcc.cgn.mobins.report.service.ReportService;
 
 public class ReportServiceImpl implements ReportService{
@@ -59,6 +62,67 @@ public class ReportServiceImpl implements ReportService{
 		String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 		report.setInspectionTime(time);
 		return this.addReport(report);
+	}
+
+	@Override
+	public List<MobInsTarget> listAllMobInsTarget() {
+		List<MobInsTarget> list = new ArrayList<MobInsTarget>();
+		SqlSession session = null;
+		try {
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			List<MobInsTarget> li = session
+					.selectList("cn.com.dhcc.cgn.mobins.po.InspectionReport.queryAllTarget");
+			if (li != null) {
+				list.addAll(li);
+			}
+			session.commit();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<MobDestHost> listMobDestHost(String targetID) {
+		List<MobDestHost> list = new ArrayList<MobDestHost>();
+		SqlSession session = null;
+		try {
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			List<MobDestHost> li = session
+					.selectList("cn.com.dhcc.cgn.mobins.po.InspectionReport.queryHostByTargetID", targetID);
+			if (li != null) {
+				list.addAll(li);
+			}
+			session.commit();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<InspectionReport> listReportByDate(String hostID,String formatDate) {
+		QueryReportParam para = new QueryReportParam(hostID, formatDate);
+		List<InspectionReport> list = new ArrayList<InspectionReport>();
+		SqlSession session = null;
+		try {
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			List<InspectionReport> li = session
+					.selectList("cn.com.dhcc.cgn.mobins.po.InspectionReport.queryReport", para);
+			if (li != null) {
+				list.addAll(li);
+			}
+			session.commit();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return list;
 	}
 	
 }

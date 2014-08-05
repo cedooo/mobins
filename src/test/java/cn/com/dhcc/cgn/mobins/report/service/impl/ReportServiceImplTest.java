@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.Test;
 
 import cn.com.dhcc.cgn.mobins.po.InspectionReport;
+import cn.com.dhcc.cgn.mobins.po.MobDestHost;
+import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
 
 public class ReportServiceImplTest {
 	private ReportServiceImpl serv = new ReportServiceImpl();
@@ -17,7 +19,7 @@ public class ReportServiceImplTest {
 		List<InspectionReport> list = serv.listReportAll();
 		assertEquals(true, list!=null);
 	}
-	@Test
+	//@Test
 	public void testAddReport(){
 		InspectionReport report = new InspectionReport();
 		report.setMaintUser("root");
@@ -28,5 +30,27 @@ public class ReportServiceImplTest {
 		report.setInspectionTime(time);
 		serv.addReport(report);
 		System.out.println("报告ID = " + report.getInspectionReportID());
+	}
+	@Test
+	public void testAllMobInsTarget(){
+		List<MobInsTarget> list = serv.listAllMobInsTarget();
+		assertEquals(true, list!=null);
+		System.out.println(list);
+	}
+	@Test
+	public void testMobDestHost(){
+		String targetID = "1";
+		List<MobDestHost> list = serv.listMobDestHost(targetID);
+		assertEquals(true, list!=null);
+		System.out.println(list);
+	}
+
+	@Test
+	public void testGetReportByDate(){
+		String hostID = "3";
+		String formatDate = "2014-08-05";
+		List<InspectionReport> list = serv.listReportByDate(hostID, formatDate);
+		assertEquals(true, list!=null);
+		System.out.println(list);
 	}
 }

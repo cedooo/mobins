@@ -20,26 +20,87 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			FROM T_INSPECTION_REPORT	
 		]]>
 	</select>
-
+	<!-- 添加报告 -->
 	<insert id="insert" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionReport">
 		INSERT INTO T_INSPECTION_REPORT(
-			N_MOB_DEST_HOST_ID
-			,DT_INSPECTION_TIME
-			,VC_MAINT_ACOUNT
-			,VC_MAINT_USER
-			,DT_GENERATE_TIME
-			,VC_INSPECTION_IS_EXCEPTION
+		N_MOB_DEST_HOST_ID
+		,DT_INSPECTION_TIME
+		,VC_MAINT_ACOUNT
+		,VC_MAINT_USER
+		,DT_GENERATE_TIME
+		,VC_INSPECTION_IS_EXCEPTION
 		)
 		VALUES(
-			#{mobDestHostID},
-			#{inspectionTime},
-			#{maintAccount},
-			#{maintUser},
-			getdate(),
-			#{inspectionIsException}
+		#{mobDestHostID},
+		getdate(),
+		<!-- #{inspectionTime}, -->
+		#{maintAccount},
+		#{maintUser},
+		getdate(),
+		#{inspectionIsException}
 		)
-		<selectKey resultType="String" order="AFTER" keyProperty="inspectionReportID">  
-        	select @@IDENTITY as inspectionReportID  
-    	</selectKey>
+		<selectKey resultType="String" order="AFTER" keyProperty="inspectionReportID">
+			select @@IDENTITY as inspectionReportID
+		</selectKey>
 	</insert>
+
+	<resultMap type="cn.com.dhcc.cgn.mobins.po.MobInsTarget" id="MobInsTargetMap">
+		<result property="targetID" column="N_TARGET_ID" />
+		<result property="targetName" column="VC_TARGET_NAME" />
+		<result property="targetNote" column="VC_TARGET_NOTE" />
+		<result property="targetAddTime" column="DT_TARGET_ADD_TIME" />
+		<result property="targetDelTime" column="DT_TARGET_DEL_TIME" />
+	</resultMap>
+	<!-- 目标列表 -->
+	<select id="queryAllTarget" resultMap="MobInsTargetMap">
+		SELECT N_TARGET_ID,
+		VC_TARGET_NAME,VC_TARGET_NOTE,
+		DT_TARGET_ADD_TIME, DT_TARGET_DEL_TIME
+		FROM T_MOB_INS_TARGET
+		WHERE DT_TARGET_DEL_TIME IS NULL
+	</select>
+
+	<resultMap type="cn.com.dhcc.cgn.mobins.po.MobDestHost" id="MobDestHostMap">
+		<result property="mobDestHostID" column="N_MOB_DEST_HOST_ID" />
+		<result property="targetID" column="N_TARGET_ID" />
+		<result property="mobDestHostIP" column="VC_MOB_DEST_HOST_IP" />
+		<result property="hostUser" column="VC_HOST_USER" />
+		<result property="hostPasswd" column="VC_HOST_PASSWD" />
+		<result property="hostNote" column="VC_HOST_NOTE" />
+		<result property="hostType" column="N_HOST_TYPE" />
+		<result property="hostAddTime" column="DT_HOST_ADD_TIME" />
+		<result property="hostDelTime" column="DT_HOST_DEL_TIME" />
+	</resultMap>
+	<!-- 通过目标ID查找主机列表 -->
+	<select id="queryHostByTargetID" resultMap="MobDestHostMap"
+		parameterType="String">
+		SELECT
+		N_MOB_DEST_HOST_ID
+		,N_TARGET_ID
+		,VC_MOB_DEST_HOST_IP
+		,VC_HOST_USER
+		,VC_HOST_PASSWD
+		,VC_HOST_NOTE
+		,N_HOST_TYPE
+		,DT_HOST_ADD_TIME
+		,DT_HOST_DEL_TIME
+		FROM T_MOB_DEST_HOST
+		WHERE DT_HOST_DEL_TIME IS NULL AND N_TARGET_ID = #{targetID}
+	</select>
+
+	<!-- 目标列表 -->
+	<select id="queryReport" resultMap="InspectionReportMap"
+		parameterType="cn.com.dhcc.cgn.mobins.report.dao.QueryReportParam">
+		<![CDATA[
+			SELECT N_INSPECTION_REPORT_ID
+		      ,N_MOB_DEST_HOST_ID
+		      ,DT_INSPECTION_TIME
+		      ,VC_MAINT_ACOUNT
+		      ,VC_MAINT_USER
+		      ,DT_GENERATE_TIME
+		      ,VC_INSPECTION_IS_EXCEPTION
+			FROM T_INSPECTION_REPORT	
+			WHERE N_MOB_DEST_HOST_ID = #{hostID} AND CONVERT(VARCHAR(10), DT_GENERATE_TIME,120) = #{formatDate}
+		]]>
+	</select>
 </mapper>

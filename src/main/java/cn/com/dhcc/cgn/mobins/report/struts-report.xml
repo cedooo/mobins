@@ -5,12 +5,23 @@
 
 <struts>
 
-    <package name="report" namespace="/report" extends="default">
+    <package name="report" namespace="/report" extends="default, json-default">
 
 		<action name="report" class="cn.com.dhcc.cgn.mobins.report.action.ReportAction">
             <result>/index.jsp</result>
 		</action>
 		
+		<action name="targetList" class="cn.com.dhcc.cgn.mobins.report.action.AllTargetAction">
+            <result type="json"></result>
+		</action>
+		
+		<action name="hostListOfTarget" class="cn.com.dhcc.cgn.mobins.report.action.HostOfTargetAction">
+            <result type="json"></result>
+		</action>
+		
+		<action name="reportList" class="cn.com.dhcc.cgn.mobins.report.action.ReportListAction">
+            <result type="json"></result>
+		</action>
     </package>
     
 </struts>
