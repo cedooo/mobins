@@ -8,7 +8,7 @@
     <package name="report" namespace="/report" extends="default, json-default">
 
 		<action name="default" class="cn.com.dhcc.cgn.mobins.report.action.ReportDefaultAction">
-            <result>/index.jsp</result>
+            <result>/page/default.jsp</result>
 		</action>
 		
 		<action name="targetList" class="cn.com.dhcc.cgn.mobins.report.action.AllTargetAction">

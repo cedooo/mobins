@@ -41,7 +41,7 @@ public class ExecutorResult {
 	public String getStrResultVector() {
 		StringBuilder strBuilder = new StringBuilder();
 		for (String str : resultVector) {
-			strBuilder.append(str);
+			strBuilder.append(str + "<br />");
 		}
 		return strBuilder.toString();
 	}
