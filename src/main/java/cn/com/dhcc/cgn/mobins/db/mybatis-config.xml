@@ -30,6 +30,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="cn/com/dhcc/cgn/mobins/setting/dao/mob-dest-host-sqlmap.xml" />
 		<mapper resource="cn/com/dhcc/cgn/mobins/inspection/dao/host-inspection-point-sqlmap.xml" />
 		<mapper resource="cn/com/dhcc/cgn/mobins/report/dao/inspection-records-sqlmap.xml" />
+		<mapper resource="cn/com/dhcc/cgn/mobins/inspection/dao/analysis-sqlmap.xml" />
 		
 		<!-- 
 		<mapper resource="cn/com/dhcc/inspection/collector/cnf/sqlmap/cnf-sqlmap.xml" />

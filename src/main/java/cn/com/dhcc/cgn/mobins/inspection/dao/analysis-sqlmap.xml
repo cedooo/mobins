@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService">
+
+	<resultMap type="cn.com.dhcc.cgn.mobins.po.InspectionRecords"
+		id="InspectionRecordsMap">
+		<result property="mobDestHostID" column="N_MOB_DEST_HOST_ID" />
+		<result property="targetID" column="N_TARGET_ID" />
+		<result property="mobDestHostIP" column="VC_MOB_DEST_HOST_IP" />
+		<result property="hostUser" column="VC_HOST_USER" />
+		<result property="hostPasswd" column="VC_HOST_PASSWD" />
+		<result property="hostNote" column="VC_HOST_NOTE" />
+		<result property="hostType" column="N_HOST_TYPE" />
+		<result property="hostAddTime" column="DT_HOST_ADD_TIME" />
+		<result property="hostDelTime" column="DT_HOST_DEL_TIME" />
+		<result property="inspectionRecordsID" column="N_INSPECTION_RECORDS_ID" />
+		<result property="inspectionReportID" column="N_INSPECTION_REPORT_ID" />
+		<result property="checkItem" column="VC_CHECK_ITEM" />
+		<result property="checkPoint" column="VC_CHECK_POINT" />
+		<result property="checkNote" column="VC_CHECK_NOTE" />
+		<result property="operNote" column="VC_OPER_NOTE" />
+		<result property="isException" column="VC_IS_EXCEPTION" />
+		<result property="checkResult" column="VC_CHECK_RESULT" />
+		<result property="protoData" column="VC_PROTO_DATA" />
+		<result property="dealResult" column="VC_DEAL_RESULT" />
+		<result property="inspectionType" column="VC_INSPECTION_TYPE" />
+		<result property="addTime" column="DT_ADD_TIME" />
+		<result property="checkCode" column="VC_CHECK_CODE" />
+	</resultMap>
+
+	<resultMap type="cn.com.dhcc.cgn.mobins.inspection.dao.AnalysisInfo"
+		id="AnalysisInfoMap">
+		<result property="inspectionRecordsID" column="N_INSPECTION_RECORDS_ID" />
+		<result property="isException" column="VC_IS_EXCEPTION" />
+		<result property="checkResult" column="VC_CHECK_RESULT" />
+		<result property="protoData" column="VC_PROTO_DATA" />
+		<result property="dealResult" column="VC_DEAL_RESULT" />
+		<result property="checkCode" column="VC_CHECK_CODE" />
+
+		<result property="checkPointName" column="VC_CHECK_POINT_NAME" />
+		<result property="keyRegex" column="VC_KEY_REGEX" />
+		<result property="valCompareMin" column="D_VAL_COMPARE_MIN" />
+		<result property="valCompareMax" column="D_VAL_COMPARE_MAX" />
+		<result property="matchType" column="N_MATCH_TYPE" />
+	</resultMap>
+
+	<!-- 通过目标ID查找主机列表 -->
+	<select id="queryRecordsNoAnalysis" resultMap="AnalysisInfoMap" >
+		SELECT
+		N_INSPECTION_RECORDS_ID
+		,VC_IS_EXCEPTION
+		,VC_CHECK_RESULT
+		,VC_PROTO_DATA
+		,VC_DEAL_RESULT
+		,VC_CHECK_CODE
+
+		,VC_CHECK_POINT_NAME
+		,VC_KEY_REGEX
+		,D_VAL_COMPARE_MIN
+		,D_VAL_COMPARE_MAX
+		,N_MATCH_TYPE
+		FROM T_INSPECTION_RECORDS records LEFT JOIN T_INSPECTION_POINT point 
+			ON records.VC_CHECK_CODE = point.VC_INSPECTION_CODE
+		WHERE VC_IS_EXCEPTION IS NULL AND
+			VC_CHECK_RESULT IS NULL
+	</select>
+
+	<update id="updateResult" parameterType="cn.com.dhcc.cgn.mobins.inspection.dao.AnalysisInfo">
+		UPDATE T_INSPECTION_RECORDS
+		SET VC_IS_EXCEPTION = #{isException}, VC_CHECK_RESULT = #{checkResult}
+		WHERE N_INSPECTION_RECORDS_ID = #{inspectionRecordsID}
+	</update>
+
+</mapper>

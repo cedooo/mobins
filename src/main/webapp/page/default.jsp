@@ -86,7 +86,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						var lenOfData = data.listReport.length;
 						if(lenOfData){
 							$("#reports *").remove();
+							
 							for(var i=0; i< lenOfData; i++){
+								$("#reports").append("<hr />");
 								//$("#reports").append("<hr />");
 								//{"generateTime":"2014-08-05 18:00:53.61","inspectionIsException":null,
 									//"inspectionReportID":"37","inspectionTime":"2014-08-05 18:00:53.61",
@@ -101,11 +103,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								
 								var tabID = "report" + reportID;
 								$("#reports").append(
-											"<div>" + hostInfo + 
+											"<table class='headReport gridtable'><tr><td>主机信息</td><td>" + hostInfo + 
 											//"<td>生成时间</td>" + "<td>" + generateTime + "</td>" + 
-											", 运维帐号：" +  maintUser +   
-											", 是否异常 ：" +  inspectionIsException +  
-											", 巡检时间：" + inspectionTime + "</div>"
+											"</td><td>运维帐号</td><td>" +  maintUser +   
+											"</td><td>是否异常 </td><td>" +  inspectionIsException +  
+											"</td><td>巡检时间</td><td>" + inspectionTime + "</td></tr></table>"
 										); 
 								$("#reports").append(
 										"<table class='gridtable' id='" + tabID+ "'>" + 
@@ -130,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					var lenOfData = data.listRecord.length;
 					var htmlColName = "<tr>" +
 							"<th>巡检类型</th>" + "<th>检查项目</th>" + "<th>检查点</th>" +"<th>操作说明</th>" + "<th>是否异常</th>" +
-							"<th>检查结果</th>" + "<th>结果</th>" +
+							"<th>巡检结果</th>" + "<th>操作结果</th>" +
 						"</tr>";
 					$context.append(htmlColName);
 					if(lenOfData){
@@ -193,6 +195,11 @@ protoData: "Filesystem
 	    table[id^="report"] *{
 	    	padding-top: 5px;
 			border: 1px solid;
+	    }
+	    table.headReport{
+	    	width:100%;
+			border: 0px solid;
+			text-align: left;
 	    }
 table.gridtable {
 	font-family: verdana,arial,sans-serif;
