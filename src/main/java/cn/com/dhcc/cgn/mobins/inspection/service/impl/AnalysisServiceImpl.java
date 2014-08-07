@@ -49,12 +49,21 @@ public class AnalysisServiceImpl implements AnalysisService {
 				if(match!=null){
 					MatchResult result = match.execute(analysisInfo);
 					LOG.info("解析结果:" + result);
+					if(result!=null && result.isCheckComplete()){
+						analysisInfo.setIsException(result.getIsException());
+						analysisInfo.setCheckResult(result.getCheckResult());
+						int updated = session.update("cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService.updateResult", analysisInfo);
+						session.commit();
+						if(updated==1){
+							LOG.warn("更新成功:" + analysisInfo);
+						}else{
+							LOG.debug("更新失败");
+						}
+					}else{
+						LOG.info("未解析成功");
+					}
 				}
-				/*int updated = session.update("cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService.updateResult", analysisInfo);
-				session.commit();
-				if(updated==1){
-					LOG.warn("未更新成功:" + analysisInfo);
-				}*/
+				
 			}
 		} finally {
 			if (session != null) {

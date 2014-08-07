@@ -4,12 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- services -->
+	<!-- 巡检匹配规则 -->
 	<bean id="ValueRangeMatch"
 		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.ValueRangeMatch" >
 	</bean>
-
-	<!-- 巡检目标  -->
 	<bean id="ExpressMatch"
 		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.ExpressMatch" >
 	</bean>
