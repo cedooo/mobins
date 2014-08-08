@@ -40,8 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		,VC_RESULT_FORMAT
 		FROM T_INSPECTION_RECORDS records LEFT JOIN T_INSPECTION_POINT point 
 			ON records.VC_CHECK_CODE = point.VC_INSPECTION_CODE
-		WHERE VC_IS_EXCEPTION IS NULL AND
-			VC_CHECK_RESULT IS NULL
+		WHERE VC_CHECK_COMPLETE IS NULL
 	</select>
 
 	<update id="updateResult" parameterType="cn.com.dhcc.cgn.mobins.inspection.dao.AnalysisInfo">

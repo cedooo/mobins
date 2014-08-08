@@ -8,6 +8,8 @@ public class InspectionReport {
 	private String maintUser = null;
 	private String generateTime = null;
 	private String inspectionIsException = null;
+	private String inspectionComplete = null;
+	
 	public String getInspectionReportID() {
 		return inspectionReportID;
 	}
@@ -49,6 +51,12 @@ public class InspectionReport {
 	}
 	public void setInspectionIsException(String inspectionIsException) {
 		this.inspectionIsException = inspectionIsException;
+	}
+	public String getInspectionComplete() {
+		return inspectionComplete;
+	}
+	public void setInspectionComplete(String inspectionComplete) {
+		this.inspectionComplete = inspectionComplete;
 	}
 	@Override
 	public String toString() {

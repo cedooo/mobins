@@ -44,6 +44,12 @@ public class AnalysisServiceImpl implements AnalysisService {
 					match = (ResultMatch) appContext.getBean("ExpressMatch");
 				}else if(AnalysisInfo.MATCH_TYPE_RANGE.equals(matchType)){
 					match = (ResultMatch) appContext.getBean("ValueRangeMatch");
+				}else if(AnalysisInfo.MATCH_TYPE_MEMRATE.equals(matchType)){
+					match = (ResultMatch) appContext.getBean("MemRateComputeMatch");
+				}else if(AnalysisInfo.MATCH_TYPE_PROGRESS_CHECK.equals(matchType)){
+					match = (ResultMatch) appContext.getBean("ProgressExistMatch");
+				}else if(AnalysisInfo.MATCH_TYPE_SOLOMO_SWITCH.equals(matchType)){
+					match = (ResultMatch) appContext.getBean("SolomonSwitchMatch");
 				}else{
 					LOG.warn("巡检记录类型错误");
 					continue;

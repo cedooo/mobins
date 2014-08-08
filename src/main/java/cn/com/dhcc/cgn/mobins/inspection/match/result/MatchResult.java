@@ -1,6 +1,10 @@
 package cn.com.dhcc.cgn.mobins.inspection.match.result;
 
+import com.opensymphony.xwork2.util.logging.Logger;
+import com.opensymphony.xwork2.util.logging.LoggerFactory;
+
 public class MatchResult {
+	static final protected Logger LOG = LoggerFactory.getLogger(MatchResult.class.getClass());
 	private String isException = null;
 	private String checkResult = null;
 	private boolean checkComplete = false;

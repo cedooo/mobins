@@ -8,8 +8,21 @@
 	<bean id="ValueRangeMatch"
 		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.ValueRangeMatch" >
 	</bean>
+	<!-- 表达式匹配 -->
 	<bean id="ExpressMatch"
 		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.ExpressMatch" >
+	</bean>
+	<!-- 内存使用率计算&检查 -->
+	<bean id="MemRateComputeMatch"
+		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.MemRateComputeMatch" >
+	</bean>
+	<!-- 进程是否存在 -->
+	<bean id="ProgressExistMatch"
+		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.ProgressExistMatch" >
+	</bean>
+	<!-- solomon进程切换检查 -->
+	<bean id="SolomonSwitchMatch"
+		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.SolomonSwitchMatch" >
 	</bean>
 
 </beans>

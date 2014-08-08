@@ -14,7 +14,8 @@ public class InspectionRecords {
 	private String inspectionType = null;
 	private String addTime = null;
 	private String checkCode = null;
-
+	private String checkComplete = null;
+	
 	public String getInspectionRecordsID() {
 		return inspectionRecordsID;
 	}
@@ -117,6 +118,14 @@ public class InspectionRecords {
 
 	public void setCheckCode(String checkCode) {
 		this.checkCode = checkCode;
+	}
+
+	public String getCheckComplete() {
+		return checkComplete;
+	}
+
+	public void setCheckComplete(String checkComplete) {
+		this.checkComplete = checkComplete;
 	}
 
 	@Override

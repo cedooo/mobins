@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
+import cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService;
 import cn.com.dhcc.cgn.mobins.inspection.service.HostInspectionPointService;
 import cn.com.dhcc.cgn.mobins.job.InspectionJob;
 import cn.com.dhcc.cgn.mobins.job.executor.CommandExecutor;
@@ -27,6 +28,7 @@ public class InspectionJobImpl implements InspectionJob{
 	private ReportService reportService = null;
 	private InspectionRecordsService recordsService = null;
 	private MobDestHostService mobHostService = null;
+	private AnalysisService analysisService = null;
 	
 	private CommandExecutor commandExecutor = null;
 
@@ -68,7 +70,7 @@ public class InspectionJobImpl implements InspectionJob{
 			}
 		}
 		
-		
+		analysisService.analysis();
 		
 	}
 	/**
@@ -134,6 +136,12 @@ public class InspectionJobImpl implements InspectionJob{
 		this.mobHostService = mobHostService;
 	}
 
+	public AnalysisService getAnalysisService() {
+		return analysisService;
+	}
+	public void setAnalysisService(AnalysisService analysisService) {
+		this.analysisService = analysisService;
+	}
 	public CommandExecutor getCommandExecutor() {
 		return commandExecutor;
 	}

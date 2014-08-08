@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="inspectionTime" column="DT_INSPECTION_TIME" />
 		<result property="inspectionIsException" column="VC_INSPECTION_IS_EXCEPTION" />
 		<result property="mobDestHostID" column="N_MOB_DEST_HOST_ID" />
+		<result property="inspectionComplete" column="VC_INSPECTION_COMPLETE" />
 	</resultMap>
 
 	<select id="queryAll" resultMap="InspectionReportMap">

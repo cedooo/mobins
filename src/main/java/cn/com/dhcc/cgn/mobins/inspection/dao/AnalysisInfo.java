@@ -3,6 +3,9 @@ package cn.com.dhcc.cgn.mobins.inspection.dao;
 public class AnalysisInfo {
 	static public final String MATCH_TYPE_RANGE = "2";
 	static public final String MATCH_TYPE_EXPRESS = "1";
+	static public final String MATCH_TYPE_MEMRATE = "3";
+	static public final String MATCH_TYPE_PROGRESS_CHECK = "4";
+	static public final String MATCH_TYPE_SOLOMO_SWITCH = "5";
 	private String inspectionRecordsID = null;
 	private String isException = null;
 	private String checkResult = null;
