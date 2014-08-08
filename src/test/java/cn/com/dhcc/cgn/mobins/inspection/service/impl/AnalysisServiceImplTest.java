@@ -8,8 +8,9 @@ public class AnalysisServiceImplTest {
 	private AnalysisServiceImpl service = new AnalysisServiceImpl();
 	@Test
 	public void testAnalysis() {
-		boolean ana = service.analysis();
-		assertEquals(true, ana);
+		int ana = service.analysis();
+		System.out.println(ana);
+		assertEquals(true, ana==1);
 	}
 
 }

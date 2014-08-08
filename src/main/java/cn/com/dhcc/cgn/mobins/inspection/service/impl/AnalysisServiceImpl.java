@@ -20,9 +20,11 @@ public class AnalysisServiceImpl implements AnalysisService {
 	static final private Logger LOG = LoggerFactory.getLogger(AnalysisServiceImpl.class.getClass());
 	private static ApplicationContext appContext = new ClassPathXmlApplicationContext("classpath:inspection-matches.xml"); 
 	@Override
-	public boolean analysis() {
+	public int analysis() {
 		List<AnalysisInfo> list = new ArrayList<AnalysisInfo>();
 		SqlSession session = null;
+		int rv = -1;
+		int updatedCount = -1;
 		try {
 			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
 			List<AnalysisInfo> li = session
@@ -31,7 +33,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 				list.addAll(li);
 			}
 			session.commit();
-			LOG.debug("解析个数: " + list.size()  + ":" + list.toString());
+			LOG.info("解析个数: " + list.size());
 			/**
 			 * 解析、入库
 			 */
@@ -54,6 +56,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 						analysisInfo.setCheckResult(result.getCheckResult());
 						int updated = session.update("cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService.updateResult", analysisInfo);
 						session.commit();
+						updatedCount += updated;
 						if(updated==1){
 							LOG.warn("更新成功:" + analysisInfo);
 						}else{
@@ -63,14 +66,20 @@ public class AnalysisServiceImpl implements AnalysisService {
 						LOG.info("未解析成功");
 					}
 				}
-				
-			}
+			}//for
 		} finally {
 			if (session != null) {
 				session.close();
 			}
 		}
-		return false;
+		if(updatedCount==0){
+			rv = 0;
+		}else if(updatedCount>0 && updatedCount < list.size()){
+			rv = 2;
+		}else if(updatedCount == list.size()){
+			rv = 1;
+		}
+		return rv;
 	}
 	
 }

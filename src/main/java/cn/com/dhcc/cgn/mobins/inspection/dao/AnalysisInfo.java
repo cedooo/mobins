@@ -15,6 +15,7 @@ public class AnalysisInfo {
 	private String valCompareMin = null;
 	private String valCompareMax = null;
 	private String matchType = null;
+	private String resultFormat = null;
 	
 	public String getInspectionRecordsID() {
 		return inspectionRecordsID;
@@ -81,6 +82,12 @@ public class AnalysisInfo {
 	}
 	public void setMatchType(String matchType) {
 		this.matchType = matchType;
+	}
+	public String getResultFormat() {
+		return resultFormat;
+	}
+	public void setResultFormat(String resultFormat) {
+		this.resultFormat = resultFormat;
 	}
 	@Override
 	public String toString() {

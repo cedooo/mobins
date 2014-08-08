@@ -4,6 +4,9 @@ import cn.com.dhcc.cgn.mobins.inspection.dao.AnalysisInfo;
 import cn.com.dhcc.cgn.mobins.inspection.match.result.MatchResult;
 
 public abstract class ResultMatch {
+	static final public String LINE_SPLIT = "<br />";
+	static final public String EXCEPTION = "异常";
+	static final public String NORMAL = "正常";
 	private AnalysisInfo analysisInfo = null;
 	
 	public AnalysisInfo getAnalysisInfo() {

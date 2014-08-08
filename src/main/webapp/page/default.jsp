@@ -159,7 +159,14 @@ protoData: "Filesystem
 							var checkResult = data.listRecord[i].checkResult;
 							var protoData = data.listRecord[i].protoData;
 							var inspectionType = data.listRecord[i].inspectionType;
-							var htmlRecord = "<tr>" + 
+							
+							var trTag = "<tr class='normal'>";
+							if(isException=="异常"){
+								trTag = "<tr class='highlight'>";
+							}else if(isException==null){
+								trTag = "<tr class='errors'>";								
+							}
+							var htmlRecord = trTag + 
 								"<td>" + inspectionType + "</td>" + 
 								"<td>" + checkItem + "</td>" + 
 								"<td>" + checkPoint + "</td>" + 
@@ -196,6 +203,16 @@ protoData: "Filesystem
 	    	padding-top: 5px;
 			border: 1px solid;
 	    }
+	    table[id^="report"] tr.normal{
+	    	color: green;
+	    }
+	    table[id^="report"] tr.highlight{
+	    	color: red;
+	    }
+	    table[id^="report"] tr.errors{
+	    	color: gray;
+	    }
+	    
 	    table.headReport{
 	    	width:100%;
 			border: 0px solid;
