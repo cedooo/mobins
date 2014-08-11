@@ -50,6 +50,8 @@ public class AnalysisServiceImpl implements AnalysisService {
 					match = (ResultMatch) appContext.getBean("ProgressExistMatch");
 				}else if(AnalysisInfo.MATCH_TYPE_SOLOMO_SWITCH.equals(matchType)){
 					match = (ResultMatch) appContext.getBean("SolomonSwitchMatch");
+				}else if(AnalysisInfo.MATCH_TYPE_PORGRESS_COUNT.equals(matchType)){
+					match = (ResultMatch) appContext.getBean("ProgressCountMatch");
 				}else{
 					LOG.warn("巡检记录类型错误");
 					continue;

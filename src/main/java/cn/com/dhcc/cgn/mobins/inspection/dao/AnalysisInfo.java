@@ -6,6 +6,7 @@ public class AnalysisInfo {
 	static public final String MATCH_TYPE_MEMRATE = "3";
 	static public final String MATCH_TYPE_PROGRESS_CHECK = "4";
 	static public final String MATCH_TYPE_SOLOMO_SWITCH = "5";
+	static public final String MATCH_TYPE_PORGRESS_COUNT = "6";
 	private String inspectionRecordsID = null;
 	private String isException = null;
 	private String checkResult = null;

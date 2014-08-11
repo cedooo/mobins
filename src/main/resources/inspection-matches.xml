@@ -24,5 +24,9 @@
 	<bean id="SolomonSwitchMatch"
 		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.SolomonSwitchMatch" >
 	</bean>
+	<bean id="ProgressCountMatch"
+		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.ProgressCountMatch" >
+	</bean>
+	
 
 </beans>

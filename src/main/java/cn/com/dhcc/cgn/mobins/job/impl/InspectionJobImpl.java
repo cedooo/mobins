@@ -69,7 +69,6 @@ public class InspectionJobImpl implements InspectionJob{
 				LOG.warn("巡检报告-报告头入库失败,巡检记录无法入库。");
 			}
 		}
-		
 		analysisService.analysis();
 		
 	}
