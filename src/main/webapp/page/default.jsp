@@ -183,6 +183,9 @@ protoData: "Filesystem
 					}
 				});
 		}
+		function setting(){
+			window.location.href = "<%=basePath%>page/setting.jsp";
+		}
 	</script>
 	<style type="text/css">
 		body{
@@ -245,6 +248,7 @@ table.gridtable td {
   
   <body>
   		<div class="opos">
+  			<button onclick="setting()">设置</button>
 			<select id="target"></select>
 			<select id="host"></select>
 			<input type="text" id="insDate" size="30">

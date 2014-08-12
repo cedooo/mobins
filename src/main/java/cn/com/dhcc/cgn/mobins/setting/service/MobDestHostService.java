@@ -3,6 +3,7 @@ package cn.com.dhcc.cgn.mobins.setting.service;
 import java.util.List;
 
 import cn.com.dhcc.cgn.mobins.po.MobDestHost;
+import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
 
 public interface MobDestHostService {
 	/**
@@ -29,5 +30,11 @@ public interface MobDestHostService {
 	 * @return
 	 */
 	List<MobDestHost> query(MobDestHost host);
-	
+
+	/**
+	 * 分页查找主机
+	 * @param pagging
+	 * @return
+	 */
+	List<MobDestHost> listHostTarget(MobInsTarget target);
 }

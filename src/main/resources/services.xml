@@ -13,5 +13,10 @@
 	<bean id="targetService"
 		class="cn.com.dhcc.cgn.mobins.setting.service.impl.TargetServiceImpl" >
 	</bean>
+	
+	<!-- 巡检主机  -->
+	<bean id="hostService"
+		class="cn.com.dhcc.cgn.mobins.setting.service.impl.MobDestHostServiceImpl" >
+	</bean>
 
 </beans>

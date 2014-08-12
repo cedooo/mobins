@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
+import cn.com.dhcc.cgn.mobins.pagging.Pagging;
 import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
 import cn.com.dhcc.cgn.mobins.setting.service.TargetService;
 
@@ -75,6 +76,25 @@ public class TargetServiceImpl implements TargetService{
 		try{
 			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
 			List<MobInsTarget> li = session.selectList("cn.com.dhcc.cgn.mobins.po.MobInsTarget.query", target);
+			if(li!=null){
+				list.addAll(li);
+			}
+			session.commit();
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<MobInsTarget> listTarget(Pagging pagging) {
+		List<MobInsTarget> list = new ArrayList<MobInsTarget>();
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			List<MobInsTarget> li = session.selectList("cn.com.dhcc.cgn.mobins.po.MobInsTarget.queryByPagging", pagging);
 			if(li!=null){
 				list.addAll(li);
 			}

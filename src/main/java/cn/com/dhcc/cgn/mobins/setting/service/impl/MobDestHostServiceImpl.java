@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.po.MobDestHost;
+import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
 import cn.com.dhcc.cgn.mobins.setting.service.MobDestHostService;
 
 public class MobDestHostServiceImpl implements MobDestHostService {
@@ -75,6 +76,25 @@ public class MobDestHostServiceImpl implements MobDestHostService {
 		try{
 			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
 			List<MobDestHost> li = session.selectList("cn.com.dhcc.cgn.mobins.po.MobDestHost.query", host);
+			if(li!=null){
+				list.addAll(li);
+			}
+			session.commit();
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<MobDestHost> listHostTarget(MobInsTarget target) {
+		List<MobDestHost> list = new ArrayList<MobDestHost>();
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			List<MobDestHost> li = session.selectList("cn.com.dhcc.cgn.mobins.po.MobDestHost.queryByTarget", target);
 			if(li!=null){
 				list.addAll(li);
 			}

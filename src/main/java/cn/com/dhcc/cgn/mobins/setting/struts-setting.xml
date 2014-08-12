@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="setting" namespace="/setting" extends="default,json-default">
+
+		<action name="targetList" class="cn.com.dhcc.cgn.mobins.setting.action.TargetAction" method="list">
+            <result type="json">
+            	<param  name="excludeProperties">targetService,target</param>
+            </result>
+		</action>
+		
+		<action name="hostList" class="cn.com.dhcc.cgn.mobins.setting.action.HostAction" method="list">
+            <result type="json">
+            	<param  name="excludeProperties">hostService,targetID</param>
+            </result>
+		</action>
+		
+    </package>
+    
+</struts>

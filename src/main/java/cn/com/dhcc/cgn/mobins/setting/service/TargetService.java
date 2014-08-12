@@ -2,6 +2,7 @@ package cn.com.dhcc.cgn.mobins.setting.service;
 
 import java.util.List;
 
+import cn.com.dhcc.cgn.mobins.pagging.Pagging;
 import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
 
 public interface TargetService {
@@ -28,5 +29,11 @@ public interface TargetService {
 	 * @return
 	 */
 	List<MobInsTarget> query(MobInsTarget target);
+	/**
+	 * 分页查找目标
+	 * @param pagging
+	 * @return
+	 */
+	List<MobInsTarget> listTarget(Pagging pagging);
 	
 }

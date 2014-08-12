@@ -58,4 +58,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE DT_HOST_DEL_TIME IS NULL
 		]]>
 	</select>
+	
+	<select id="queryByTarget" resultMap="MobDestHostMap">
+		<![CDATA[
+			SELECT N_MOB_DEST_HOST_ID
+			      ,N_TARGET_ID
+			      ,VC_MOB_DEST_HOST_IP
+			      ,VC_HOST_USER
+			      ,VC_HOST_PASSWD
+			      ,VC_HOST_NOTE
+			      ,N_HOST_TYPE
+			      ,CONVERT(varchar(20), DT_HOST_ADD_TIME, 20) as DT_HOST_ADD_TIME
+			      ,CONVERT(varchar(20), DT_HOST_DEL_TIME, 20) as DT_HOST_DEL_TIME
+			FROM T_MOB_DEST_HOST
+			WHERE DT_HOST_DEL_TIME IS NULL AND N_TARGET_ID = #{targetID}
+		]]>
+	</select>
+	
 </mapper>
