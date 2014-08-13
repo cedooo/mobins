@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.mobins.po.InspectionStrage">
+
+	<resultMap type="cn.com.dhcc.cgn.mobins.po.InspectionStrage"
+		id="InspectionStrageMap">
+		<result column="N_STRAGE_ID" property="strageID" />
+		<result column="VC_STRAGE_NAME" property="strageName" />
+		<result column="VC_STRAGE_VALID" property="strageValid" />
+		<result column="VC_STRAGE_NOTE" property="strageNote" />
+		<result column="DT_STRAGE_ADD_TIME" property="strageAddTime" />
+		<result column="DT_STRAGE_DEL_TIME" property="strageDelTime" />
+	</resultMap>
+
+	<select id="queryByPagging" resultMap="InspectionStrageMap" parameterType="cn.com.dhcc.cgn.mobins.pagging.Pagging">
+		<![CDATA[
+			SELECT 
+				N_STRAGE_ID
+		      ,VC_STRAGE_NAME
+		      ,VC_STRAGE_VALID
+		      ,VC_STRAGE_NOTE
+		      ,CONVERT(varchar(20), DT_STRAGE_ADD_TIME, 20) as DT_STRAGE_ADD_TIME
+		      ,CONVERT(varchar(20), DT_STRAGE_DEL_TIME, 20) as DT_STRAGE_DEL_TIME
+			FROM T_INSPECTION_STRAGE
+			WHERE DT_STRAGE_DEL_TIME IS NULL
+		]]>
+	</select>
+</mapper>

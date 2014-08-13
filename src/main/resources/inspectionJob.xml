@@ -10,7 +10,7 @@
 	</bean>
 	<!-- 执行 -->
 	<bean id="commandExecutor"
-		class="cn.com.dhcc.cgn.mobins.job.executor.impl.SSHCommandsExecutor" >
+		class="cn.com.dhcc.cgn.mobins.job.executor.impl.SSHCommandListExecutor" >
 	</bean>
 	<!-- 报告 -->
 	<bean id="reportService"
@@ -54,7 +54,7 @@
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="inspectionJobDetail" />
 		<!-- 每1分钟运行一次 -->
-		<property name="cronExpression" value="50 35 23 * * ?" />
+		<property name="cronExpression" value="0 23 14 * * ?" />
 	</bean>
 	
 	<!-- 执行列表 -->

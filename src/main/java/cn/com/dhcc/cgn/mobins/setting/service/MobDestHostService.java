@@ -37,4 +37,10 @@ public interface MobDestHostService {
 	 * @return
 	 */
 	List<MobDestHost> listHostTarget(MobInsTarget target);
+	/**
+	 * 修改主机巡检帐号密码
+	 * @param host
+	 * @return
+	 */
+	boolean updateAccountAndPassword(MobDestHost host);
 }

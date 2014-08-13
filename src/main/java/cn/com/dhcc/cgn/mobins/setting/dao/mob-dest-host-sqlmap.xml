@@ -30,11 +30,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</update>
 
-	<update id="update" parameterType="cn.com.dhcc.cgn.mobins.po.MobDestHost">
+	<update id="userUpdate" parameterType="cn.com.dhcc.cgn.mobins.po.MobDestHost">
 		<![CDATA[
 			UPDATE T_MOB_DEST_HOST
-			SET N_TARGET_ID = #{targetID}, VC_MOB_DEST_HOST_IP = #{mobDestHostIP}, VC_HOST_USER = #{hostUser}, 
-				VC_HOST_PASSWD	= #{hostPasswd}, VC_HOST_NOTE = #{hostNote}, N_HOST_TYPE = #{hostType}
+			SET  VC_MOB_DEST_HOST_IP = #{mobDestHostIP},
+				 VC_HOST_NOTE = #{hostNote}, N_HOST_TYPE = #{hostType}
+			WHERE N_MOB_DEST_HOST_ID = #{mobDestHostID} AND DT_HOST_DEL_TIME IS NULL
+		]]>
+	</update>
+
+	<update id="updateAccountAndPassword" parameterType="cn.com.dhcc.cgn.mobins.po.MobDestHost">
+		<![CDATA[
+			UPDATE T_MOB_DEST_HOST
+			SET  VC_HOST_USER = #{hostUser}, VC_HOST_PASSWD = #{hostPasswd}
 			WHERE N_MOB_DEST_HOST_ID = #{mobDestHostID} AND DT_HOST_DEL_TIME IS NULL
 		]]>
 	</update>

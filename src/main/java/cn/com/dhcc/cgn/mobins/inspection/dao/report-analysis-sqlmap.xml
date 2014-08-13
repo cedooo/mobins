@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="cn.com.dhcc.cgn.mobins.inspection.service.ReportAnalysisService">
+
+	<select id="queryReportUnInspection" resultMap="cn.com.dhcc.cgn.mobins.po.InspectionReport.InspectionReportMap">
+		<![CDATA[
+			SELECT N_INSPECTION_REPORT_ID
+			      ,N_MOB_DEST_HOST_ID
+			      ,DT_INSPECTION_TIME
+			      ,VC_MAINT_ACOUNT
+			      ,VC_MAINT_USER
+			      ,DT_GENERATE_TIME
+			      ,VC_INSPECTION_IS_EXCEPTION
+			      ,VC_INSPECTION_COMPLETE
+			FROM T_INSPECTION_REPORT	
+			WHERE VC_INSPECTION_IS_EXCEPTION IS NULL AND  VC_INSPECTION_COMPLETE IS NULL
+		]]>
+	</select>
+
+	<select id="queryReportRecords" parameterType="String" resultMap="cn.com.dhcc.cgn.mobins.po.InspectionReport.InspectionRecordsMap">
+		<![CDATA[
+			SELECT N_INSPECTION_RECORDS_ID
+		      ,N_INSPECTION_REPORT_ID
+		      ,VC_CHECK_ITEM
+		      ,VC_CHECK_POINT
+		      ,VC_CHECK_NOTE
+		      ,VC_OPER_NOTE
+		      ,VC_IS_EXCEPTION
+		      ,VC_CHECK_RESULT
+		      ,VC_PROTO_DATA
+		      ,VC_DEAL_RESULT
+		      ,VC_INSPECTION_TYPE
+		      ,DT_ADD_TIME
+		      ,VC_CHECK_CODE
+		      ,VC_CHECK_COMPLETE
+		  FROM T_INSPECTION_RECORDS
+		  WHERE N_INSPECTION_REPORT_ID = #{reportID}
+		]]>
+	</select>
+
+</mapper>

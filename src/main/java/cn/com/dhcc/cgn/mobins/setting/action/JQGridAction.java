@@ -12,6 +12,9 @@ public abstract class JQGridAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = -1820355085979018419L;
+	static public final String OPER_EDIT = "edit";
+	static public final String OPER_DEL = "del";
+	static public final String OPER_ADD = "add";
 	
 	private String  id = null;
 	private String _search = null;
@@ -21,6 +24,8 @@ public abstract class JQGridAction extends ActionSupport{
 	private String sidx = null;
 	private String sord = null;
 	private String nd_ = null;
+	private String oper = null;
+	private String filters = null;
 	public String getId() {
 		return id;
 	}
@@ -68,6 +73,18 @@ public abstract class JQGridAction extends ActionSupport{
 	}
 	public void setNd_(String nd_) {
 		this.nd_ = nd_;
+	}
+	public String getOper() {
+		return oper;
+	}
+	public void setOper(String oper) {
+		this.oper = oper;
+	}
+	public String getFilters() {
+		return filters;
+	}
+	public void setFilters(String filters) {
+		this.filters = filters;
 	}
 	
 }

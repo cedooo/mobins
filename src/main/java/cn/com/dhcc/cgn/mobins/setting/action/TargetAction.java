@@ -40,15 +40,14 @@ public class TargetAction extends JQGridAction {
 		this.target = target;
 	}
 
-	@Override
-	public String execute(){
-		return SUCCESS;
-	}
 	/**
 	 * 添加目标
 	 * @return
 	 */
-	public String add(){
+	private String add(){
+		MobInsTarget target = new MobInsTarget();
+		target.setTargetName(targetName);
+		target.setTargetNote(targetNote);
 		boolean addSuccess = targetService.addTarget(target);
 		if(addSuccess){
 			return SUCCESS;
@@ -81,11 +80,63 @@ public class TargetAction extends JQGridAction {
 	 */
 	public String list(){
 		pagging = new Pagging();
-		pagging.setPage("1");
-		pagging.setRecords("20");
-		pagging.setTotal("2");
 		listTarget = targetService.listTarget(pagging);
 		return SUCCESS;
 	}
-	
+
+	@Override
+	public String execute(){
+		if(OPER_EDIT.equals(this.getOper())){
+			return edit();
+		}else if(OPER_ADD.equals(this.getOper())){
+			return add();
+		}
+		return SUCCESS;
+	}
+	private String targetID = null;
+	private String targetName = null;
+	private String targetNote = null;
+	private String targetAddTime = null;
+
+	public String getTargetID() {
+		return targetID;
+	}
+
+	public void setTargetID(String targetID) {
+		this.targetID = targetID;
+	}
+
+	public String getTargetName() {
+		return targetName;
+	}
+
+	public void setTargetName(String targetName) {
+		this.targetName = targetName;
+	}
+
+	public String getTargetNote() {
+		return targetNote;
+	}
+
+	public void setTargetNote(String targetNote) {
+		this.targetNote = targetNote;
+	}
+
+	public String getTargetAddTime() {
+		return targetAddTime;
+	}
+
+	public void setTargetAddTime(String targetAddTime) {
+		this.targetAddTime = targetAddTime;
+	}
+
+	private String edit() {
+		MobInsTarget target = new MobInsTarget();
+		target.setTargetID(this.getTargetID());
+		target.setTargetName(this.getTargetName());
+		target.setTargetNote(this.getTargetNote());
+		targetService.modTarget(target);
+		return SUCCESS;
+	}
+
 }

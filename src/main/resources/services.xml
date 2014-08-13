@@ -19,4 +19,8 @@
 		class="cn.com.dhcc.cgn.mobins.setting.service.impl.MobDestHostServiceImpl" >
 	</bean>
 
+	<!-- 巡检主机  -->
+	<bean id="strageService"
+		class="cn.com.dhcc.cgn.mobins.setting.service.impl.StrageServiceImpl" >
+	</bean>
 </beans>

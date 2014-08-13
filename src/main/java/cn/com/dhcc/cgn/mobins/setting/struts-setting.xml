@@ -6,19 +6,52 @@
 <struts>
 
     <package name="setting" namespace="/setting" extends="default,json-default">
-
+    	<!-- 默认页面 -->
+		<action name="defaults" class="cn.com.dhcc.cgn.mobins.setting.action.DefaultAction">
+            <result>/page/setting.jsp</result>
+		</action>
+		
+		<!-- 目标列表 -->
 		<action name="targetList" class="cn.com.dhcc.cgn.mobins.setting.action.TargetAction" method="list">
             <result type="json">
             	<param  name="excludeProperties">targetService,target</param>
             </result>
 		</action>
-		
+		<!-- 目标编辑 -->
+		<action name="tagetEdit" class="cn.com.dhcc.cgn.mobins.setting.action.TargetAction" method="execute">
+            <result type="json">
+            	<param  name="excludeProperties">hostService,targetID</param>
+            </result>
+		</action>
+		<!-- 主机列表 -->
 		<action name="hostList" class="cn.com.dhcc.cgn.mobins.setting.action.HostAction" method="list">
             <result type="json">
             	<param  name="excludeProperties">hostService,targetID</param>
             </result>
 		</action>
+		<!-- 主机编辑 -->
+		<action name="hostEdit" class="cn.com.dhcc.cgn.mobins.setting.action.HostAction" method="execute">
+            <result type="json">
+            	<param  name="excludeProperties">hostService,targetID</param>
+            </result>
+		</action>
 		
+		<!-- 删除主机 -->
+		<action name="delHost" class="cn.com.dhcc.cgn.mobins.setting.action.HostAction" method="del">
+            <result type="json"></result>
+		</action>
+		<!-- 更新帐号、密码 -->
+		<action name="updateAP" class="cn.com.dhcc.cgn.mobins.setting.action.HostAction" method="updateAP">
+            <result type="json">
+            	<param  name="excludeProperties">hostService,targetID</param>
+            </result>
+		</action>
+		<!-- 巡检策略列表 -->
+		<action name="listStrage" class="cn.com.dhcc.cgn.mobins.setting.action.StrageAction" method="list">
+            <result type="json">
+            	<param  name="excludeProperties">strageService</param>
+            </result>
+		</action>
     </package>
     
 </struts>

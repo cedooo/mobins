@@ -70,9 +70,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						}else if(data.listHost[i].hostType == 0){
 							hostType = "备";					
 						}
-						  $("#host").append("<option value='" + mobDestHostID + "'>" + mobDestHostIP + " (" + hostType + ")</option>");
+						  $("#host").append("<option value='" + mobDestHostID + "'>" + mobDestHostIP 
+								  //+ " (" + hostType + ")"
+								  + "</option>");
 					}
 				}
+				loadReport();
 			});
 		}
 		function loadReport(){
@@ -184,7 +187,7 @@ protoData: "Filesystem
 				});
 		}
 		function setting(){
-			window.location.href = "<%=basePath%>page/setting.jsp";
+			window.location.href = "<%=basePath%>setting/defaults.action";
 		}
 	</script>
 	<style type="text/css">

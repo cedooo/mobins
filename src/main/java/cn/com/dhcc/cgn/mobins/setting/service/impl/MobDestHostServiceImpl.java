@@ -55,7 +55,7 @@ public class MobDestHostServiceImpl implements MobDestHostService {
 		SqlSession session = null;
 		try{
 			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
-			int upd = session.update("cn.com.dhcc.cgn.mobins.po.MobDestHost.update", host);
+			int upd = session.update("cn.com.dhcc.cgn.mobins.po.MobDestHost.userUpdate", host);
 			session.commit();
 			if(upd==1){
 				return true;
@@ -105,6 +105,25 @@ public class MobDestHostServiceImpl implements MobDestHostService {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public boolean updateAccountAndPassword(MobDestHost host) {
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			int upd = session.update("cn.com.dhcc.cgn.mobins.po.MobDestHost.updateAccountAndPassword", host);
+			session.commit();
+			if(upd==1){
+				return true;
+			}else{
+				return false;
+			}
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
 	}
 
 }

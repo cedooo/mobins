@@ -12,6 +12,7 @@ import cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService;
 import cn.com.dhcc.cgn.mobins.inspection.service.HostInspectionPointService;
 import cn.com.dhcc.cgn.mobins.job.InspectionJob;
 import cn.com.dhcc.cgn.mobins.job.executor.CommandExecutor;
+import cn.com.dhcc.cgn.mobins.job.executor.jsch.ConnectResult;
 import cn.com.dhcc.cgn.mobins.job.executor.result.ExecutorResult;
 import cn.com.dhcc.cgn.mobins.po.HostInspectionPoint;
 import cn.com.dhcc.cgn.mobins.po.InspectionRecords;
@@ -29,7 +30,6 @@ public class InspectionJobImpl implements InspectionJob{
 	private InspectionRecordsService recordsService = null;
 	private MobDestHostService mobHostService = null;
 	private AnalysisService analysisService = null;
-	
 	private CommandExecutor commandExecutor = null;
 
 	/**
@@ -44,33 +44,42 @@ public class InspectionJobImpl implements InspectionJob{
 		for (MobDestHost mobDestHost : listHost) {
 			//执行巡检
 			List<HostInspectionPoint> listHostPoint = hostInspectionPointService.getListByMobDestHost(mobDestHost);
-			Map<HostInspectionPoint, ExecutorResult> resultsMap = commandExecutor.execute(listHostPoint);
-			LOG.debug("巡检点及结果: " + resultsMap);
-			
-			//生成报告头部
-			InspectionReport report = generateReport(mobDestHost);
-			boolean addReportSucc = reportService.addReport(report);
-			LOG.debug(report + "");
+			ConnectResult result = commandExecutor.connectValid(mobDestHost);
+			if(result.isSuccess()){
+				Map<HostInspectionPoint, ExecutorResult> resultsMap = commandExecutor.execute(mobDestHost, listHostPoint);
+				LOG.debug("巡检点及结果: " + resultsMap);
+				//生成报告头部
+				InspectionReport report = generateReport(mobDestHost);
+				boolean addReportSucc = reportService.addReport(report);
+				LOG.debug(report + "");
 
-			LOG.debug("添加巡检记录报告成功：id = " + report.getInspectionReportID());
-			if(addReportSucc){
-				//生成报告项目
-				Iterator<Entry<HostInspectionPoint, ExecutorResult>> iterator = resultsMap.entrySet().iterator();
-				while(iterator.hasNext()){
-					Map.Entry<HostInspectionPoint, ExecutorResult> entry = iterator.next();
-					HostInspectionPoint hostInspectionPoint = entry.getKey();
-					InspectionRecords record = generateInspectionRecord(hostInspectionPoint);
-					record.setInspectionReportID(report.getInspectionReportID());
-					record.setProtoData(entry.getValue().getStrResultVector());
-					recordsService.addInspectionRecord(record);
-					LOG.info("添加成功：" + record);
+				LOG.debug("添加巡检记录报告成功：id = " + report.getInspectionReportID());
+				if(addReportSucc){
+					//生成报告项目
+					Iterator<Entry<HostInspectionPoint, ExecutorResult>> iterator = resultsMap.entrySet().iterator();
+					while(iterator.hasNext()){
+						Map.Entry<HostInspectionPoint, ExecutorResult> entry = iterator.next();
+						HostInspectionPoint hostInspectionPoint = entry.getKey();
+						InspectionRecords record = generateInspectionRecord(hostInspectionPoint);
+						record.setInspectionReportID(report.getInspectionReportID());
+						record.setProtoData(entry.getValue().getStrResultVector());
+						recordsService.addInspectionRecord(record);
+						LOG.info("添加成功：" + record);
+					}
+				}else{
+					LOG.warn("巡检报告-报告头入库失败,巡检记录无法入库。");
 				}
 			}else{
-				LOG.warn("巡检报告-报告头入库失败,巡检记录无法入库。");
+				LOG.debug(result.toString());
 			}
+			
 		}
-		analysisService.analysis();
-		
+		/**
+		 * 结果解析
+		 */
+		int analysisResult = analysisService.analysis();
+		//更新报告状态为已完成，记录巡检结果
+		System.out.println("解析" + analysisResult);
 	}
 	/**
 	 * 

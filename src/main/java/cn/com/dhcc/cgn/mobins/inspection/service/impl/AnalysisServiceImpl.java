@@ -18,7 +18,7 @@ import cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService;
 
 public class AnalysisServiceImpl implements AnalysisService {
 	static final private Logger LOG = LoggerFactory.getLogger(AnalysisServiceImpl.class.getClass());
-	private static ApplicationContext appContext = new ClassPathXmlApplicationContext("classpath:inspection-matches.xml"); 
+	private static final ApplicationContext appContext = new ClassPathXmlApplicationContext("classpath:inspection-matches.xml"); 
 	@Override
 	public int analysis() {
 		List<AnalysisInfo> list = new ArrayList<AnalysisInfo>();
