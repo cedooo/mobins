@@ -10,4 +10,7 @@ public interface AnalysisService {
 	 * @return -1:未执行， 0:失败，1:成功， 2：部分成功
 	 */
 	int analysis();
+	
+	
+	
 }

@@ -7,6 +7,7 @@ public class AnalysisInfo {
 	static public final String MATCH_TYPE_PROGRESS_CHECK = "4";
 	static public final String MATCH_TYPE_SOLOMO_SWITCH = "5";
 	static public final String MATCH_TYPE_PORGRESS_COUNT = "6";
+	static public final String MATCH_TYPE_HA_ERROR = "7";
 	private String inspectionRecordsID = null;
 	private String isException = null;
 	private String checkResult = null;
@@ -20,6 +21,7 @@ public class AnalysisInfo {
 	private String valCompareMax = null;
 	private String matchType = null;
 	private String resultFormat = null;
+	private String checkComplete = null;
 	
 	public String getInspectionRecordsID() {
 		return inspectionRecordsID;
@@ -92,6 +94,12 @@ public class AnalysisInfo {
 	}
 	public void setResultFormat(String resultFormat) {
 		this.resultFormat = resultFormat;
+	}
+	public String getCheckComplete() {
+		return checkComplete;
+	}
+	public void setCheckComplete(String checkComplete) {
+		this.checkComplete = checkComplete;
 	}
 	@Override
 	public String toString() {

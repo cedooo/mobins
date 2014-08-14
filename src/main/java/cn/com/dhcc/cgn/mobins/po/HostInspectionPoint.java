@@ -26,7 +26,8 @@ public class HostInspectionPoint {
 	private String valCompareMin = null;
 	private String valCompareMax = null;
 	private String matchType = null;
-
+	private String sortNum = null;
+	private String exceptionWeight = null;
 	public String getMobDestHostID() {
 		return mobDestHostID;
 	}
@@ -185,6 +186,22 @@ public class HostInspectionPoint {
 
 	public void setMatchType(String matchType) {
 		this.matchType = matchType;
+	}
+
+	public String getSortNum() {
+		return sortNum;
+	}
+
+	public void setSortNum(String sortNum) {
+		this.sortNum = sortNum;
+	}
+
+	public String getExceptionWeight() {
+		return exceptionWeight;
+	}
+
+	public void setExceptionWeight(String exceptionWeight) {
+		this.exceptionWeight = exceptionWeight;
 	}
 
 	@Override

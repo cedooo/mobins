@@ -44,27 +44,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		function editHost(tableID, hostID){
 			$("#" + tableID ).jqGrid('editRow', hostID, true);
-			//$("#" + tableID ).trigger("reloadGrid");
 		}
 		function savHost(tableID, hostID){
 			$("#" + tableID ).jqGrid('editRow', hostID, true);
-			//$("#" + tableID ).trigger("reloadGrid");
 		}
 		function editTarget(targetID){
-			//alert("编辑目标" + targetID);
 			$("#list2" ).jqGrid('editRow', targetID, true);
-			//$("#list2" ).trigger("reloadGrid");
 		}
 		function saveTarget(targetID){
-			//alert("编辑目标" + targetID);
 			$("#list2" ).jqGrid('editRow', targetID, true);
-			//$("#list2" ).trigger("reloadGrid");
 		}
 		function delHost(tableID, hostID){
 			var confirmed = confirm("确认删除?");
 			if(confirmed){
 				//alert("删除目标" + hostID);
-				//$("#" + tableID ).jqGrid('delRowData', hostID);
 				$.ajax({
 				  url: "<%=basePath%>setting/delHost.action?mobDestHostID="+hostID,
 				  context: document.body
@@ -73,37 +66,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				});
 			}
 		}
-		/*更新帐号信息  */
-		function submitUserAndPasswd(){
-			 //form["id=accform"].submit();
-			// alert($("form#accform").valid());
-			if($("form#accform").valid()==true){
-  				document.getElementById("accform").submit();
-			}else{
-				
-			}
-		}
-		var accpassdialog ;
+		var accpassdialog;
 		$(function(){
 			accpassdialog = $( "#accpass" ).dialog({
 		      autoOpen: false,
-		      height: 200,
-		      width: 350,
+		      //height: 200,
+		      //width: 350,
 		      modal: true,
 		      resizable: false,
-		      buttons: {
-		        "保存": submitUserAndPasswd,
-		        "取消": function() {
-		        	accpassdialog.dialog( "close" );
-		        }
-		      }
 		    });
 			
 		});
 		/*验证IP是否合法*/
  		var ipregex = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}$/;
 	 	function ipconfirm(value, colname) {
-	 		//alert(ipregex.test(value));
 	 		if (!ipregex.test(value)) {
 	 		   return [false,"IP地址不合法"];
 	 		}else{ 
@@ -111,11 +87,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		}
 	 	}
 		function refreshPasswd(gridID, hostID){
-			//alert("更新密码" + gridID + hostID);
 			var data = $("#" + gridID ).jqGrid('getRowData', hostID);
 			$("#hostUser").val(data.hostUser);
 			$("#mobDestHostID").val(data.mobDestHostID);
+			$("#mobDestHostIP").val(data.mobDestHostIP);
+			$("#password").val("");
+			$("#confirm_password").val("");
+			$("#testBtn").val("测试").removeAttr("disabled");
+			$("form#accform input[type='submit']").hide();
 			accpassdialog.dialog( "open" );
+		}
+		function accPwdTest(){
+			if($("form#accform").valid()==true){
+				var editAction = "<%=basePath%>setting/updateAP.action";
+				var validAction = "<%=basePath%>setting/accValid.action";
+				$("#testBtn").val("通过").attr("disabled","disabled");
+				$("form#accform input[type='submit']").show();
+			}
 		}
 		$(function(){
 			jQuery("#list2").jqGrid({
@@ -160,15 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 		}	
 			 	},
 			     subGridRowExpanded: function(subgrid_id, row_id) {
-			 		// we pass two parameters
-			 		// subgrid_id is a id of the div tag created whitin a table data
-			 		// the id of this elemenet is a combination of the "sg_" + id of the row
-			 		// the row_id is the id of the row
-			 		// If we wan to pass additinal parameters to the url we can use
-			 		// a method getRowData(row_id) - which returns associative array in type name-value
-			 		// here we can easy construct the flowing
-			 		
-			 		var subgrid_table_id, pager_id;
+			 		var subgrid_table_id;//, pager_id;
 			 		subgrid_table_id = subgrid_id+"_t";
 			 		pager_id = "p_"+subgrid_table_id;
 			 		$("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
@@ -212,7 +192,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						 			save = "<input type='button' value='保存' onclick=\"jQuery('#"+subgrid_table_id + "').saveRow('"+cl+"');\"  />";
 						 			refresh = "<input type='button' value='帐号密码' onclick=\"refreshPasswd('"+subgrid_table_id + "', '"+cl+"');\"  />";
 						 			$grid.jqGrid('setRowData',ids[i],{act: edit+save+refresh+del});
-						 		}	
+						 		}
 						 	},
 			 		   	//pager:  '#' + pager_id,
 			 		   	sortname: 'num',
@@ -230,12 +210,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   	//pager: '#nav',
 	 			multiselect:false,
 			    sortorder: "desc",
-			    caption:"巡检目标"
+			    caption:"巡检目标",
 			});
 			jQuery("#list2").jqGrid('navGrid','#nav',{edit:false,add:true,del:false,search:false});
 			
 			$("#accform").validate({
-			       rules: {
+				rules: {
 			        	mobDestHostID: {
 						    required: true,
 						    digits:true,
@@ -255,8 +235,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    equalTo: "#password"
 					   }
 				  },
-				   submitHandler: function(form) 
-				   {      
+				  submitHandler: function(form) {      
 				      $(form).ajaxSubmit();     
 				   } 
 			 });
@@ -280,9 +259,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<table id="list2"></table>
 		<div id="nav"></div>
 		<div id="accpass" title="更新帐号">
-			<div>只能更新，不能查看.</div>
-		  <form id="accform" action="<%=basePath%>setting/updateAP.action">
+		  <form id="accform" action="<%=basePath%>setting/updateAP.action" method="post">
 		  	<input type="hidden" id="mobDestHostID" name="mobDestHostID" value="" />
+		  	<input type="hidden" id="mobDestHostIP" value="" />
 		      <label for="hostUser">帐号</label>
 		      <input type="text" name="hostUser" id="hostUser" value=""  class="text ui-widget-content ui-corner-all">
 		      <br />
@@ -291,9 +270,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 		<br />
 		      <label for="confirm_password">确认</label>
 		      <input type="password"  id="confirm_password" name="confirm_password" value="" class="text ui-widget-content ui-corner-all">
-		 
-		      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+		      <hr />
+		 	 <input onclick="accPwdTest()" id="testBtn" type="button" value="测试"/>
+		 	 <input type="submit" value="保存">
+		 	 <input type="button" onclick="accpassdialog.dialog('close');" value="关闭" />
 		  </form>
 		</div>
+		<table id="listStrage"></table>
+		<div id="strageNav"></div>
 	</body>
 </html>

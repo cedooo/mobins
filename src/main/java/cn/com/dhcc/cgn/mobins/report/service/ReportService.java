@@ -41,4 +41,6 @@ public interface ReportService {
 	 * @return
 	 */
 	List<InspectionRecords> listRecord(String reportID);
+	
+	
 }

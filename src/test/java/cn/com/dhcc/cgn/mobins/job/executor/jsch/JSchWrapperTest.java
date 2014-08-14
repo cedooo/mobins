@@ -33,7 +33,7 @@ public class JSchWrapperTest {
 		ifPoint.setOperCommand("ifconfig");
 		listPoint.add(ifPoint);
 		HostInspectionPoint pwdPoint = new HostInspectionPoint();
-		pwdPoint.setOperCommand("pwd");
+		pwdPoint.setOperCommand("grep -e 'error' /var/log/ha-log.log");
 		listPoint.add(pwdPoint);
 		Map<HostInspectionPoint, ExecutorResult> maps = jsw.executeCommands(listPoint);
 		Iterator<Entry<HostInspectionPoint, ExecutorResult>> iterator = maps.entrySet().iterator();

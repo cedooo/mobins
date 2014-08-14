@@ -25,11 +25,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="D_VAL_COMPARE_MIN" property="valCompareMin" />
 		<result column="D_VAL_COMPARE_MAX" property="valCompareMax" />
 		<result column="N_MATCH_TYPE" property="matchType" />
+		<result column="N_SORT_NUM" property="sortNum" />
+		<result column="N_EXCEPTION_WEIGHT" property="exceptionWeight" />
 	</resultMap>
 
 	<select id="queryAll" resultMap="HostInspectionPointMap">
 		<![CDATA[
-			SELECT * 
+			SELECT N_MOB_DEST_HOST_ID
+		      ,VC_MOB_DEST_HOST_IP
+		      ,VC_HOST_USER
+		      ,VC_HOST_PASSWD
+		      ,VC_HOST_NOTE
+		      ,N_HOST_TYPE
+		      ,VC_STRAGE_NAME
+		      ,VC_STRAGE_VALID
+		      ,VC_STRAGE_NOTE
+		      ,VC_ITEM_NAME
+		      ,VC_INSPECTION_TYPE
+		      ,VC_INSPECTION_ITEM_NOTE
+		      ,VC_OPER_COMMAND
+		      ,VC_OPER_NOTE
+		      ,VC_CHECK_POINT_NAME
+		      ,VC_INSPECTION_CODE
+		      ,VC_KEY_REGEX
+		      ,D_VAL_COMPARE_MIN
+		      ,D_VAL_COMPARE_MAX
+		      ,N_MATCH_TYPE
+		      ,N_SORT_NUM
+		      ,N_EXCEPTION_WEIGHT
 			FROM V_HOST_INSPECTION_POINT
 			ORDER BY N_MOB_DEST_HOST_ID
 		]]>
@@ -38,7 +61,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="queryByDestHost" resultMap="HostInspectionPointMap" parameterType="cn.com.dhcc.cgn.mobins.po.MobDestHost" >
 		<![CDATA[
-			SELECT * 
+			SELECT N_MOB_DEST_HOST_ID
+		      ,VC_MOB_DEST_HOST_IP
+		      ,VC_HOST_USER
+		      ,VC_HOST_PASSWD
+		      ,VC_HOST_NOTE
+		      ,N_HOST_TYPE
+		      ,VC_STRAGE_NAME
+		      ,VC_STRAGE_VALID
+		      ,VC_STRAGE_NOTE
+		      ,VC_ITEM_NAME
+		      ,VC_INSPECTION_TYPE
+		      ,VC_INSPECTION_ITEM_NOTE
+		      ,VC_OPER_COMMAND
+		      ,VC_OPER_NOTE
+		      ,VC_CHECK_POINT_NAME
+		      ,VC_INSPECTION_CODE
+		      ,VC_KEY_REGEX
+		      ,D_VAL_COMPARE_MIN
+		      ,D_VAL_COMPARE_MAX
+		      ,N_MATCH_TYPE
+		      ,N_SORT_NUM
+		      ,N_EXCEPTION_WEIGHT
 			FROM V_HOST_INSPECTION_POINT
 			WHERE N_MOB_DEST_HOST_ID = #{mobDestHostID}
 			ORDER BY N_MOB_DEST_HOST_ID

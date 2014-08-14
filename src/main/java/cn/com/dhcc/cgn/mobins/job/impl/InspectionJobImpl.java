@@ -41,45 +41,66 @@ public class InspectionJobImpl implements InspectionJob{
 	public void execute() {
 		LOG.info("执行巡检任务");
 		List<MobDestHost> listHost = mobHostService.query(null);
-		for (MobDestHost mobDestHost : listHost) {
-			//执行巡检
-			List<HostInspectionPoint> listHostPoint = hostInspectionPointService.getListByMobDestHost(mobDestHost);
-			ConnectResult result = commandExecutor.connectValid(mobDestHost);
-			if(result.isSuccess()){
-				Map<HostInspectionPoint, ExecutorResult> resultsMap = commandExecutor.execute(mobDestHost, listHostPoint);
-				LOG.debug("巡检点及结果: " + resultsMap);
-				//生成报告头部
-				InspectionReport report = generateReport(mobDestHost);
-				boolean addReportSucc = reportService.addReport(report);
-				LOG.debug(report + "");
-
-				LOG.debug("添加巡检记录报告成功：id = " + report.getInspectionReportID());
-				if(addReportSucc){
-					//生成报告项目
-					Iterator<Entry<HostInspectionPoint, ExecutorResult>> iterator = resultsMap.entrySet().iterator();
-					while(iterator.hasNext()){
-						Map.Entry<HostInspectionPoint, ExecutorResult> entry = iterator.next();
-						HostInspectionPoint hostInspectionPoint = entry.getKey();
-						InspectionRecords record = generateInspectionRecord(hostInspectionPoint);
-						record.setInspectionReportID(report.getInspectionReportID());
-						record.setProtoData(entry.getValue().getStrResultVector());
-						recordsService.addInspectionRecord(record);
-						LOG.info("添加成功：" + record);
+		try{
+			for (MobDestHost mobDestHost : listHost) {
+				//执行巡检
+				List<HostInspectionPoint> listHostPoint = hostInspectionPointService.getListByMobDestHost(mobDestHost);
+				ConnectResult result = commandExecutor.connectValid(mobDestHost);
+				if(result.isSuccess()){
+					LOG.info("可以连接，开始巡检,主机ip：" + mobDestHost.getMobDestHostIP());
+					Map<HostInspectionPoint, ExecutorResult> resultsMap = commandExecutor.execute(mobDestHost, listHostPoint);
+					LOG.debug("巡检点及结果: " + resultsMap);
+					//生成报告头部
+					InspectionReport report = generateReport(mobDestHost);
+					boolean addReportSucc = reportService.addReport(report);
+					LOG.info("生成巡检报告：" + report);
+	
+					LOG.debug("添加巡检记录报告成功：id = " + report.getInspectionReportID());
+					if(addReportSucc){
+						//生成报告项目
+						Iterator<Entry<HostInspectionPoint, ExecutorResult>> iterator = resultsMap.entrySet().iterator();
+						while(iterator.hasNext()){
+							Map.Entry<HostInspectionPoint, ExecutorResult> entry = iterator.next();
+							HostInspectionPoint hostInspectionPoint = entry.getKey();
+							InspectionRecords record = generateInspectionRecord(hostInspectionPoint);
+							record.setInspectionReportID(report.getInspectionReportID());
+							record.setProtoData(entry.getValue().getStrResultVector());
+							recordsService.addInspectionRecord(record);
+							LOG.info("添加成功：" + record);
+						}
+					}else{
+						LOG.warn("巡检报告-报告头入库失败,巡检记录无法入库。");
 					}
 				}else{
-					LOG.warn("巡检报告-报告头入库失败,巡检记录无法入库。");
+					LOG.info("无法连接ip=" + mobDestHost.getMobDestHostIP() + "的主机，巡检失败.");
+					InspectionReport report = generateReport(mobDestHost);
+					report.setInspectionIsException(InspectionReport.EXCEPTION);
+					report.setInspectionComplete(result.isSuccess()?
+							InspectionReport.COMPLETE_SUCCESS:InspectionReport.COMPLETE_FAIL);
+					try{
+						LOG.info(report.toString());
+						boolean addReportSucc = reportService.addReport(report);
+						if(!addReportSucc){
+							LOG.info("数据入库异常:" + report);
+						}else{
+							LOG.debug("巡检报告入库成功.");
+						}
+						LOG.debug("巡检失败，失败原因：" + result.toString());
+					}catch(Exception e){
+						e.printStackTrace();
+					}
 				}
-			}else{
-				LOG.debug(result.toString());
+				
 			}
-			
+		}finally{
+			/**
+			 * 结果解析
+			 */
+			LOG.info("解析巡检记录..");
+			int analysisResult = analysisService.analysis();
+			//更新报告状态为已完成，记录巡检结果
+			LOG.info("巡检记录解析结果：" + analysisResult );
 		}
-		/**
-		 * 结果解析
-		 */
-		int analysisResult = analysisService.analysis();
-		//更新报告状态为已完成，记录巡检结果
-		System.out.println("解析" + analysisResult);
 	}
 	/**
 	 * 
@@ -109,6 +130,9 @@ public class InspectionJobImpl implements InspectionJob{
 		records.setOperNote(hostPoint.getOperNote());
 		records.setInspectionType(hostPoint.getInspectionType());
 		records.setCheckPoint(hostPoint.getCheckPointName());
+		
+		records.setShowSortNum(hostPoint.getSortNum());
+		records.setRecordsExceptionWeight(hostPoint.getExceptionWeight());
 		return records;
 	}
 	public HostInspectionPointService getHostInspectionPointService() {

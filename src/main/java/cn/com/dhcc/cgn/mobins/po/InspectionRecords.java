@@ -15,6 +15,8 @@ public class InspectionRecords {
 	private String addTime = null;
 	private String checkCode = null;
 	private String checkComplete = null;
+	private String showSortNum = null;
+	private String recordsExceptionWeight = null;//RECORDS_EXCEPTION_WEIGHT
 	
 	public String getInspectionRecordsID() {
 		return inspectionRecordsID;
@@ -126,6 +128,22 @@ public class InspectionRecords {
 
 	public void setCheckComplete(String checkComplete) {
 		this.checkComplete = checkComplete;
+	}
+
+	public String getShowSortNum() {
+		return showSortNum;
+	}
+
+	public void setShowSortNum(String showSortNum) {
+		this.showSortNum = showSortNum;
+	}
+
+	public String getRecordsExceptionWeight() {
+		return recordsExceptionWeight;
+	}
+
+	public void setRecordsExceptionWeight(String recordsExceptionWeight) {
+		this.recordsExceptionWeight = recordsExceptionWeight;
 	}
 
 	@Override

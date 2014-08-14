@@ -18,6 +18,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,VC_INSPECTION_TYPE
 			,DT_ADD_TIME
 			,VC_CHECK_CODE
+			,N_SHOW_SORT_NUM
+      		,N_RECORDS_EXCEPTION_WEIGHT
 		)
 		VALUES(
 			#{inspectionReportID},
@@ -31,7 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{dealResult},
 			#{inspectionType},
 			getdate(),
-			#{checkCode}
+			#{checkCode},
+			#{showSortNum},
+			#{recordsExceptionWeight}
 		)
 		<selectKey resultType="String" order="AFTER" keyProperty="inspectionRecordsID">  
         	select @@IDENTITY as inspectionRecordsID  

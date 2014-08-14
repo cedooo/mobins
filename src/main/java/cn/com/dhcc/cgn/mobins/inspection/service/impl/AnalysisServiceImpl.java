@@ -33,7 +33,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 				list.addAll(li);
 			}
 			session.commit();
-			LOG.info("解析个数: " + list.size());
+			LOG.info("解析条数: " + list.size());
 			/**
 			 * 解析、入库
 			 */
@@ -52,6 +52,8 @@ public class AnalysisServiceImpl implements AnalysisService {
 					match = (ResultMatch) appContext.getBean("SolomonSwitchMatch");
 				}else if(AnalysisInfo.MATCH_TYPE_PORGRESS_COUNT.equals(matchType)){
 					match = (ResultMatch) appContext.getBean("ProgressCountMatch");
+				}else if(AnalysisInfo.MATCH_TYPE_HA_ERROR.equals(matchType)){
+					match = (ResultMatch) appContext.getBean("HAErrorMatch");
 				}else{
 					LOG.warn("巡检记录类型错误");
 					continue;
@@ -62,13 +64,14 @@ public class AnalysisServiceImpl implements AnalysisService {
 					if(result!=null && result.isCheckComplete()){
 						analysisInfo.setIsException(result.getIsException());
 						analysisInfo.setCheckResult(result.getCheckResult());
+						analysisInfo.setCheckComplete("1");
 						int updated = session.update("cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService.updateResult", analysisInfo);
 						session.commit();
 						updatedCount += updated;
 						if(updated==1){
-							LOG.warn("更新成功:" + analysisInfo);
+							LOG.info("更新成功:" + analysisInfo);
 						}else{
-							LOG.debug("更新失败");
+							LOG.info("更新失败");
 						}
 					}else{
 						LOG.info("未解析成功");

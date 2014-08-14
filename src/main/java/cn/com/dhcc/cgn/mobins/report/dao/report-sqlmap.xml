@@ -30,15 +30,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		,VC_MAINT_USER
 		,DT_GENERATE_TIME
 		,VC_INSPECTION_IS_EXCEPTION
+		,VC_INSPECTION_COMPLETE
 		)
 		VALUES(
 		#{mobDestHostID},
 		getdate(),
-		<!-- #{inspectionTime}, -->
 		#{maintAccount},
 		#{maintUser},
 		getdate(),
-		#{inspectionIsException}
+		#{inspectionIsException},
+		#{inspectionComplete}
 		)
 		<selectKey resultType="String" order="AFTER" keyProperty="inspectionReportID">
 			select @@IDENTITY as inspectionReportID
@@ -95,11 +96,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[
 			SELECT N_INSPECTION_REPORT_ID
 		      ,N_MOB_DEST_HOST_ID
-		      ,DT_INSPECTION_TIME
+		      ,CONVERT(varchar(20), DT_INSPECTION_TIME, 20) as DT_INSPECTION_TIME
 		      ,VC_MAINT_ACOUNT
 		      ,VC_MAINT_USER
-		      ,DT_GENERATE_TIME
+		      ,CONVERT(varchar(20), DT_GENERATE_TIME, 20) as DT_GENERATE_TIME
 		      ,VC_INSPECTION_IS_EXCEPTION
+		      ,VC_INSPECTION_COMPLETE
 			FROM T_INSPECTION_REPORT	
 			WHERE N_MOB_DEST_HOST_ID = #{hostID} AND CONVERT(VARCHAR(10), DT_GENERATE_TIME,120) = #{formatDate}
 			ORDER BY DT_INSPECTION_TIME DESC
@@ -130,6 +132,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="inspectionType" column="VC_INSPECTION_TYPE" />
 		<result property="addTime" column="DT_ADD_TIME" />
 		<result property="checkCode" column="VC_CHECK_CODE" />
+		<result property="showSortNum" column="N_SHOW_SORT_NUM" />
+		<result property="recordsExceptionWeight" column="N_RECORDS_EXCEPTION_WEIGHT" />
 	</resultMap>
 	<!-- 通过目标ID查找主机列表 -->
 	<select id="queryRecordsByReportID" resultMap="InspectionRecordsMap"
@@ -148,9 +152,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		,VC_INSPECTION_TYPE
 		,DT_ADD_TIME
 		,VC_CHECK_CODE
+		,N_SHOW_SORT_NUM
+   		,N_RECORDS_EXCEPTION_WEIGHT
 		FROM T_INSPECTION_RECORDS
 		WHERE N_INSPECTION_REPORT_ID = #{reportID}
-		ORDER BY VC_INSPECTION_TYPE DESC, DT_ADD_TIME
+		ORDER BY N_SHOW_SORT_NUM
 	</select>
 
 </mapper>

@@ -27,6 +27,8 @@
 	<bean id="ProgressCountMatch"
 		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.ProgressCountMatch" >
 	</bean>
+	<bean id="HAErrorMatch"
+		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.HAErrorMatch" >
+	</bean>
 	
-
 </beans>

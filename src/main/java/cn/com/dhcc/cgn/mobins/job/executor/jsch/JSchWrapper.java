@@ -109,17 +109,16 @@ public class JSchWrapper {
     		result.setResult("登录成功");
     		result.setSuccess(true);
 		} catch (JSchException e) {
-			result.setResult("IP、帐号、密码不匹配，连接失败。");
+			result.setResult("无法登录主机，可能是IP、帐号、密码不匹配或网络原因，连接失败。");
 			result.setSuccess(false);
 		} catch (IOException e) {
-			result.setResult("IP、帐号、密码不匹配，连接失败。");
+			result.setResult("连接失效，无法接收巡检结果。");
 			result.setSuccess(false);
 		} finally{
 			if(session!=null){
 				session.disconnect();
 			}
 		}
-	    LOG.debug(result.toString());
 		return result;
 	}
 	/**
@@ -130,57 +129,52 @@ public class JSchWrapper {
 	 */
 	public  Map<HostInspectionPoint, ExecutorResult> executeCommands(List<HostInspectionPoint> listPoint){
 		Map<HostInspectionPoint, ExecutorResult> maps = new HashMap<HostInspectionPoint, ExecutorResult>();
-		ConnectResult result = validate();
-		if(result.isSuccess()){
-			JSch jsch = new JSch();
-			Session session = null;
-		    try {
-				session=jsch.getSession(user, ipaddr, port);
-				session.setPassword(passwd);
-				UserInfo ui = new MyUserInfo();
-				session.setUserInfo(ui);
-				session.connect(DEFAULT_INTERN);
-				LOG.info("用户" + user + "登录" + ipaddr + ":" + port);
-	            BufferedReader input = null;
-	            try{
-	            	for (HostInspectionPoint hostInspectionPoint : listPoint) {
-	    				Channel channel = session.openChannel("exec");
-			            ((ChannelExec) channel).setCommand(hostInspectionPoint.getOperCommand());
-		            	input = new BufferedReader(new InputStreamReader(channel.getInputStream()));
-		                channel.connect();
-		                String line;
-		                LOG.debug("命令" + hostInspectionPoint.getOperCommand() +  "执行结果");
-		                ExecutorResult exeResult = new ExecutorResult();
-		                Vector<String> vct = new Vector<String>();
-		                while ((line = input.readLine()) != null) {
-		                    LOG.info(line);
-		                    vct.add(line);
-		                }
-		                exeResult.setResultVector(vct);
-		                exeResult.setExecuteInfo("执行成功");
-		                maps.put(hostInspectionPoint, exeResult);
-					}
-	            } catch (IOException e) {
-					e.printStackTrace();
-				}finally{
-	            	if(input!=null){
-	            		try {
-							input.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-	            	}
-	            }
-		    } catch (JSchException e) {
-				e.printStackTrace();
+		JSch jsch = new JSch();
+		Session session = null;
+	    try {
+			session=jsch.getSession(user, ipaddr, port);
+			session.setPassword(passwd);
+			UserInfo ui = new MyUserInfo();
+			session.setUserInfo(ui);
+			session.connect(DEFAULT_INTERN);
+			LOG.info("用户" + user + "登录" + ipaddr + ":" + port);
+            BufferedReader input = null;
+            try{
+            	for (HostInspectionPoint hostInspectionPoint : listPoint) {
+    				Channel channel = session.openChannel("exec");
+		            ((ChannelExec) channel).setCommand(hostInspectionPoint.getOperCommand());
+	            	input = new BufferedReader(new InputStreamReader(channel.getInputStream()));
+	                channel.connect();
+	                String line;
+	                LOG.info("执行巡检命令: " + hostInspectionPoint.getOperCommand());
+	                ExecutorResult exeResult = new ExecutorResult();
+	                Vector<String> vct = new Vector<String>();
+	                while ((line = input.readLine()) != null) {
+	                    LOG.debug(line);
+	                    vct.add(line);
+	                }
+	                exeResult.setResultVector(vct);
+	                exeResult.setExecuteInfo("执行成功");
+	                maps.put(hostInspectionPoint, exeResult);
+				}
+            } catch (IOException e) {
+            	
 			}finally{
-		    	if(session!=null){
-		    		session.disconnect();
-		    	}
-		    }
-		}else{
-			LOG.debug("登录失败");
-		}		
+            	if(input!=null){
+            		try {
+						input.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+            	}
+            }
+	    } catch (JSchException e) {
+			e.printStackTrace();
+		}finally{
+	    	if(session!=null){
+	    		session.disconnect();
+	    	}
+	    }
 		return maps;
 	}
 	

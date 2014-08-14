@@ -1,6 +1,10 @@
 package cn.com.dhcc.cgn.mobins.po;
 
 public class InspectionReport {
+	static final public String EXCEPTION = "异常";
+	static final public String COMPLETE_SUCCESS = "1";
+	static final public String COMPLETE_FAIL = "1";
+	
 	private String inspectionReportID = null;
 	private String mobDestHostID = null;
 	private String inspectionTime = null;
