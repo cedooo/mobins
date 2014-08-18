@@ -59,6 +59,14 @@
             	<param  name="excludeProperties">mobDestHostIP,hostPasswd,hostUser</param>
             </result>
 		</action>
+		
+		
+		<!-- 巡检策略巡检项目列表 -->
+		<action name="listInspectionItem" class="cn.com.dhcc.cgn.mobins.setting.action.InspectionItemAction" method="list">
+            <result type="json">
+            	<param  name="excludeProperties">inspectionItemService</param>
+            </result>
+		</action>
     </package>
     
 </struts>

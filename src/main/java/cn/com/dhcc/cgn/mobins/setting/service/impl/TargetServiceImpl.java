@@ -6,8 +6,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
-import cn.com.dhcc.cgn.mobins.pagging.Pagging;
 import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
+import cn.com.dhcc.cgn.mobins.pojo.pagging.Pagging;
 import cn.com.dhcc.cgn.mobins.setting.service.TargetService;
 
 public class TargetServiceImpl implements TargetService{

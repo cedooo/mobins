@@ -5,10 +5,9 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
-
 	
 	<import resource="inspectionJob.xml" />
-
 	<import resource="services.xml" />
-
+	<import resource="search-condition.xml" />
+	
 </beans>

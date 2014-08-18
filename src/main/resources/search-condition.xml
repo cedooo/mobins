@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 分页 -->
+	<bean id="Pagging"
+		class="cn.com.dhcc.cgn.mobins.pojo.pagging.Pagging" >
+	</bean>
+	
+	<!-- 策略搜素条件 -->
+	<bean id="StrageSearchCondition"
+		class="cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition" >
+		<property name="pagging" ref="Pagging"></property>
+	</bean>
+	<!-- 巡检项目搜素条件 -->
+	<bean id="InspectionItemSearchCondition"
+		class="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionItemSearchCondition" >
+		<property name="pagging" ref="Pagging"></property>
+	</bean>
+	
+</beans>

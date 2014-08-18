@@ -75,8 +75,7 @@ public class InspectionJobImpl implements InspectionJob{
 					LOG.info("无法连接ip=" + mobDestHost.getMobDestHostIP() + "的主机，巡检失败.");
 					InspectionReport report = generateReport(mobDestHost);
 					report.setInspectionIsException(InspectionReport.EXCEPTION);
-					report.setInspectionComplete(result.isSuccess()?
-							InspectionReport.COMPLETE_SUCCESS:InspectionReport.COMPLETE_FAIL);
+					report.setInspectionComplete(result.getResult());
 					try{
 						LOG.info(report.toString());
 						boolean addReportSucc = reportService.addReport(report);

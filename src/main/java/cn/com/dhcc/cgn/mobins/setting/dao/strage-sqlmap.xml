@@ -14,17 +14,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="DT_STRAGE_DEL_TIME" property="strageDelTime" />
 	</resultMap>
 
-	<select id="queryByPagging" resultMap="InspectionStrageMap" parameterType="cn.com.dhcc.cgn.mobins.pagging.Pagging">
+	<select id="countByCondition" resultType="int" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition">
 		<![CDATA[
-			SELECT 
+			SELECT COUNT(*)
+			FROM T_INSPECTION_STRAGE
+			WHERE DT_STRAGE_DEL_TIME IS NULL
+		]]>
+	</select>
+	<select id="queryByCondition" resultMap="InspectionStrageMap" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition">
+		<![CDATA[
+			select 
 				N_STRAGE_ID
 		      ,VC_STRAGE_NAME
 		      ,VC_STRAGE_VALID
 		      ,VC_STRAGE_NOTE
 		      ,CONVERT(varchar(20), DT_STRAGE_ADD_TIME, 20) as DT_STRAGE_ADD_TIME
 		      ,CONVERT(varchar(20), DT_STRAGE_DEL_TIME, 20) as DT_STRAGE_DEL_TIME
-			FROM T_INSPECTION_STRAGE
-			WHERE DT_STRAGE_DEL_TIME IS NULL
+			from (
+			select row_number()over(order by tc)rn,*
+			from (
+				select top ${pagging.rows + pagging.skip} 0 tc,* 
+					from T_INSPECTION_STRAGE
+					WHERE DT_STRAGE_DEL_TIME IS NULL
+				)t
+			)tt
+			where ${pagging.skip} < rn
 		]]>
 	</select>
+	
 </mapper>

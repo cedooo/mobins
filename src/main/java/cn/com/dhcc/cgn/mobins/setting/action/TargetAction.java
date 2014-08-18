@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cn.com.dhcc.cgn.mobins.pagging.Pagging;
 import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
+import cn.com.dhcc.cgn.mobins.pojo.pagging.Pagging;
 import cn.com.dhcc.cgn.mobins.setting.service.TargetService;
 
 /**

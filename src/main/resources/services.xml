@@ -19,8 +19,12 @@
 		class="cn.com.dhcc.cgn.mobins.setting.service.impl.MobDestHostServiceImpl" >
 	</bean>
 
-	<!-- 巡检主机  -->
+	<!-- 巡检策略  -->
 	<bean id="strageService"
 		class="cn.com.dhcc.cgn.mobins.setting.service.impl.StrageServiceImpl" >
+	</bean>
+	<!-- 巡检巡检项目  -->
+	<bean id="inspectionItemService"
+		class="cn.com.dhcc.cgn.mobins.setting.service.impl.InspectionItemServiceImpl" >
 	</bean>
 </beans>

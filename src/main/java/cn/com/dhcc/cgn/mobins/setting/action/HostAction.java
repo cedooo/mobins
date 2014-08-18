@@ -129,6 +129,7 @@ public class HostAction extends JQGridAction {
 
 	private String hostPasswd = null;
 	private String confirm_password = null;
+	private String updateAPSuccess = null;
 	public String getHostPasswd() {
 		return hostPasswd;
 	}
@@ -136,13 +137,22 @@ public class HostAction extends JQGridAction {
 	public void setHostPasswd(String hostPasswd) {
 		this.hostPasswd = hostPasswd;
 	}
+	
+	public String getUpdateAPSuccess() {
+		return updateAPSuccess;
+	}
+
+	public void setUpdateAPSuccess(String updateAPSuccess) {
+		this.updateAPSuccess = updateAPSuccess;
+	}
 
 	public String updateAP(){
 		MobDestHost host = new MobDestHost();
 		host.setMobDestHostID(mobDestHostID);
 		host.setHostUser(hostUser);
 		host.setHostPasswd(hostPasswd);
-		hostService.updateAccountAndPassword(host);
+		boolean updateSucc = hostService.updateAccountAndPassword(host);
+		updateAPSuccess = updateSucc+"";
 		return SUCCESS;
 	}
 	

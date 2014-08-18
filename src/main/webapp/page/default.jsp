@@ -14,16 +14,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="巡检">
   
-	<link href="<%=basePath%>js/dependency/jquery-ui-1.11.0.custom/jquery-ui.css" rel="stylesheet">
-	<script src="<%=basePath%>js/dependency/jquery-ui-1.11.0.custom/external/jquery/jquery.js"></script>
-	<script src="<%=basePath%>js/dependency/jquery-ui-1.11.0.custom/jquery-ui.js"></script>
+	<%@ include file="/page/them.jsp" %>
+	
 	<script src="<%=basePath%>js/dependency/jquery.ui.datepicker-zh-CN.js"></script>
+	
+	<link href="<%=basePath%>css/default.css" rel="stylesheet">
 	<script type="text/javascript">
 		$(function(){
 			loadTarget();
-			$("#target").change(loadHost);
-			$("#host").change(loadReport);
-			//$.datepicker.setDefaults( $.datepicker.regional[ "zh-CN" ] );
 		    $( "#insDate" ).datepicker({
 		    	dateFormat : "yy-mm-dd",
 		    	showAnim : "slideDown",
@@ -31,6 +29,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    })
 			.datepicker('setDate', new Date())
 			.change(loadReport);
+
+			$("#target").selectmenu({change:loadHost});
+			$("#host").selectmenu({change:loadReport});
 		});
 		function loadTarget(){
 			$.ajax({
@@ -64,11 +65,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						}else if(data.listHost[i].hostType == 0){
 							hostType = "备";					
 						}
-						  $("#host").append("<option value='" + mobDestHostID + "'>" + mobDestHostIP 
+						  $("#host").append("<option  value='" + mobDestHostID + "'>" + mobDestHostIP 
 								  //+ " (" + hostType + ")"
 								  + "</option>");
 					}
 				}
+				$("#target").selectmenu("refresh");
+				$("#host").selectmenu("refresh");
 				loadReport();
 			});
 		}
@@ -86,10 +89,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							
 							for(var i=0; i< lenOfData; i++){
 								$("#reports").append("<hr />");
-								//$("#reports").append("<hr />");
-								//{"generateTime":"2014-08-05 18:00:53.61","inspectionIsException":null,
-									//"inspectionReportID":"37","inspectionTime":"2014-08-05 18:00:53.61",
-									//"maintAccount":"root","maintUser":"root","mobDestHostID":"3"}
 								var reportID = data.listReport[i].inspectionReportID;
 								//var generateTime = data.listReport[i].generateTime;
 								var inspectionTime = data.listReport[i].inspectionTime;
@@ -114,9 +113,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									); 
 								loadRecord($("#" + tabID), reportID);
 							}
-							$("#querInfo").html("共" + lenOfData + "条巡检报告");
+							$("#querInfo").html($("#host").find("option:selected").text()  + ",共" + lenOfData + "条巡检报告");
 						}else{
-							$("#querInfo").html("无巡检报告");
+							$("#querInfo").html($("#host").find("option:selected").text()  + ",无巡检报告");
 						}
 					});
 			}else{
@@ -151,19 +150,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								trTag = "<tr class='errors'>";								
 							}
 							var htmlRecord = trTag + 
-								"<td>" + inspectionType + "</td>" + 
-								"<td>" + checkItem + "</td>" + 
-								"<td>" + checkPoint + "</td>" + 
-								"<td>" + operNote + "</td>" + 
-								"<td>" + isException + "</td>" + 
-								"<td>" + checkResult + "</td>" + 
-								"<td>" + protoData + "</td>" + 
+									"<td>" + inspectionType + "</td>" + 
+									"<td>" + checkItem + "</td>" + 
+									"<td>" + checkPoint + "</td>" + 
+									"<td>" + operNote + "</td>" + 
+									"<td>" + isException + "</td>" + 
+									"<td>" + checkResult + "</td>" + 
+									"<td>" + protoData + "</td>" + 
 								"</tr>";
 							$context.append(htmlRecord);
-							//$context.append("<pre>" + protoData + "</pre>");
 						}
 					}else{
-						//$("#querInfo").html("reportID = " +  reportID + "的巡检无巡检记录");
 						$context.append("<tr><td colspan=7 align='center'>无巡检项记录</td></tr>");
 					}
 				});
@@ -171,75 +168,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function setting(){
 			window.location.href = "<%=basePath%>setting/defaults.action";
 		}
+		$(function(){
+			$( ".cnfBtn" ).button({
+			      icons: {
+			        primary: "ui-icon-gear"
+			      }
+			    });
+			$( "#query" ).button({
+			      icons: {
+			        primary: "ui-icon-search"
+			      }
+			    });
+		});
 	</script>
-	<style type="text/css">
-		body{
-			padding: 0;
-			margin:0;
-		}
-		div.opos{
-	    	padding: 0 0.5%;
-		}
-	    .report{
-	    	min-height: 15px;
-	    	padding: 0 0.5% 1% 0.5%;
-	    }
-	    table[id^="report"] {
-			width: 100%;
-	    }
-	    table[id^="report"] *{
-	    	padding-top: 5px;
-			border: 1px solid;
-	    }
-	    table[id^="report"] tr.normal{
-	    	color: green;
-	    }
-	    table[id^="report"] tr.highlight{
-	    	color: red;
-	    }
-	    table[id^="report"] tr.errors{
-	    	color: gray;
-	    }
-	    
-	    table.headReport{
-	    	width:100%;
-			border: 0px solid;
-			text-align: left;
-	    }
-		table.gridtable {
-			font-family: verdana,arial,sans-serif;
-			font-size:11px;
-			color:#333333;
-			border-width: 1px;
-			border-color: #666666;
-			border-collapse: collapse;
-		}
-		table.gridtable th {
-			border-width: 1px;
-			padding: 8px;
-			border-style: solid;
-			border-color: #666666;
-			background-color: #dedede;
-		}
-		table.gridtable td {
-			border-width: 1px;
-			padding: 8px;
-			border-style: solid;
-			border-color: #666666;
-			background-color: #ffffff;
-		}
-	</style>
   </head>
   
   <body>
   		<div class="opos">
-  			<button onclick="setting()">配置</button>
 			<select id="target"></select>
 			<select id="host"></select>
-			<input type="text" id="insDate" size="30">
-			<!-- <button id="query">查询</button> -->
-			<span id="querInfo"></span>
+			<input class="mytxt" type="text" id="insDate" size="20">
+			<!-- <span id="querInfo"></span> -->
+			<div class="ui-state-highlight ui-corner-all" style="padding: .5em .7em;">
+				<span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+				<span id="querInfo"></span>
+			</div>
 		</div>
+  			<button onclick="setting()" class="cnfBtn">配置</button>
 		<div id="reports" class="report" ></div>
   </body>
 </html>

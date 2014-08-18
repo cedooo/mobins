@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.mobins.po.InspectionItem">
+
+	<resultMap type="cn.com.dhcc.cgn.mobins.po.InspectionItem"
+		id="InspectionItemMap">
+		<result column="N_INSPECTION_ITEM_ID" property="inspectionItemID" />
+		<result column="VC_ITEM_NAME" property="itemName" />
+		<result column="VC_INSPECTION_TYPE" property="inspectionType" />
+		<result column="VC_INSPECTION_ITEM_NOTE" property="inspectionItemNote" />
+	</resultMap>
+
+	<select id="countByCondition" resultType="int" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionItemSearchCondition">
+		<![CDATA[
+			SELECT count(*)
+			from T_INSPECTION_ITEM_APPLY apply left join T_INSPECTION_ITEM items 
+				on apply.N_INSPECTION_ITEM_ID = items.N_INSPECTION_ITEM_ID
+			where apply.N_STRAGE_ID = #{strageID}
+		]]>
+	</select>
+	<select id="queryByCondition" resultMap="InspectionItemMap" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionItemSearchCondition">
+		<![CDATA[
+			select 
+				N_INSPECTION_ITEM_ID
+			      ,VC_ITEM_NAME
+			      ,VC_INSPECTION_TYPE
+			      ,VC_INSPECTION_ITEM_NOTE
+			from (
+				select row_number()over(order by tc)rn,*
+				from (
+					select top ${pagging.rows + pagging.skip} 0 tc,apply.N_INSPECTION_ITEM_ID
+					  ,VC_ITEM_NAME
+					  ,VC_INSPECTION_TYPE
+					  ,VC_INSPECTION_ITEM_NOTE 
+						from T_INSPECTION_ITEM_APPLY apply left join T_INSPECTION_ITEM items 
+							on apply.N_INSPECTION_ITEM_ID = items.N_INSPECTION_ITEM_ID
+						where apply.N_STRAGE_ID = #{strageID}
+					)t
+				)tt
+			where ${pagging.skip} < rn
+		]]>
+	</select>
+	
+</mapper>
