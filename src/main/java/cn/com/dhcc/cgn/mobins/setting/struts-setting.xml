@@ -52,7 +52,12 @@
             	<param  name="excludeProperties">strageService</param>
             </result>
 		</action>
-		
+		<!-- 策略修改 -->
+		<action name="strageEdit" class="cn.com.dhcc.cgn.mobins.setting.action.StrageAction">
+            <result type="json">
+            	<param  name="excludeProperties">strageService</param>
+            </result>
+		</action>
 		<!-- ssh检测 -->
 		<action name="accValid" class="cn.com.dhcc.cgn.mobins.setting.action.SSHAccountValidAction">
             <result type="json">
@@ -65,6 +70,14 @@
 		<action name="listInspectionItem" class="cn.com.dhcc.cgn.mobins.setting.action.InspectionItemAction" method="list">
             <result type="json">
             	<param  name="excludeProperties">inspectionItemService</param>
+            </result>
+		</action>
+		
+		
+		<!-- 巡检策略巡检项目 巡检点列表 -->
+		<action name="listInspectionPoint" class="cn.com.dhcc.cgn.mobins.setting.action.InspectionPointAction" method="list">
+            <result type="json">
+            	<param  name="excludeProperties">inspectionPointService</param>
             </result>
 		</action>
     </package>

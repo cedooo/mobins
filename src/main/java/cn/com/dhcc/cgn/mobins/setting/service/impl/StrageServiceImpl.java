@@ -47,4 +47,23 @@ public class StrageServiceImpl implements StrageService {
 		return cont;
 	}
 
+	@Override
+	public boolean update(InspectionStrage strage) {
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			int upd = session.update("cn.com.dhcc.cgn.mobins.po.InspectionStrage.update", strage);
+			session.commit();
+			if(upd==1){
+				return true;
+			}else{
+				return false;
+			}
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
+	}
+
 }

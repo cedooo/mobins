@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
+import cn.com.dhcc.cgn.mobins.inspection.service.AlarmService;
 import cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService;
 import cn.com.dhcc.cgn.mobins.inspection.service.HostInspectionPointService;
 import cn.com.dhcc.cgn.mobins.job.InspectionJob;
@@ -31,6 +32,7 @@ public class InspectionJobImpl implements InspectionJob{
 	private MobDestHostService mobHostService = null;
 	private AnalysisService analysisService = null;
 	private CommandExecutor commandExecutor = null;
+	private AlarmService alarmService = null;
 
 	/**
 	 * 
@@ -99,6 +101,9 @@ public class InspectionJobImpl implements InspectionJob{
 			int analysisResult = analysisService.analysis();
 			//更新报告状态为已完成，记录巡检结果
 			LOG.info("巡检记录解析结果：" + analysisResult );
+			LOG.info("异常扫描...");
+			alarmService.explore();
+			LOG.info("异常扫描完成...");
 		}
 	}
 	/**
@@ -179,6 +184,12 @@ public class InspectionJobImpl implements InspectionJob{
 
 	public void setCommandExecutor(CommandExecutor commandExecutor) {
 		this.commandExecutor = commandExecutor;
+	}
+	public AlarmService getAlarmService() {
+		return alarmService;
+	}
+	public void setAlarmService(AlarmService alarmService) {
+		this.alarmService = alarmService;
 	}
 
 }

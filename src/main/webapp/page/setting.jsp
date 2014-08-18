@@ -131,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   	rowList:[10,20,30],
 			   	//sortname: 'id',
 			   	autowidth:true,
-			   	height: 240,
+			   	//height: 240,
 			   	rownumbers: true,
 			    viewrecords: true,
 				subGrid : true,
@@ -314,7 +314,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   	colModel:[
 			   		{name:'strageID',index:'strageID', width:20,align:"center", sortable:false, key:true, hidden:true},
 			   		{name:'strageName',index:'strageName', width:80,align:"center", sortable:false,editable:true,editrules:{required:true}},
-			   		{name:'strageNote',index:'strageNote', width:80,align:"center", sortable:false,editable:true,editrules:{required:true}},		
+			   		{name:'strageNote',index:'strageNote', width:80,align:"center", sortable:false,editable:true,editrules:{required:true,maxlength:2}},		
 			   		{name:'strageAddTime',index:'strageAddTime',align:"center", width:55, sortable:false, hidden:true},
 		   			{name:'act',index:'act', width:35,sortable:false,align:"center"}
 			   		//{name:'targetDelTime',index:'targetDelTime', width:90}
@@ -325,7 +325,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   	rowList:[5, 10,20,30],
 			   	//sortname: 'id',
 			   	autowidth:true,
-			   	//height: 240,
+			   	height: 220,
 			   	rownumbers: true,
 			    viewrecords: true,
 				//subGrid : true,
@@ -335,7 +335,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        total: "strageSearchCondition.pagging.total",
 			        records: "strageSearchCondition.pagging.records",
 			     },
-				 //editurl: "<%=basePath%>setting/tagetEdit.action",
+				 editurl: "<%=basePath%>setting/strageEdit.action",
 			     gridComplete: function(){
 			    	var $grid = jQuery("#listStrage");
 			 		var ids = $grid.jqGrid('getDataIDs');
@@ -356,12 +356,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						strageID = strageIDs[0];
 					}
 					loadStrageItem(strageID);
-					jQuery("#listStrage").jqGrid('setSelection', strageID);
+					jQuery("#listStrage")
+					.jqGrid('setSelection', strageID);
+					var strage = jQuery("#listStrage").jqGrid('getRowData', strageID);
+					var strageName = strage.strageName; 
+					jQuery("#listStrageItem").jqGrid('setCaption', strageName + '-检查项目' );
+			 	},
+			 	onCellSelect: function(id) {
+					jQuery("#listStrageItem").jqGrid('setCaption', '检查项目');		
+					var strage = jQuery("#listStrage").jqGrid('getRowData', id);
+					var strageName = strage.strageName; 
+					var isInputMatch = /^<input.*/.test(strageName);
+					if(!isInputMatch){
+						jQuery("#listStrageItem").jqGrid('setCaption', strageName + '-检查项目' );
+					}else{
+						jQuery("#listStrageItem").jqGrid('setCaption', '编辑中...-检查项目' );
+					}
 			 	},
 			 	onSelectRow: function(id){
 			 		jQuery("#listStrageItem").setGridParam({
 					   	url:'<%=basePath%>setting/listInspectionItem.action?strageID='+ id
-			 		}).trigger("reloadGrid");				   			
+			 		}).trigger("reloadGrid");				   	
 			 	},
 			   	pager: '#strageNav',
 	 			multiselect:false,
@@ -390,7 +405,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   	rowList:[10,20,30],
 			   	//sortname: 'id',
 			   	autowidth:true,
-			   	//height: 240,
+			   	height: 220,
 			   	rownumbers: true,
 			    viewrecords: true,
 				subGrid : true,
@@ -421,27 +436,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 		pager_id = "p_"+subgrid_table_id;
 			 		$("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
 			 		jQuery("#"+subgrid_table_id).jqGrid({
-			 			url:"<%=basePath%>setting/hostList.action?targetID=" + row_id,
+			 			url:"<%=basePath%>setting/listInspectionPoint.action?searchCondition.inspectionItemID=" + row_id,
 			 			datatype: "json",
-			 			colNames: ['编号','目标ID','IP','备注','类型','巡检帐号','密码','添加时间','删除时间', '操作'],
+			 			colNames: ['编号','巡检项ID','巡检点名称','操作','备注','编码','排序','权重'],
 					   	autowidth:true,
 					   	rownumbers: true,
 			 			colModel: [
-			 				{name:"mobDestHostID",index:"mobDestHostID",align:"center", width:40,key:true, sortable:false, hidden:true},
-			 				{name:"targetID",index:"tar.targetID",width:200,align:"center", sortable:false, hidden:true},
-			 				{name:"mobDestHostIP",index:"mobDestHostIP",width:70,align:"center", sortable:false,editable:true,editable:true,editrules:{ required:true,custom:true,custom_func:ipconfirm}},
-			 				{name:"hostNote",index:"hostNote",width:80,align:"center", sortable:false,editable:true,editable:true,editrules:{ required:true}},
-			 				{name:"hostType",index:"hostType",width:30,align:"center", sortable:false,editable:false, hidden:true, edittype:"select",editoptions:{value:"0:备机;1:主机"}},
-			 				{name:"hostUser",index:"hostUser",width:70,align:"center", sortable:false,editable:false},
-			 				{name:"hostPasswd",index:"hostPasswd",width:70,align:"center",sortable:false, hidden:true},
-			 				{name:"hostAddTime",index:"hostAddTime",width:140,align:"center", sortable:false, hidden:true},
-			 				{name:"hostDelTime",index:"hostDelTime",width:140,align:"center", sortable:false, hidden:true},
-				   			{name:'act',index:'act', width:35,sortable:false,align:"center"}
+			 				{name:"inspectionPointID",index:"inspectionPointID",align:"center", width:40,key:true, sortable:false, hidden:true},
+			 				{name:"inspectionItemID",index:"inspectionItemID",width:100,align:"center", sortable:false, hidden:true},
+			 				{name:"checkPointName",index:"checkPointName",width:70,align:"center", sortable:false,editable:true,editable:true,editrules:{ required:true}},
+			 				{name:"operCommand",index:"operCommand",width:120,align:"center", sortable:false,editable:false, hidden:false, edittype:"select",editoptions:{value:"0:备机;1:主机"}},
+			 				{name:"operNote",index:"operNote",width:120,align:"center", sortable:false,editable:false},
+			 				{name:"inspectionCode",index:"inspectionCode",width:70,align:"center",sortable:false, hidden:true},
+			 				{name:"sortNum",index:"sortNum",width:20,align:"center", sortable:false, hidden:false},
+			 				{name:"exceptionWeight",index:"exceptionWeight",width:20,align:"center", sortable:false, hidden:false},
+				   			//{name:'act',index:'act', width:35,sortable:false,align:"center"}
+			 				//{"checkPointName":"测试连接外网","exceptionWeight":"2","inspectionCode":"PING-BAIDU","inspectionItemID":"1",
+			 					//"inspectionPointID":"1","keyRegex":".*(\\d+)% packet loss.*","matchType":"2","operCommand":"ping baidu.com -c 5 -i 0.3",
+			 					//"operNote":"ping 百度","resultFormat":"丢包率为%s%%,%s","sortNum":"1","valCompareMax":"10.00","valCompareMin":"0.00"}
 			 			],
 			 			multiselect:false,
 			 			hoverrows:false,
 			 			jsonReader : {
-					        root:"listHost",
+					        root:"listInspectionPoint",
 					        page: "pagging.page",
 					        total: "pagging.total",
 					        records: "pagging.records",
@@ -451,20 +468,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 	editurl: "<%=basePath%>setting/hostEdit.action",
 			 		   	rowNum:20,
 					     gridComplete: function(){
-						    	var $grid = jQuery("#"+subgrid_table_id);
-						 		var ids = $grid.jqGrid('getDataIDs');
-						 		for(var i=0;i < ids.length;i++){
-						 			var cl = ids[i];
-						 			//edit = "<input  class='actBtn edit' type='button' value='编辑' onclick=\"editHost('" + subgrid_table_id + "', '"+cl+"');\"  />"; 
-						 			edit = "<span class=\"act ui-icon ui-icon-pencil\" title='编辑' onclick=\"editHost('" + subgrid_table_id + "', '"+cl+"');\"></span>"; 
-						 			//del = "<input class='delBtn' type='button' value='删除' onclick=\"delHost('" + subgrid_table_id + "', '"+cl+"');\"  />";
-						 			del='';
-						 			//save = "<input class='actBtn save' type='button' value='保存' onclick=\"jQuery('#"+subgrid_table_id + "').saveRow('"+cl+"');\"  />";
-						 			save = "<span class=\"act ui-icon ui-icon-disk\"  title='保存'  onclick=\"jQuery('#"+subgrid_table_id + "').saveRow('"+cl+"');\" ></span>";
-						 			//refresh = "<input type='button' class='actBtn refresh' value='帐号密码' onclick=\"refreshPasswd('"+subgrid_table_id + "', '"+cl+"');\"  />";
-						 			refresh = "<span class=\"act ui-icon ui-icon-person\"  title='帐号密码'  onclick=\"refreshPasswd('"+subgrid_table_id + "', '"+cl+"');\"  ></span>";
-						 			$grid.jqGrid('setRowData',ids[i],{act: edit+save+refresh+del});
-						 		}
+						    
 						 	},
 			 		   	//pager:  '#' + pager_id,
 			 		   	//sortname: 'num',

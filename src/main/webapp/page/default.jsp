@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							$("#reports *").remove();
 							
 							for(var i=0; i< lenOfData; i++){
-								$("#reports").append("<hr />");
+								$("#reports").append("<br />");
 								var reportID = data.listReport[i].inspectionReportID;
 								//var generateTime = data.listReport[i].generateTime;
 								var inspectionTime = data.listReport[i].inspectionTime;

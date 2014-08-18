@@ -1,6 +1,7 @@
 package cn.com.dhcc.cgn.mobins.po;
 
 /**
+ * 巡检点 视图
  * @author CeDo
  * 
  */

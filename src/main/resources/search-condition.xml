@@ -20,4 +20,9 @@
 		<property name="pagging" ref="Pagging"></property>
 	</bean>
 	
+	<!-- 巡检项目 巡检点搜素条件 -->
+	<bean id="InspectionPointSearchCondition"
+		class="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionPointSearchCondition" >
+		<property name="pagging" ref="Pagging"></property>
+	</bean>
 </beans>

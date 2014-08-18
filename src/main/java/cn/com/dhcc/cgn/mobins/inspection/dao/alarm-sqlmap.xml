@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.mobins.inspection.service.AlarmService">
+	<select id="uncheckReportList" resultMap="cn.com.dhcc.cgn.mobins.po.InspectionReport.InspectionReportMap">
+		SELECT N_INSPECTION_REPORT_ID
+		      ,N_MOB_DEST_HOST_ID
+		      ,DT_INSPECTION_TIME
+		      ,VC_MAINT_ACOUNT
+		      ,VC_MAINT_USER
+		      ,DT_GENERATE_TIME
+		      ,VC_INSPECTION_IS_EXCEPTION
+		      ,VC_INSPECTION_COMPLETE
+		  FROM T_INSPECTION_REPORT
+		  WHERE VC_INSPECTION_IS_EXCEPTION IS NULL AND
+      			VC_INSPECTION_COMPLETE IS NULL AND
+      			DT_INSPECTION_TIME between
+					DATEADD(DAY, -2, GETDATE()) and GETDATE()
+	</select>
+	
+	<update id="updateReportStatus" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionReport">
+		UPDATE T_INSPECTION_REPORT
+		SET VC_INSPECTION_IS_EXCEPTION = #{inspectionIsException},
+			VC_INSPECTION_COMPLETE = #{inspectionComplete}
+		WHERE N_INSPECTION_REPORT_ID = #{inspectionReportID}	
+	</update>
+	
+</mapper>

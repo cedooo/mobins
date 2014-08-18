@@ -11,6 +11,9 @@ public class InspectionPoint {
 	private String valCompareMax = null;
 	private String matchType = null;
 	private String inspectionCode = null;
+	private String resultFormat = null;
+	private String sortNum = null;
+	private String exceptionWeight = null;
 
 	public String getInspectionPointID() {
 		return inspectionPointID;
@@ -90,6 +93,30 @@ public class InspectionPoint {
 
 	public void setInspectionCode(String inspectionCode) {
 		this.inspectionCode = inspectionCode;
+	}
+
+	public String getResultFormat() {
+		return resultFormat;
+	}
+
+	public void setResultFormat(String resultFormat) {
+		this.resultFormat = resultFormat;
+	}
+
+	public String getSortNum() {
+		return sortNum;
+	}
+
+	public void setSortNum(String sortNum) {
+		this.sortNum = sortNum;
+	}
+
+	public String getExceptionWeight() {
+		return exceptionWeight;
+	}
+
+	public void setExceptionWeight(String exceptionWeight) {
+		this.exceptionWeight = exceptionWeight;
 	}
 
 	@Override

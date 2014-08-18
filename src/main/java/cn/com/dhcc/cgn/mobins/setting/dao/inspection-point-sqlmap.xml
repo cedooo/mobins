@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.mobins.po.InspectionPoint">
+
+	<resultMap type="cn.com.dhcc.cgn.mobins.po.InspectionPoint"
+		id="InspectionPointMap">
+		 <result column="N_INSPECTION_POINT_ID" property="inspectionPointID" />
+		  <result column="N_INSPECTION_ITEM_ID" property="inspectionItemID" />
+		   <result column="VC_OPER_COMMAND" property="operCommand" />
+		   <result column="VC_OPER_NOTE" property="operNote" />
+		   <result column="VC_CHECK_POINT_NAME" property="checkPointName" />
+		   <result column="VC_KEY_REGEX" property="keyRegex" />
+		   <result column="D_VAL_COMPARE_MIN" property="valCompareMin" />
+		   <result column="D_VAL_COMPARE_MAX" property="valCompareMax" />
+		   <result column="N_MATCH_TYPE" property="matchType" />
+		   <result column="VC_INSPECTION_CODE" property="inspectionCode" />
+		   <result column="VC_RESULT_FORMAT" property="resultFormat" />
+		   <result column="N_SORT_NUM" property="sortNum" />
+		   <result column="N_EXCEPTION_WEIGHT" property="exceptionWeight" /> 
+	</resultMap>
+
+	<select id="countByCondition" resultType="int" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionPointSearchCondition">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM T_INSPECTION_POINT
+			WHERE  N_INSPECTION_ITEM_ID = #{inspectionItemID}
+		]]>
+	</select>
+	<select id="queryByCondition" resultMap="InspectionPointMap" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionPointSearchCondition">
+		<![CDATA[
+			select 
+				N_INSPECTION_POINT_ID
+		      ,N_INSPECTION_ITEM_ID
+		      ,VC_OPER_COMMAND
+		      ,VC_OPER_NOTE
+		      ,VC_CHECK_POINT_NAME
+		      ,VC_KEY_REGEX
+		      ,D_VAL_COMPARE_MIN
+		      ,D_VAL_COMPARE_MAX
+		      ,N_MATCH_TYPE
+		      ,VC_INSPECTION_CODE
+		      ,VC_RESULT_FORMAT
+		      ,N_SORT_NUM
+		      ,N_EXCEPTION_WEIGHT
+			from (
+			select row_number()over(order by tc)rn,*
+			from (
+				select top ${pagging.rows + pagging.skip} 0 tc,* 
+					from T_INSPECTION_POINT
+					WHERE N_INSPECTION_ITEM_ID = #{inspectionItemID}
+				)t
+			)tt
+			where ${pagging.skip} < rn
+		]]>
+	</select>
+	
+</mapper>

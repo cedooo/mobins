@@ -40,6 +40,10 @@ public class StrageAction extends JQGridAction {
 	public void setStrageSearchCondition(StrageSearchCondition strageSearchCondition) {
 		this.strageSearchCondition = strageSearchCondition;
 	}
+	/**
+	 * 策略列表
+	 * @return
+	 */
 	public String list(){
 		LOG.debug("查询策略");
 		Pagging pagging = strageSearchCondition.getPagging();
@@ -60,5 +64,58 @@ public class StrageAction extends JQGridAction {
 		listStrage = this.strageService.list(strageSearchCondition);
 		return SUCCESS;
 	}
+	@Override
+	public String execute(){
+		if(OPER_EDIT.equals(this.getOper())){
+			return edit();
+		}else if(OPER_ADD.equals(this.getOper())){
+			return add();
+		}
+		return SUCCESS;
+	}
+	private String strageName = null;    //:目标巡检策略-测试
+	private String strageNote = null;    //:添加测试用
+	private String strageID = null;    //:1
+	
+	public String getStrageName() {
+		return strageName;
+	}
+	public void setStrageName(String strageName) {
+		this.strageName = strageName;
+	}
+	public String getStrageNote() {
+		return strageNote;
+	}
+	public void setStrageNote(String strageNote) {
+		this.strageNote = strageNote;
+	}
+	public String getStrageID() {
+		return strageID;
+	}
+	public void setStrageID(String strageID) {
+		this.strageID = strageID;
+	}
+	/**
+	 * 编辑
+	 * @return
+	 */
+	private String edit(){
+		InspectionStrage strage = new InspectionStrage();
+		strage.setStrageID(strageID);
+		strage.setStrageName(strageName);
+		strage.setStrageNote(strageNote);
+		boolean upSucc = this.strageService.update(strage);
+		LOG.debug(upSucc?"更新策略成功":"更新策略失败");
+		return SUCCESS;
+	}
+	/**
+	 * 添加
+	 * @return
+	 */
+	private String add(){
+		
+		return SUCCESS;
+	}
+	
 	
 }
