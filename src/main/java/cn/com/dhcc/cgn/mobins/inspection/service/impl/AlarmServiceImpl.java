@@ -57,7 +57,7 @@ public class AlarmServiceImpl extends AlarmService {
 				if(uptedCnt==1){
 					LOG.debug("巡检报告状态(正常/异常)更新成功");
 				}else{
-					LOG.info("巡检报告状态(正常/异常)更新失败");
+					LOG.info("巡检报告状态(正常/异常)更新失败:" + inspectionReport);
 				}
 				session.commit();
 			}

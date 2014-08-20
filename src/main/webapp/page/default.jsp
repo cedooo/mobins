@@ -104,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											//"<td>生成时间</td>" + "<td>" + generateTime + "</td>" + 
 											"</td><td>运维帐号</td><td>" +  maintUser +   
 											"</td><td>是否异常 </td><td>" +  inspectionIsException +  
-											"</td><td>完成情况 </td><td>" +  inspectionComplete +  
+											"</td><td>巡检完成情况 </td><td>" +  inspectionComplete +  
 											"</td><td>巡检时间</td><td>" + inspectionTime + "</td></tr></table>"
 										); 
 								$("#reports").append(

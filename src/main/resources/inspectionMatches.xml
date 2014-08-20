@@ -8,6 +8,10 @@
 	<bean id="ValueRangeMatch"
 		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.ValueRangeMatch" >
 	</bean>
+	<!-- 整数值范围规则 -->
+	<bean id="IntValueRangeMatch"
+		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.IntValueRangeMatch" >
+	</bean>
 	<!-- 表达式匹配 -->
 	<bean id="ExpressMatch"
 		class="cn.com.dhcc.cgn.mobins.inspection.match.impl.ExpressMatch" >

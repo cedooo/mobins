@@ -17,6 +17,7 @@ import com.jcraft.jsch.UserInfo;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
+import cn.com.dhcc.cgn.mobins.inspection.pojo.CommandFormat;
 import cn.com.dhcc.cgn.mobins.job.executor.result.ExecutorResult;
 import cn.com.dhcc.cgn.mobins.po.HostInspectionPoint;
 
@@ -137,16 +138,17 @@ public class JSchWrapper {
 			UserInfo ui = new MyUserInfo();
 			session.setUserInfo(ui);
 			session.connect(DEFAULT_INTERN);
-			LOG.info("用户" + user + "登录" + ipaddr + ":" + port);
+			LOG.info("用户" + user + "登录," + ipaddr + ":" + port);
             BufferedReader input = null;
             try{
             	for (HostInspectionPoint hostInspectionPoint : listPoint) {
     				Channel channel = session.openChannel("exec");
-		            ((ChannelExec) channel).setCommand(hostInspectionPoint.getOperCommand());
+    				String commands = CommandFormat.format(hostInspectionPoint.getOperCommand());    //命令可变参数转换
+		            ((ChannelExec) channel).setCommand(commands);
 	            	input = new BufferedReader(new InputStreamReader(channel.getInputStream()));
 	                channel.connect();
-	                String line;
-	                LOG.info("执行巡检命令: " + hostInspectionPoint.getOperCommand());
+	                String line = null;
+	                LOG.info("执行巡检命令: " + commands);
 	                ExecutorResult exeResult = new ExecutorResult();
 	                Vector<String> vct = new Vector<String>();
 	                while ((line = input.readLine()) != null) {

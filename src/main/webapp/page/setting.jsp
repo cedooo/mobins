@@ -448,8 +448,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 				{name:"operCommand",index:"operCommand",width:120,align:"center", sortable:false,editable:false, hidden:false, edittype:"select",editoptions:{value:"0:备机;1:主机"}},
 			 				{name:"operNote",index:"operNote",width:120,align:"center", sortable:false,editable:false},
 			 				{name:"inspectionCode",index:"inspectionCode",width:70,align:"center",sortable:false, hidden:true},
-			 				{name:"sortNum",index:"sortNum",width:20,align:"center", sortable:false, hidden:false},
-			 				{name:"exceptionWeight",index:"exceptionWeight",width:20,align:"center", sortable:false, hidden:false},
+			 				{name:"sortNum",index:"sortNum",width:20,align:"center", sortable:false, hidden:true},
+			 				{name:"exceptionWeight",index:"exceptionWeight",width:20,align:"center", sortable:false, hidden:true},
 				   			//{name:'act',index:'act', width:35,sortable:false,align:"center"}
 			 				//{"checkPointName":"测试连接外网","exceptionWeight":"2","inspectionCode":"PING-BAIDU","inspectionItemID":"1",
 			 					//"inspectionPointID":"1","keyRegex":".*(\\d+)% packet loss.*","matchType":"2","operCommand":"ping baidu.com -c 5 -i 0.3",
@@ -488,7 +488,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    sortorder: "desc",
 			    caption:"检查项目",
 			});
-			jQuery("#listStrageItem").jqGrid('navGrid','#strageItemNav',{refresh:true,edit:false,add:false,del:false,search:true});
+			jQuery("#listStrageItem").jqGrid('navGrid','#strageItemNav',{refresh:true,edit:false,add:false,del:false,search:false});
 			
 		};
 	</script>

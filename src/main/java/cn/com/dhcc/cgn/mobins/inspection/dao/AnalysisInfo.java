@@ -8,6 +8,7 @@ public class AnalysisInfo {
 	static public final String MATCH_TYPE_SOLOMO_SWITCH = "5";
 	static public final String MATCH_TYPE_PORGRESS_COUNT = "6";
 	static public final String MATCH_TYPE_HA_ERROR = "7";
+	static public final String MATCH_TYPE_INT_RANGE = "8";
 	private String inspectionRecordsID = null;
 	private String isException = null;
 	private String checkResult = null;

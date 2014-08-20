@@ -8,6 +8,6 @@
 	
 	<import resource="inspectionJob.xml" />
 	<import resource="services.xml" />
-	<import resource="search-condition.xml" />
+	<import resource="searchCondition.xml" />
 	
 </beans>

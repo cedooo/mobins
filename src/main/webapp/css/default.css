@@ -114,3 +114,8 @@ body{
 		    border-bottom-style:solid;
 		    border-left-style:solid;
 		}
+		
+		
+		.headReport>tr td:even{
+			align: right;
+		}

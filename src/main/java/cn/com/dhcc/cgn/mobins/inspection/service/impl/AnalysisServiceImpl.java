@@ -18,7 +18,7 @@ import cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService;
 
 public class AnalysisServiceImpl implements AnalysisService {
 	static final private Logger LOG = LoggerFactory.getLogger(AnalysisServiceImpl.class.getClass());
-	private static final ApplicationContext appContext = new ClassPathXmlApplicationContext("classpath:inspection-matches.xml"); 
+	private static final ApplicationContext appContext = new ClassPathXmlApplicationContext("classpath:inspectionMatches.xml"); 
 	@Override
 	public int analysis() {
 		List<AnalysisInfo> list = new ArrayList<AnalysisInfo>();
@@ -54,6 +54,8 @@ public class AnalysisServiceImpl implements AnalysisService {
 					match = (ResultMatch) appContext.getBean("ProgressCountMatch");
 				}else if(AnalysisInfo.MATCH_TYPE_HA_ERROR.equals(matchType)){
 					match = (ResultMatch) appContext.getBean("HAErrorMatch");
+				}else if(AnalysisInfo.MATCH_TYPE_INT_RANGE.equals(matchType)){
+					match = (ResultMatch) appContext.getBean("IntValueRangeMatch");
 				}else{
 					LOG.warn("巡检记录类型错误");
 					continue;
