@@ -2,8 +2,6 @@ package cn.com.dhcc.cgn.mobins.setting.action;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import cn.com.dhcc.cgn.mobins.po.MobDestHost;
 import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
 import cn.com.dhcc.cgn.mobins.setting.service.MobDestHostService;
@@ -14,7 +12,6 @@ public class HostAction extends JQGridAction {
 	 * 
 	 */
 	private static final long serialVersionUID = -3767843588494001776L;
-	@Autowired
 	private MobDestHostService hostService = null;
 	
 	public MobDestHostService getHostService() {
@@ -178,7 +175,30 @@ public class HostAction extends JQGridAction {
 		hostService.add(host);
 		return SUCCESS;
 	}
+	private MobDestHost mobDestHost = null;
 	
+	public MobDestHost getMobDestHost() {
+		return mobDestHost;
+	}
+
+	public void setMobDestHost(MobDestHost mobDestHost) {
+		this.mobDestHost = mobDestHost;
+	}
+	
+	private boolean operSuccess = false;
+	
+	public boolean isOperSuccess() {
+		return operSuccess;
+	}
+
+	public void setOperSuccess(boolean operSuccess) {
+		this.operSuccess = operSuccess;
+	}
+
+	public String validInpsect(){
+		operSuccess = hostService.validHostInspect(mobDestHost);
+		return SUCCESS;
+	}
 	
 	
 }

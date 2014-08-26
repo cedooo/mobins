@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insert" parameterType="cn.com.dhcc.cgn.mobins.po.MobInsTarget" >
 		<![CDATA[
-			INSERT INTO T_MOB_INS_TARGET(VC_TARGET_NAME, VC_TARGET_NOTE, DT_TARGET_ADD_TIME)
-			VALUES (#{targetName},#{targetNote}, getdate())
+			INSERT INTO T_MOB_INS_TARGET(VC_TARGET_NAME, VC_TARGET_NOTE, DT_TARGET_ADD_TIME, VC_TARGET_INS_VALID)
+			VALUES (#{targetName},#{targetNote}, getdate(), #{targetInsValid})
 		]]>
 	</insert>
 	
@@ -33,15 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="VC_TARGET_NOTE" property="targetNote" />
 		<result column="DT_TARGET_ADD_TIME" property="targetAddTime" />
 		<result column="DT_TARGET_DEL_TIME" property="targetDelTime" />
+		<result column="VC_TARGET_INS_VALID" property="targetInsValid" />
 	</resultMap>
-	
-	<select id="query" resultMap="targetMap">
-		<![CDATA[
-			SELECT * 
-			FROM T_MOB_INS_TARGET
-			WHERE DT_TARGET_DEL_TIME IS NULL
-		]]>
-	</select>
 	
 	<select id="queryByPagging" resultMap="targetMap">
 		<![CDATA[
@@ -51,8 +44,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		      ,VC_TARGET_NOTE
 		      ,CONVERT(varchar(20), DT_TARGET_ADD_TIME, 20) as DT_TARGET_ADD_TIME
 		      ,CONVERT(varchar(20), DT_TARGET_DEL_TIME, 20) as DT_TARGET_DEL_TIME
+		      ,VC_TARGET_INS_VALID
 			FROM T_MOB_INS_TARGET
 			WHERE DT_TARGET_DEL_TIME IS NULL
 		]]>
 	</select>
+	
+	
+	<update id="updateValid" parameterType="cn.com.dhcc.cgn.mobins.po.MobInsTarget" >
+		<![CDATA[
+			UPDATE T_MOB_INS_TARGET
+			SET VC_TARGET_INS_VALID = #{targetInsValid}
+			WHERE N_TARGET_ID = #{targetID} AND DT_TARGET_DEL_TIME IS NULL
+		]]>
+	</update>
 </mapper>

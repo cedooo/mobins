@@ -35,5 +35,10 @@ public interface TargetService {
 	 * @return
 	 */
 	List<MobInsTarget> listTarget(Pagging pagging);
-	
+	/**
+	 * 修改巡检启用状态
+	 * @param target
+	 * @return
+	 */
+	boolean validTargetInspect(MobInsTarget target);
 }

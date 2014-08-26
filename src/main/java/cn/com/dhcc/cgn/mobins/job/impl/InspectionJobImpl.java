@@ -117,6 +117,7 @@ public class InspectionJobImpl implements InspectionJob{
 		report.setMaintAccount(host.getHostUser());
 		report.setMaintUser(host.getHostUser());
 		report.setMobDestHostID(host.getMobDestHostID());
+		report.setMobDestHostIP(host.getMobDestHostIP());
 		return report;
 	}
 	/**

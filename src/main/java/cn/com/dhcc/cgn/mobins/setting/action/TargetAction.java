@@ -2,8 +2,6 @@ package cn.com.dhcc.cgn.mobins.setting.action;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
 import cn.com.dhcc.cgn.mobins.pojo.pagging.Pagging;
 import cn.com.dhcc.cgn.mobins.setting.service.TargetService;
@@ -19,7 +17,7 @@ public class TargetAction extends JQGridAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 50302580215770880L;
-	@Autowired
+	
 	private TargetService targetService = null;
 	
 	public TargetService getTargetService() {
@@ -129,7 +127,10 @@ public class TargetAction extends JQGridAction {
 	public void setTargetAddTime(String targetAddTime) {
 		this.targetAddTime = targetAddTime;
 	}
-
+	/**
+	 * 编辑目标
+	 * @return
+	 */
 	private String edit() {
 		MobInsTarget target = new MobInsTarget();
 		target.setTargetID(this.getTargetID());
@@ -138,5 +139,22 @@ public class TargetAction extends JQGridAction {
 		targetService.modTarget(target);
 		return SUCCESS;
 	}
+	
+	private boolean operSuccess = false;
+	
+	public boolean isOperSuccess() {
+		return operSuccess;
+	}
 
+	public void setOperSuccess(boolean operSuccess) {
+		this.operSuccess = operSuccess;
+	}
+	/**
+	 * 巡检是否启用
+	 * @return
+	 */
+	public String validIns(){
+		operSuccess = targetService.validTargetInspect(target);
+		return SUCCESS;
+	}
 }

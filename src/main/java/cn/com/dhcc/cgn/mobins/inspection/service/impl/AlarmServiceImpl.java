@@ -5,9 +5,9 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
+import cn.com.dhcc.cgn.mobins.inspection.dao.Alarm;
 import cn.com.dhcc.cgn.mobins.inspection.match.ResultMatch;
 import cn.com.dhcc.cgn.mobins.inspection.service.AlarmService;
-import cn.com.dhcc.cgn.mobins.inspection.service.impl.alarm.Alarm;
 import cn.com.dhcc.cgn.mobins.po.InspectionRecords;
 import cn.com.dhcc.cgn.mobins.po.InspectionReport;
 

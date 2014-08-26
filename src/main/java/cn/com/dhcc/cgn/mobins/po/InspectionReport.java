@@ -6,6 +6,7 @@ public class InspectionReport {
 	static final public String COMPLETE_FAIL = "1";
 	
 	private String inspectionReportID = null;
+	private String mobDestHostIP = null;    //VC_MOB_DEST_HOST_IP 
 	private String mobDestHostID = null;
 	private String inspectionTime = null;
 	private String maintAccount = null;
@@ -19,6 +20,12 @@ public class InspectionReport {
 	}
 	public void setInspectionReportID(String inspectionReportID) {
 		this.inspectionReportID = inspectionReportID;
+	}
+	public String getMobDestHostIP() {
+		return mobDestHostIP;
+	}
+	public void setMobDestHostIP(String mobDestHostIP) {
+		this.mobDestHostIP = mobDestHostIP;
 	}
 	public String getMobDestHostID() {
 		return mobDestHostID;

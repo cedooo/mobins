@@ -23,6 +23,13 @@
             	<param  name="excludeProperties">hostService,targetID</param>
             </result>
 		</action>
+		
+		<!-- 目标编辑 -->
+		<action name="tagetInsValid" class="cn.com.dhcc.cgn.mobins.setting.action.TargetAction" method="validIns">
+            <result type="json">
+            	<param  name="includeProperties">operSuccess</param>
+            </result>
+		</action>
 		<!-- 主机列表 -->
 		<action name="hostList" class="cn.com.dhcc.cgn.mobins.setting.action.HostAction" method="list">
             <result type="json">
@@ -36,6 +43,12 @@
             </result>
 		</action>
 		
+		<!-- 巡检启用-->
+		<action name="hostInsValid" class="cn.com.dhcc.cgn.mobins.setting.action.HostAction" method="validInpsect">
+            <result type="json">
+            	<param  name="includeProperties">operSuccess</param>
+            </result>
+		</action>
 		<!-- 删除主机 -->
 		<action name="delHost" class="cn.com.dhcc.cgn.mobins.setting.action.HostAction" method="del">
             <result type="json"></result>

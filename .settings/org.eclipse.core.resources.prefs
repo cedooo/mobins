@@ -2,5 +2,6 @@ eclipse.preferences.version=1
 encoding//src/main/java/cn/com/dhcc/cgn/mobins/db/db-config.properties=UTF-8
 encoding//src/main/java/cn/com/dhcc/cgn/mobins/inspection=UTF-8
 encoding//src/main/webapp/page/default.jsp=UTF-8
+encoding//src/main/webapp/page/init.jsp=UTF-8
 encoding//src/main/webapp/page/setting.jsp=UTF-8
 encoding/<project>=UTF-8

@@ -59,7 +59,7 @@
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="inspectionJobDetail" />
 		<!-- 每1分钟运行一次 -->
-		<property name="cronExpression" value="0 0/10 * * * ?" />
+		<property name="cronExpression" value="40 51 * * * ?" />
 	</bean>
 	
 	<!-- 执行列表 -->

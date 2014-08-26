@@ -1,4 +1,4 @@
-package cn.com.dhcc.cgn.mobins.inspection.service.impl.alarm;
+package cn.com.dhcc.cgn.mobins.inspection.dao;
 
 import cn.com.dhcc.cgn.mobins.po.InspectionRecords;
 

@@ -5,6 +5,7 @@
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- services -->
+	<!-- 报告单 -->
 	<bean id="reportService"
 		class="cn.com.dhcc.cgn.mobins.report.service.impl.ReportServiceImpl" >
 	</bean>
@@ -32,4 +33,34 @@
 	<bean id="inspectionPointService"
 		class="cn.com.dhcc.cgn.mobins.setting.service.impl.InspectionPointServiceImpl" >
 	</bean>
+	<!--  -->
+	<!-- PO -->
+	
+	<!-- 巡检点目标 -->
+	<bean id="target"
+		class="cn.com.dhcc.cgn.mobins.po.MobInsTarget" >
+	</bean>
+	<!-- 巡检主机 -->
+	<bean id="mobDestHost"
+		class="cn.com.dhcc.cgn.mobins.po.MobDestHost" >
+	</bean>
+	
+	<!--  -->
+	<!-- Action -->
+	
+	<!-- 巡检任务 -->
+	<bean id="targetAction"
+		class="cn.com.dhcc.cgn.mobins.setting.action.TargetAction" >
+		<property name="targetService" ref="targetService"></property>
+		<property name="target" ref="target" ></property>
+	</bean>
+	
+	<!-- 巡检任务 -->
+	<bean id="hostAction"
+		class="cn.com.dhcc.cgn.mobins.setting.action.HostAction" >
+		<property name="hostService" ref="hostService"></property>
+		<property name="mobDestHost" ref="mobDestHost" ></property>
+	</bean>
+	
+	
 </beans>

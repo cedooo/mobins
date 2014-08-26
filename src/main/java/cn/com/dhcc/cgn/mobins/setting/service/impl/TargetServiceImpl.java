@@ -107,4 +107,23 @@ public class TargetServiceImpl implements TargetService{
 		return list;
 	}
 
+	@Override
+	public boolean validTargetInspect(MobInsTarget target) {
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			int upd = session.update("cn.com.dhcc.cgn.mobins.po.MobInsTarget.updateValid", target);
+			session.commit();
+			if(upd==1){
+				return true;
+			}else{
+				return false;
+			}
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
+	}
+
 }

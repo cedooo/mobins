@@ -95,8 +95,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								var maintUser = data.listReport[i].maintUser;
 								var inspectionIsException = data.listReport[i].inspectionIsException;
 								var inspectionComplete = data.listReport[i].inspectionComplete;
-								var hostInfo = $("#target").find("option:selected").text()  + 
-									$("#host").find("option:selected").text() ;
+								var hostInfo = $("#target").find("option:selected").text()  + $("#host").find("option:selected").text() ;
+								var hostIP = data.listReport[i].mobDestHostIP;
+								hostInfo = $("#target").find("option:selected").text() + (hostIP?hostIP:"");
 								
 								var tabID = "report" + reportID;
 								$("#reports").append(
@@ -166,7 +167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				});
 		}
 		function setting(){
-			window.location.href = "<%=basePath%>setting/defaults.action";
+			window.location.href = "<%=basePath%>setting/defaults";
 		}
 		$(function(){
 			$( ".cnfBtn" ).button({

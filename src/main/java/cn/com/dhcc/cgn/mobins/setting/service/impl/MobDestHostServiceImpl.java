@@ -126,4 +126,23 @@ public class MobDestHostServiceImpl implements MobDestHostService {
 		}
 	}
 
+	@Override
+	public boolean validHostInspect(MobDestHost host) {
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			int upd = session.update("cn.com.dhcc.cgn.mobins.po.MobDestHost.updateValid", host);
+			session.commit();
+			if(upd==1){
+				return true;
+			}else{
+				return false;
+			}
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
+	}
+
 }

@@ -43,4 +43,10 @@ public interface MobDestHostService {
 	 * @return
 	 */
 	boolean updateAccountAndPassword(MobDestHost host);
+	/**
+	 * 修改巡检启用状态
+	 * @param target
+	 * @return
+	 */
+	boolean validHostInspect(MobDestHost host);
 }

@@ -57,13 +57,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="N_HOST_TYPE" property="hostType" />
 		<result column="DT_HOST_ADD_TIME" property="hostAddTime" />
 		<result column="DT_HOST_DEL_TIME" property="hostDelTime" />
+		<result column="VC_INSPECT_VALID" property="inspectValid" />
 	</resultMap>
 
+	<!-- 巡检主机列表 -->
 	<select id="query" resultMap="MobDestHostMap">
 		<![CDATA[
-			SELECT * 
-			FROM T_MOB_DEST_HOST
-			WHERE DT_HOST_DEL_TIME IS NULL
+			SELECT host.* 
+			FROM T_MOB_DEST_HOST host LEFT JOIN T_MOB_INS_TARGET target ON
+				host.N_TARGET_ID = target.N_TARGET_ID 
+			WHERE DT_HOST_DEL_TIME IS NULL AND VC_INSPECT_VALID = 'Y'
+				AND target.VC_TARGET_INS_VALID = 'Y'
 		]]>
 	</select>
 	
@@ -78,9 +82,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			      ,N_HOST_TYPE
 			      ,CONVERT(varchar(20), DT_HOST_ADD_TIME, 20) as DT_HOST_ADD_TIME
 			      ,CONVERT(varchar(20), DT_HOST_DEL_TIME, 20) as DT_HOST_DEL_TIME
+			      ,VC_INSPECT_VALID
 			FROM T_MOB_DEST_HOST
 			WHERE DT_HOST_DEL_TIME IS NULL AND N_TARGET_ID = #{targetID}
 		]]>
 	</select>
 	
+	<update id="updateValid" parameterType="cn.com.dhcc.cgn.mobins.po.MobDestHost" >
+		<![CDATA[
+			UPDATE T_MOB_DEST_HOST
+			SET  VC_INSPECT_VALID = #{inspectValid}
+			WHERE N_MOB_DEST_HOST_ID = #{mobDestHostID} AND DT_HOST_DEL_TIME IS NULL
+		]]>
+	</update>
 </mapper>

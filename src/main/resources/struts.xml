@@ -33,6 +33,7 @@
     
     <include file="cn/com/dhcc/cgn/mobins/report/struts-report.xml"/>
     <include file="cn/com/dhcc/cgn/mobins/setting/struts-setting.xml"/>
+    <include file="cn/com/dhcc/cgn/mobins/init/struts-init.xml"/>
     <!-- <include file="tk/cedoo/search/struts-search.xml"/>
     
     <include file="tk/cedoo/manage/struts-manage.xml"/>

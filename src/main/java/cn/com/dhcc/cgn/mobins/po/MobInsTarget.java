@@ -7,6 +7,7 @@ public class MobInsTarget {
 	private String targetNote = null;
 	private String targetAddTime = null;
 	private String targetDelTime = null;
+	private String targetInsValid = null;
 	public String getTargetID() {
 		return targetID;
 	}
@@ -38,6 +39,12 @@ public class MobInsTarget {
 		this.targetDelTime = targetDelTime;
 	}
 	
+	public String getTargetInsValid() {
+		return targetInsValid;
+	}
+	public void setTargetInsValid(String targetInsValid) {
+		this.targetInsValid = targetInsValid;
+	}
 	@Override
 	public String toString() {
 		return "MobInsTarget [targetID=" + targetID + ", targetName="
