@@ -65,6 +65,25 @@ public class Event {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	/**
+	 * 转换为HTTP请求参数
+	 * @return
+	 */
+	public String parseRequestParam(){
+		String repa = "mosn=" + mosn + "&addinfo=" + addinfo + "&cause="
+				+ cause + "&origininfo=" + origininfo + "&detail=" + detail
+				+ "&occurtime=" + occurtime + "&severity=" + severity
+				+ "&status=" + status ;
+		return repa;
+	}
+	@Override
+	public String toString() {
+		return "Event [mosn=" + mosn + ", addinfo=" + addinfo + ", cause="
+				+ cause + ", origininfo=" + origininfo + ", detail=" + detail
+				+ ", occurtime=" + occurtime + ", severity=" + severity
+				+ ", status=" + status + "]";
+	}
+	
 	
 
 }

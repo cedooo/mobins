@@ -15,7 +15,6 @@ public class StrageAction extends JQGridAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 7442713406083582833L;
-	@Autowired
 	private StrageService strageService = null;
 	@Autowired
 	private StrageSearchCondition strageSearchCondition = null;
@@ -70,6 +69,8 @@ public class StrageAction extends JQGridAction {
 			return edit();
 		}else if(OPER_ADD.equals(this.getOper())){
 			return add();
+		}else if(OPER_DEL.equals(this.getOper())){
+			return del();
 		}
 		return SUCCESS;
 	}
@@ -104,18 +105,60 @@ public class StrageAction extends JQGridAction {
 		strage.setStrageID(strageID);
 		strage.setStrageName(strageName);
 		strage.setStrageNote(strageNote);
-		boolean upSucc = this.strageService.update(strage);
-		LOG.debug(upSucc?"更新策略成功":"更新策略失败");
+		operSuccess = this.strageService.update(strage);
 		return SUCCESS;
+	}
+	private String strageValid = null;
+	
+	public String getStrageValid() {
+		return strageValid;
+	}
+	public void setStrageValid(String strageValid) {
+		this.strageValid = strageValid;
 	}
 	/**
 	 * 添加
 	 * @return
 	 */
 	private String add(){
-		
+		InspectionStrage strage = new InspectionStrage();
+		strage.setStrageName(strageName);
+		strage.setStrageNote(strageNote);
+		strage.setStrageValid(strageValid);
+		this.operSuccess = strageService.add(strage);
 		return SUCCESS;
 	}
+	private String del(){
+		InspectionStrage strage = new InspectionStrage();
+		strage.setStrageID(this.getId());
+		this.operSuccess = strageService.del(strage);
+		return SUCCESS;
+	}
+	private boolean operSuccess = false;
 	
+	public boolean isOperSuccess() {
+		return operSuccess;
+	}
+	
+	public void setOperSuccess(boolean operSuccess) {
+		this.operSuccess = operSuccess;
+	}
+
+	private InspectionStrage strage = null;
+	
+	public InspectionStrage getStrage() {
+		return strage;
+	}
+	public void setStrage(InspectionStrage strage) {
+		this.strage = strage;
+	}
+	/**
+	 * 巡检是否启用
+	 * @return
+	 */
+	public String validIns(){
+		operSuccess = strageService.validStrageInspect(strage);
+		return SUCCESS;
+	}
 	
 }

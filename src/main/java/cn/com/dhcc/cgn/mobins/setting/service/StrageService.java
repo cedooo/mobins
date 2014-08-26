@@ -25,4 +25,22 @@ public interface StrageService {
 	 * @return
 	 */
 	boolean update(InspectionStrage strage);
+	/**
+	 * 添加策略
+	 * @param strage
+	 * @return
+	 */
+	boolean add(InspectionStrage strage);
+	/**
+	 * 删除巡检策略
+	 * @param strage
+	 * @return
+	 */
+	boolean del(InspectionStrage strage);
+	/**
+	 * 修改巡检启用状态
+	 * @param target
+	 * @return
+	 */
+	boolean validStrageInspect(InspectionStrage strage);
 }

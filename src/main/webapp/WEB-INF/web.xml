@@ -4,10 +4,6 @@
 	id="WebApp_ID" version="2.5">
 
 	<display-name>OpenWeb</display-name>
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

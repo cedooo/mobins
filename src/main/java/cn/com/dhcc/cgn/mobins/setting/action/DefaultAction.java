@@ -13,5 +13,18 @@ public class DefaultAction extends ActionSupport {
 	public String execute(){
 		return SUCCESS;
 	}
-
+	/**
+	 * 巡检目标
+	 * @return
+	 */
+	public String target(){
+		return SUCCESS;
+	}
+	/**
+	 * 策略
+	 * @return
+	 */
+	public String strage(){
+		return SUCCESS;
+	}
 }

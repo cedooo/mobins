@@ -11,11 +11,11 @@ public class WSClientImplTest {
 	@Test
 	public void testPostAlarm() {
 		Event event = new Event();
-		event.setMosn("9999");
+		event.setMosn("998500130");
 		event.setAddinfo("test");
-		event.setCause("告警原因");
+		event.setCause("巡检-告警原因-测试，不用报。");
 		event.setDetail("事件详细信息");
-		event.setOccurtime("2014-08-25 16:44:20");
+		event.setOccurtime("2014-08-26 15:54:37");
 		event.setOrigininfo("事件详细信息");
 		event.setSeverity("3");
 		event.setStatus("发生");

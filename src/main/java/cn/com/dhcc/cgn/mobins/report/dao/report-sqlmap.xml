@@ -6,14 +6,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="cn.com.dhcc.cgn.mobins.po.InspectionReport"
 		id="InspectionReportMap">
 		<result property="inspectionReportID" column="N_INSPECTION_REPORT_ID" />
-		<result property="inspectionReportID" column="N_INSPECTION_REPORT_ID" />
+		<result property="mobDestHostID" column="N_MOB_DEST_HOST_ID" />
+		<result property="mobDestHostIP" column="VC_MOB_DEST_HOST_IP" />
 		<result property="maintAccount" column="VC_MAINT_ACOUNT" />
 		<result property="maintUser" column="VC_MAINT_USER" />
 		<result property="generateTime" column="DT_GENERATE_TIME" />
 		<result property="inspectionTime" column="DT_INSPECTION_TIME" />
 		<result property="inspectionIsException" column="VC_INSPECTION_IS_EXCEPTION" />
-		<result property="mobDestHostID" column="N_MOB_DEST_HOST_ID" />
-		<result property="mobDestHostIP" column="VC_MOB_DEST_HOST_IP" />
+		<result property="inspectionComplete" column="VC_INSPECTION_COMPLETE" />
 	</resultMap>
 
 	<select id="queryAll" resultMap="InspectionReportMap">

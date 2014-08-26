@@ -4,6 +4,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.com.dhcc.cgn.mobins.po.InspectionStrage">
 
+	<insert id="insert" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionStrage">
+		<![CDATA[
+			INSERT INTO T_INSPECTION_STRAGE(
+		      VC_STRAGE_NAME
+		      ,VC_STRAGE_VALID
+		      ,VC_STRAGE_NOTE
+		      ,DT_STRAGE_ADD_TIME
+		      )
+			VALUES(#{strageName},#{strageValid},#{strageNote},getdate())
+		]]>
+	</insert>
 	<resultMap type="cn.com.dhcc.cgn.mobins.po.InspectionStrage"
 		id="InspectionStrageMap">
 		<result column="N_STRAGE_ID" property="strageID" />
@@ -41,11 +52,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where ${pagging.skip} < rn
 		]]>
 	</select>
-	
+	<!-- 更新策略 -->
 	<update id="update" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionStrage">
 		UPDATE T_INSPECTION_STRAGE
 		SET VC_STRAGE_NAME = #{strageName}
       		,VC_STRAGE_NOTE = #{strageNote}
       WHERE N_STRAGE_ID = #{strageID}
 	</update>
+	<!-- 启用、停用巡检 -->
+	<update id="updateValid" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionStrage">
+		UPDATE T_INSPECTION_STRAGE
+		SET VC_STRAGE_VALID = #{strageValid}
+     	WHERE N_STRAGE_ID = #{strageID}
+	</update>
+	<!-- 删除巡检（伪删除） -->
+	<update id="updateDelete" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionStrage">
+		UPDATE T_INSPECTION_STRAGE
+		SET DT_STRAGE_DEL_TIME = getdate()
+     	WHERE N_STRAGE_ID = #{strageID}
+	</update>
+	
+	
 </mapper>

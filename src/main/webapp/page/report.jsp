@@ -14,7 +14,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="巡检">
   
-	<%@ include file="/page/them.jsp" %>
 	
 	<script src="<%=basePath%>js/dependency/jquery.ui.datepicker-zh-CN.js"></script>
 	
@@ -182,6 +181,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    });
 		});
 	</script>
+	<style type="text/css">
+		table.gridtable tr:odd{
+		    background-color: #F3F3F3;
+		}
+	</style>
   </head>
   
   <body>
@@ -195,7 +199,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<span id="querInfo"></span>
 			</div>
 		</div>
-  			<button onclick="setting()" class="cnfBtn">配置</button>
+  			<!-- <button onclick="setting()" class="cnfBtn">配置</button> -->
 		<div id="reports" class="report" ></div>
   </body>
 </html>

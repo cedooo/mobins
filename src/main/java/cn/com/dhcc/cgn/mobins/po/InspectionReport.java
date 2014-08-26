@@ -72,12 +72,12 @@ public class InspectionReport {
 	@Override
 	public String toString() {
 		return "InspectionReport [inspectionReportID=" + inspectionReportID
-				+ ", mobDestHostID=" + mobDestHostID + ", inspectionTime="
-				+ inspectionTime + ", maintAccount=" + maintAccount
-				+ ", maintUser=" + maintUser + ", generateTime=" + generateTime
-				+ ", inspectionIsException=" + inspectionIsException + "]";
+				+ ", mobDestHostIP=" + mobDestHostIP + ", mobDestHostID="
+				+ mobDestHostID + ", inspectionTime=" + inspectionTime
+				+ ", maintAccount=" + maintAccount + ", maintUser=" + maintUser
+				+ ", generateTime=" + generateTime + ", inspectionIsException="
+				+ inspectionIsException + ", inspectionComplete="
+				+ inspectionComplete + "]";
 	}
-	
-	
 	
 }

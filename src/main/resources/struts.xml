@@ -12,7 +12,7 @@
 
     <package name="default" namespace="/" extends="struts-default">
 
-        <default-action-ref name="index" />
+        <default-action-ref name="defaults" />
 
         <global-results>
             <result name="error">/error.jsp</result>
@@ -27,8 +27,13 @@
             <result>/index.jsp</result>
 		</action>
 		
+    	<!-- 默认页面 -->
+		<action name="defaults" class="cn.com.dhcc.cgn.mobins.setting.action.DefaultAction">
+            <result>/page/index.jsp</result>
+		</action>
+		
     </package>
-
+	
     <!-- Add packages here -->
     
     <include file="cn/com/dhcc/cgn/mobins/report/struts-report.xml"/>

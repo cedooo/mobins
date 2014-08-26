@@ -50,15 +50,17 @@ body{
 			padding: 8px;
 			border-style: solid;
 			border-color: #666666;
-			background-color: #dedede;
+		}
+		table.gridtable tr{
+		    background-color:rgb(255,255,255);
 		}
 		table.gridtable td {
 			border-width: 1px;
 			padding: 8px;
 			border-style: solid;
 			border-color: #666666;
-			background-color: #ffffff;
 		}
+		
 		.cnfBtn{
 			float:right;
 			margin-right: 0.5%;

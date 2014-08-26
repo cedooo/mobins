@@ -44,6 +44,10 @@
 	<bean id="mobDestHost"
 		class="cn.com.dhcc.cgn.mobins.po.MobDestHost" >
 	</bean>
+	<!-- 巡检策略 -->
+	<bean id="strage"
+		class="cn.com.dhcc.cgn.mobins.po.InspectionStrage" >
+	</bean>
 	
 	<!--  -->
 	<!-- Action -->
@@ -62,5 +66,11 @@
 		<property name="mobDestHost" ref="mobDestHost" ></property>
 	</bean>
 	
+	<!-- 巡检策略 -->
+	<bean id="strageAction"
+		class="cn.com.dhcc.cgn.mobins.setting.action.StrageAction" >
+		<property name="strageService" ref="strageService"></property>
+		<property name="strage" ref="strage" ></property>
+	</bean>
 	
 </beans>

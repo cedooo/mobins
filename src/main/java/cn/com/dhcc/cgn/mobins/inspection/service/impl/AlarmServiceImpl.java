@@ -5,6 +5,9 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
+import cn.com.dhcc.cgn.mobins.inspection.client.Event;
+import cn.com.dhcc.cgn.mobins.inspection.client.WSClient;
+import cn.com.dhcc.cgn.mobins.inspection.client.impl.WSClientImpl;
 import cn.com.dhcc.cgn.mobins.inspection.dao.Alarm;
 import cn.com.dhcc.cgn.mobins.inspection.match.ResultMatch;
 import cn.com.dhcc.cgn.mobins.inspection.service.AlarmService;
@@ -12,7 +15,8 @@ import cn.com.dhcc.cgn.mobins.po.InspectionRecords;
 import cn.com.dhcc.cgn.mobins.po.InspectionReport;
 
 public class AlarmServiceImpl extends AlarmService {
-
+	
+	private WSClient client = new  WSClientImpl(); 
 	@Override
 	public void explore() {
 		//告警扫描
@@ -24,7 +28,6 @@ public class AlarmServiceImpl extends AlarmService {
 			LOG.info("巡检告警分析");
 			session.commit();
 			for (InspectionReport inspectionReport : listReport) {
-				LOG.info(inspectionReport.toString());
 				String reportID = inspectionReport.getInspectionReportID();
 				List<InspectionRecords> listRecords = 
 						session.selectList("cn.com.dhcc.cgn.mobins.po.InspectionReport.queryRecordsByReportID", reportID);
@@ -38,6 +41,8 @@ public class AlarmServiceImpl extends AlarmService {
 							if(alarm!=null){
 								LOG.info(alarm.toString());
 								//TODO 异常入库
+								Event event = new Event();
+								client.postAlarm(event);
 								excepCount++;
 							}
 						}
@@ -52,6 +57,7 @@ public class AlarmServiceImpl extends AlarmService {
 					upReport.setInspectionIsException(ResultMatch.EXCEPTION);
 					upReport.setInspectionComplete(ResultMatch.INSPECTIOIN_FAIL);
 				}
+				LOG.info(inspectionReport.toString());
 				int uptedCnt = 
 						session.update("cn.com.dhcc.cgn.mobins.inspection.service.AlarmService.updateReportStatus", upReport);
 				if(uptedCnt==1){

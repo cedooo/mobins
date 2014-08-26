@@ -66,4 +66,61 @@ public class StrageServiceImpl implements StrageService {
 		}
 	}
 
+	@Override
+	public boolean validStrageInspect(InspectionStrage strage) {
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			int upd = session.update("cn.com.dhcc.cgn.mobins.po.InspectionStrage.updateValid", strage);
+			session.commit();
+			if(upd==1){
+				return true;
+			}else{
+				return false;
+			}
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
+	}
+
+	@Override
+	public boolean add(InspectionStrage strage) {
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			int inser = session.insert("cn.com.dhcc.cgn.mobins.po.InspectionStrage.insert", strage);
+			session.commit();
+			if(inser==1){
+				return true;
+			}else{
+				return false;
+			}
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
+	}
+
+	@Override
+	public boolean del(InspectionStrage strage) {
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			int upd = session.update("cn.com.dhcc.cgn.mobins.po.InspectionStrage.updateDelete", strage);
+			session.commit();
+			if(upd==1){
+				return true;
+			}else{
+				return false;
+			}
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
+	}
+
 }
