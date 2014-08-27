@@ -1,10 +1,10 @@
-package cn.com.dhcc.cgn.mobins.job.executor;
+package cn.com.dhcc.cgn.mobins.inspection.job.executor;
 
 import java.util.List;
 import java.util.Map;
 
-import cn.com.dhcc.cgn.mobins.job.executor.jsch.ConnectResult;
-import cn.com.dhcc.cgn.mobins.job.executor.result.ExecutorResult;
+import cn.com.dhcc.cgn.mobins.inspection.job.executor.jsch.ConnectResult;
+import cn.com.dhcc.cgn.mobins.inspection.job.executor.result.ExecutorResult;
 import cn.com.dhcc.cgn.mobins.po.HostInspectionPoint;
 import cn.com.dhcc.cgn.mobins.po.MobDestHost;
 

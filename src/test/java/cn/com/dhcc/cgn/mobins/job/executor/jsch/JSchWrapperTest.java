@@ -10,7 +10,9 @@ import java.util.Map.Entry;
 
 import org.junit.Test;
 
-import cn.com.dhcc.cgn.mobins.job.executor.result.ExecutorResult;
+import cn.com.dhcc.cgn.mobins.inspection.job.executor.jsch.ConnectResult;
+import cn.com.dhcc.cgn.mobins.inspection.job.executor.jsch.JSchWrapper;
+import cn.com.dhcc.cgn.mobins.inspection.job.executor.result.ExecutorResult;
 import cn.com.dhcc.cgn.mobins.po.HostInspectionPoint;
 
 public class JSchWrapperTest {

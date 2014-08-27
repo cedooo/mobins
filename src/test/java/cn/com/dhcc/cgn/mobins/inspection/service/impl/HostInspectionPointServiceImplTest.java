@@ -21,9 +21,10 @@ public class HostInspectionPointServiceImplTest {
 	@Test
 	public void getListByMobDestHost() {
 		MobDestHost MHost = new MobDestHost();
-		MHost.setMobDestHostID("3");
+		MHost.setMobDestHostID("2");
 		List<HostInspectionPoint> list = serviceImpl.getListByMobDestHost(MHost);
 		System.out.println(list);
 		assertEquals(true, list!=null&&list.size()>0);
 	}
+
 }

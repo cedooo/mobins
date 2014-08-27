@@ -29,6 +29,7 @@ public class HostInspectionPoint {
 	private String matchType = null;
 	private String sortNum = null;
 	private String exceptionWeight = null;
+	private String alarmLevel = null;
 	public String getMobDestHostID() {
 		return mobDestHostID;
 	}
@@ -205,6 +206,14 @@ public class HostInspectionPoint {
 		this.exceptionWeight = exceptionWeight;
 	}
 
+	public String getAlarmLevel() {
+		return alarmLevel;
+	}
+
+	public void setAlarmLevel(String alarmLevel) {
+		this.alarmLevel = alarmLevel;
+	}
+
 	@Override
 	public String toString() {
 		return "HostInspectionPoint [mobDestHostID=" + mobDestHostID
@@ -218,9 +227,10 @@ public class HostInspectionPoint {
 				+ ", checkPointName=" + checkPointName + ", inspectionCode="
 				+ inspectionCode + ", keyRegex=" + keyRegex
 				+ ", valCompareMin=" + valCompareMin + ", valCompareMax="
-				+ valCompareMax + ", matchType=" + matchType + "]";
+				+ valCompareMax + ", matchType=" + matchType + ", sortNum="
+				+ sortNum + ", exceptionWeight=" + exceptionWeight
+				+ ", alarmLevel=" + alarmLevel + "]";
 	}
 
-	
 	
 }

@@ -1,4 +1,4 @@
-package cn.com.dhcc.cgn.mobins.job.executor.result;
+package cn.com.dhcc.cgn.mobins.inspection.job.executor.result;
 
 import java.util.Vector;
 

@@ -32,6 +32,11 @@
             <result>/page/index.jsp</result>
 		</action>
 		
+    	<!-- 报告默认页面 -->
+		<action name="report" class="cn.com.dhcc.cgn.mobins.setting.action.DefaultAction">
+            <result>report.jsp</result>
+		</action>
+		
     </package>
 	
     <!-- Add packages here -->

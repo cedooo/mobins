@@ -1,4 +1,4 @@
-package cn.com.dhcc.cgn.mobins.job.executor.jsch;
+package cn.com.dhcc.cgn.mobins.inspection.job.executor.jsch;
 
 public class ConnectResult {
 	private String result = null;

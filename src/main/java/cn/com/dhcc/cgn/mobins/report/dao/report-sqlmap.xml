@@ -137,6 +137,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="checkCode" column="VC_CHECK_CODE" />
 		<result property="showSortNum" column="N_SHOW_SORT_NUM" />
 		<result property="recordsExceptionWeight" column="N_RECORDS_EXCEPTION_WEIGHT" />
+		<result property="recordAlarmLevel" column="N_RECORD_ALARM_LEVEL" />
 	</resultMap>
 	<!-- 通过目标ID查找主机列表 -->
 	<select id="queryRecordsByReportID" resultMap="InspectionRecordsMap"
@@ -157,6 +158,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		,VC_CHECK_CODE
 		,N_SHOW_SORT_NUM
    		,N_RECORDS_EXCEPTION_WEIGHT
+   		,N_RECORD_ALARM_LEVEL
 		FROM T_INSPECTION_RECORDS
 		WHERE N_INSPECTION_REPORT_ID = #{reportID}
 		ORDER BY N_SHOW_SORT_NUM

@@ -11,7 +11,8 @@ public class InspectionRecordsServiceImplTest {
 	@Test
 	public void testAddInspectionRecord() {
 		InspectionRecords record = new InspectionRecords();
-		record.setInspectionReportID("10");
+		record.setInspectionReportID("105");
+		record.setRecordAlarmLevel("3");
 		assertEquals(true,service.addInspectionRecord(record));
 	}
 

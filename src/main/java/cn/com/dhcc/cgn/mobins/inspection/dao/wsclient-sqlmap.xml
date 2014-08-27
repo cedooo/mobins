@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.mobins.inspection.wsclient">
+	<select id="valueByKey" parameterType="String" resultType="String">
+		SELECT VC_INS_CNF_VAL
+		  FROM T_INSPECT_CNF
+		  WHERE VC_INS_CNF_KEY = #{code}
+	</select>
+</mapper>

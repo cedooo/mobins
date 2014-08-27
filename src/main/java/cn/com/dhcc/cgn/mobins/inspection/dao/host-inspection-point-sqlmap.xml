@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="N_MATCH_TYPE" property="matchType" />
 		<result column="N_SORT_NUM" property="sortNum" />
 		<result column="N_EXCEPTION_WEIGHT" property="exceptionWeight" />
+		<result column="N_ALARM_LEVEL" property="alarmLevel" />
 	</resultMap>
 
 	<select id="queryAll" resultMap="HostInspectionPointMap">
@@ -53,6 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		      ,N_MATCH_TYPE
 		      ,N_SORT_NUM
 		      ,N_EXCEPTION_WEIGHT
+		      ,N_ALARM_LEVEL
 			FROM V_HOST_INSPECTION_POINT
 			ORDER BY N_MOB_DEST_HOST_ID
 		]]>
@@ -83,6 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		      ,N_MATCH_TYPE
 		      ,N_SORT_NUM
 		      ,N_EXCEPTION_WEIGHT
+		      ,N_ALARM_LEVEL
 			FROM V_HOST_INSPECTION_POINT
 			WHERE N_MOB_DEST_HOST_ID = #{mobDestHostID}
 			ORDER BY N_MOB_DEST_HOST_ID

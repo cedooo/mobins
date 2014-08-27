@@ -1,4 +1,4 @@
-package cn.com.dhcc.cgn.mobins.job.impl;
+package cn.com.dhcc.cgn.mobins.inspection.job.impl;
 
 import java.util.Iterator;
 import java.util.List;
@@ -8,13 +8,12 @@ import java.util.Map.Entry;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
+import cn.com.dhcc.cgn.mobins.inspection.job.executor.CommandExecutor;
+import cn.com.dhcc.cgn.mobins.inspection.job.executor.jsch.ConnectResult;
+import cn.com.dhcc.cgn.mobins.inspection.job.executor.result.ExecutorResult;
 import cn.com.dhcc.cgn.mobins.inspection.service.AlarmService;
 import cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService;
 import cn.com.dhcc.cgn.mobins.inspection.service.HostInspectionPointService;
-import cn.com.dhcc.cgn.mobins.job.InspectionJob;
-import cn.com.dhcc.cgn.mobins.job.executor.CommandExecutor;
-import cn.com.dhcc.cgn.mobins.job.executor.jsch.ConnectResult;
-import cn.com.dhcc.cgn.mobins.job.executor.result.ExecutorResult;
 import cn.com.dhcc.cgn.mobins.po.HostInspectionPoint;
 import cn.com.dhcc.cgn.mobins.po.InspectionRecords;
 import cn.com.dhcc.cgn.mobins.po.InspectionReport;
@@ -23,7 +22,7 @@ import cn.com.dhcc.cgn.mobins.report.service.InspectionRecordsService;
 import cn.com.dhcc.cgn.mobins.report.service.ReportService;
 import cn.com.dhcc.cgn.mobins.setting.service.MobDestHostService;
 
-public class InspectionJobImpl implements InspectionJob{
+public class InspectionJobImpl implements cn.com.dhcc.cgn.mobins.inspection.job.InspectionJob{
 	static final private Logger LOG = LoggerFactory.getLogger(InspectionJobImpl.class.getClass());
 	
 	private HostInspectionPointService hostInspectionPointService = null;
@@ -45,9 +44,11 @@ public class InspectionJobImpl implements InspectionJob{
 		List<MobDestHost> listHost = mobHostService.query(null);
 		try{
 			for (MobDestHost mobDestHost : listHost) {
+				LOG.debug(mobDestHost.toString());
 				//执行巡检
 				List<HostInspectionPoint> listHostPoint = hostInspectionPointService.getListByMobDestHost(mobDestHost);
 				ConnectResult result = commandExecutor.connectValid(mobDestHost);
+				LOG.debug(listHostPoint.toString());
 				if(result.isSuccess()){
 					LOG.info("可以连接，开始巡检,主机ip：" + mobDestHost.getMobDestHostIP());
 					Map<HostInspectionPoint, ExecutorResult> resultsMap = commandExecutor.execute(mobDestHost, listHostPoint);
@@ -67,6 +68,7 @@ public class InspectionJobImpl implements InspectionJob{
 							InspectionRecords record = generateInspectionRecord(hostInspectionPoint);
 							record.setInspectionReportID(report.getInspectionReportID());
 							record.setProtoData(entry.getValue().getStrResultVector());
+							LOG.debug("添加巡检记录:" + record);
 							recordsService.addInspectionRecord(record);
 							LOG.info("添加成功：" + record);
 						}
@@ -138,6 +140,7 @@ public class InspectionJobImpl implements InspectionJob{
 		
 		records.setShowSortNum(hostPoint.getSortNum());
 		records.setRecordsExceptionWeight(hostPoint.getExceptionWeight());
+		records.setRecordAlarmLevel(hostPoint.getAlarmLevel());
 		return records;
 	}
 	public HostInspectionPointService getHostInspectionPointService() {

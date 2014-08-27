@@ -17,6 +17,7 @@ public class InspectionRecords {
 	private String checkComplete = null;
 	private String showSortNum = null;
 	private String recordsExceptionWeight = null;//RECORDS_EXCEPTION_WEIGHT
+	private String recordAlarmLevel = null;    //告警级别
 	
 	public String getInspectionRecordsID() {
 		return inspectionRecordsID;
@@ -144,6 +145,14 @@ public class InspectionRecords {
 
 	public void setRecordsExceptionWeight(String recordsExceptionWeight) {
 		this.recordsExceptionWeight = recordsExceptionWeight;
+	}
+
+	public String getRecordAlarmLevel() {
+		return recordAlarmLevel;
+	}
+
+	public void setRecordAlarmLevel(String recordAlarmLevel) {
+		this.recordAlarmLevel = recordAlarmLevel;
 	}
 
 	@Override

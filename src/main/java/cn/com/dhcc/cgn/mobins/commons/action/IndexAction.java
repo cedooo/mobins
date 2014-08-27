@@ -16,4 +16,7 @@ public class IndexAction extends ActionSupport{
 		LOG.info("跳转主页(index.jsp)");
 		return SUCCESS;
 	}
+	public String report(){
+		return SUCCESS;
+	}
 }

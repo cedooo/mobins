@@ -1,4 +1,4 @@
-package cn.com.dhcc.cgn.mobins.job.executor.jsch;
+package cn.com.dhcc.cgn.mobins.inspection.job.executor.jsch;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,8 +17,8 @@ import com.jcraft.jsch.UserInfo;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
+import cn.com.dhcc.cgn.mobins.inspection.job.executor.result.ExecutorResult;
 import cn.com.dhcc.cgn.mobins.inspection.pojo.CommandFormat;
-import cn.com.dhcc.cgn.mobins.job.executor.result.ExecutorResult;
 import cn.com.dhcc.cgn.mobins.po.HostInspectionPoint;
 
 public class JSchWrapper {

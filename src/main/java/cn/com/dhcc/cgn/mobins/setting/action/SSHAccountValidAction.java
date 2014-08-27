@@ -1,7 +1,7 @@
 package cn.com.dhcc.cgn.mobins.setting.action;
 
-import cn.com.dhcc.cgn.mobins.job.executor.jsch.ConnectResult;
-import cn.com.dhcc.cgn.mobins.job.executor.jsch.JSchWrapper;
+import cn.com.dhcc.cgn.mobins.inspection.job.executor.jsch.ConnectResult;
+import cn.com.dhcc.cgn.mobins.inspection.job.executor.jsch.JSchWrapper;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.logging.Logger;

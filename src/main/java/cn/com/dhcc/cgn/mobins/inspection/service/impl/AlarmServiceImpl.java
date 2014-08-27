@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.inspection.client.Event;
+import cn.com.dhcc.cgn.mobins.inspection.client.EventFactory;
 import cn.com.dhcc.cgn.mobins.inspection.client.WSClient;
 import cn.com.dhcc.cgn.mobins.inspection.client.impl.WSClientImpl;
 import cn.com.dhcc.cgn.mobins.inspection.dao.Alarm;
@@ -41,7 +42,7 @@ public class AlarmServiceImpl extends AlarmService {
 							if(alarm!=null){
 								LOG.info(alarm.toString());
 								//TODO 异常入库
-								Event event = new Event();
+								Event event = EventFactory.getMobAppEvent(inspectionRecords);
 								client.postAlarm(event);
 								excepCount++;
 							}

@@ -7,7 +7,7 @@
 
     <package name="report" namespace="/report" extends="default, json-default">
 
-		<action name="default" class="cn.com.dhcc.cgn.mobins.report.action.ReportDefaultAction">
+		<action name="reportJSP" class="cn.com.dhcc.cgn.mobins.report.action.ReportDefaultAction">
             <result>/page/report.jsp</result>
 		</action>
 		

@@ -1,4 +1,4 @@
-package cn.com.dhcc.cgn.mobins.job;
+package cn.com.dhcc.cgn.mobins.inspection.job;
 /**
  * 巡检任务： 取得巡检结果(并未解析结果)
  * @author CeDo
