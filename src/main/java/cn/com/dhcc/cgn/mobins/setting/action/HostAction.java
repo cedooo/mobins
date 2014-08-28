@@ -2,8 +2,11 @@ package cn.com.dhcc.cgn.mobins.setting.action;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import cn.com.dhcc.cgn.mobins.po.MobDestHost;
-import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
+import cn.com.dhcc.cgn.mobins.pojo.pagging.Pagging;
+import cn.com.dhcc.cgn.mobins.pojo.search.impl.DestHostSearchCondition;
 import cn.com.dhcc.cgn.mobins.setting.service.MobDestHostService;
 
 public class HostAction extends JQGridAction {
@@ -12,6 +15,7 @@ public class HostAction extends JQGridAction {
 	 * 
 	 */
 	private static final long serialVersionUID = -3767843588494001776L;
+	@Autowired
 	private MobDestHostService hostService = null;
 	
 	public MobDestHostService getHostService() {
@@ -40,11 +44,34 @@ public class HostAction extends JQGridAction {
 	public void setTargetID(String targetID) {
 		this.targetID = targetID;
 	}
+	@Autowired
+	private DestHostSearchCondition searchCondition;
+	
+	public DestHostSearchCondition getSearchCondition() {
+		return searchCondition;
+	}
+
+	public void setSearchCondition(DestHostSearchCondition searchCondition) {
+		this.searchCondition = searchCondition;
+	}
 
 	public String list(){
-		MobInsTarget target = new MobInsTarget();
-		target.setTargetID(targetID);
-		this.listHost = hostService.listHostTarget(target);
+		Pagging pagging = searchCondition.getPagging();
+		pagging.setPage(this.getPage());
+		pagging.setRows(this.getRows());
+		int records = hostService.count(searchCondition);
+		pagging.setRecords(records+"");
+		int rows = 10;
+		try{
+			rows = Integer.parseInt(this.getRows());
+		}catch(NumberFormatException e){
+			
+		}
+		int totals = (int)Math.ceil((records*1d)/rows);
+		pagging.setTotal(totals+"");
+		searchCondition.setTargetID(this.getTargetID());
+		LOG.info(searchCondition.toString());
+		this.listHost = hostService.listHostTarget(searchCondition);
 		return SUCCESS;
 	}
 

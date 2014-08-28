@@ -13,5 +13,10 @@ public abstract class SearchCondition {
 	public void setPagging(Pagging pagging) {
 		this.pagging = pagging;
 	}
+
+	@Override
+	public String toString() {
+		return "SearchCondition [pagging=" + pagging + "]";
+	}
 	
 }

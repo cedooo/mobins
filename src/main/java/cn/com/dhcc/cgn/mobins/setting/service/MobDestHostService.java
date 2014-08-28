@@ -3,7 +3,7 @@ package cn.com.dhcc.cgn.mobins.setting.service;
 import java.util.List;
 
 import cn.com.dhcc.cgn.mobins.po.MobDestHost;
-import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
+import cn.com.dhcc.cgn.mobins.pojo.search.impl.DestHostSearchCondition;
 
 public interface MobDestHostService {
 	/**
@@ -36,7 +36,7 @@ public interface MobDestHostService {
 	 * @param pagging
 	 * @return
 	 */
-	List<MobDestHost> listHostTarget(MobInsTarget target);
+	List<MobDestHost> listHostTarget(DestHostSearchCondition searchCondition);
 	/**
 	 * 修改主机巡检帐号密码
 	 * @param host
@@ -49,4 +49,10 @@ public interface MobDestHostService {
 	 * @return
 	 */
 	boolean validHostInspect(MobDestHost host);
+	/**
+	 * 主机记录数
+	 * @param searchCondition
+	 * @return
+	 */
+	int count(DestHostSearchCondition searchCondition);
 }

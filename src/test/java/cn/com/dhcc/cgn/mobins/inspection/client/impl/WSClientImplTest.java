@@ -11,13 +11,13 @@ public class WSClientImplTest {
 	@Test
 	public void testPostAlarm() {
 		Event event = new Event();
-		event.setMosn("998500130");
+		event.setMosn("998500253");
 		event.setAddinfo("test");
-		event.setCause("巡检-告警原因-测试，不用报。");
+		event.setCause("移动应用巡检-告警原因-测试，不用报。");
 		event.setDetail("事件详细信息");
-		event.setOccurtime("2014-08-26 15:54:37");
+		event.setOccurtime("2014-08-27 18:24:28");
 		event.setOrigininfo("事件详细信息");
-		event.setSeverity("3");
+		event.setSeverity("4");
 		event.setStatus("发生");
 		String rt = wsClient.postAlarm(event);
 		assertEquals(true, rt=="success");

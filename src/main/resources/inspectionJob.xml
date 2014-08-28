@@ -29,9 +29,16 @@
 	<bean id="analysisService"
 		class="cn.com.dhcc.cgn.mobins.inspection.service.impl.AnalysisServiceImpl" >
 	</bean>
+	
+	<!-- 告警client-->
+	<bean id="wsClient"
+		class="cn.com.dhcc.cgn.mobins.inspection.client.impl.WSClientImpl" >
+	</bean>
+	
 	<!-- 巡检记录 -->
 	<bean id="alarmService"
 		class="cn.com.dhcc.cgn.mobins.inspection.service.impl.AlarmServiceImpl" >
+		<property name="client" ref="wsClient"></property>
 	</bean>
 	<!-- 巡检任务 -->
 	<bean id="inspectionJob"

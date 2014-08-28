@@ -14,7 +14,6 @@
 		<!-- 目标列表 -->
 		<action name="targetList" class="cn.com.dhcc.cgn.mobins.setting.action.TargetAction" method="list">
             <result type="json">
-            	<param  name="excludeProperties">targetService,target</param>
             </result>
 		</action>
 		<!-- 目标编辑 -->

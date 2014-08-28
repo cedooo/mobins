@@ -3,7 +3,7 @@ package cn.com.dhcc.cgn.mobins.setting.service;
 import java.util.List;
 
 import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
-import cn.com.dhcc.cgn.mobins.pojo.pagging.Pagging;
+import cn.com.dhcc.cgn.mobins.pojo.search.impl.TargetSearchCondition;
 
 public interface TargetService {
 	/**
@@ -31,14 +31,20 @@ public interface TargetService {
 	List<MobInsTarget> query(MobInsTarget target);
 	/**
 	 * 分页查找目标
-	 * @param pagging
+	 * @param searchCondition
 	 * @return
 	 */
-	List<MobInsTarget> listTarget(Pagging pagging);
+	List<MobInsTarget> listTarget(TargetSearchCondition searchCondition);
 	/**
 	 * 修改巡检启用状态
 	 * @param target
 	 * @return
 	 */
 	boolean validTargetInspect(MobInsTarget target);
+	/**
+	 * 符合条件的目标个数
+	 * @param searchCondition
+	 * @return
+	 */
+	int count(TargetSearchCondition searchCondition);
 }

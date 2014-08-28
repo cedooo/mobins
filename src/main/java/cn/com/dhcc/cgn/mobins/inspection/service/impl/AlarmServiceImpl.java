@@ -8,7 +8,6 @@ import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.inspection.client.Event;
 import cn.com.dhcc.cgn.mobins.inspection.client.EventFactory;
 import cn.com.dhcc.cgn.mobins.inspection.client.WSClient;
-import cn.com.dhcc.cgn.mobins.inspection.client.impl.WSClientImpl;
 import cn.com.dhcc.cgn.mobins.inspection.dao.Alarm;
 import cn.com.dhcc.cgn.mobins.inspection.match.ResultMatch;
 import cn.com.dhcc.cgn.mobins.inspection.service.AlarmService;
@@ -17,7 +16,16 @@ import cn.com.dhcc.cgn.mobins.po.InspectionReport;
 
 public class AlarmServiceImpl extends AlarmService {
 	
-	private WSClient client = new  WSClientImpl(); 
+	private WSClient client = null;
+	
+	public WSClient getClient() {
+		return client;
+	}
+
+	public void setClient(WSClient client) {
+		this.client = client;
+	}
+
 	@Override
 	public void explore() {
 		//告警扫描

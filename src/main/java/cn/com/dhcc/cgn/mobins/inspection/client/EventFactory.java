@@ -1,9 +1,12 @@
 package cn.com.dhcc.cgn.mobins.inspection.client;
 
+import java.util.Date;
+
 import org.apache.ibatis.session.SqlSession;
 
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.po.InspectionRecords;
+import cn.com.dhcc.cgn.mobins.pojo.ConstantsAndCommon;
 
 public class EventFactory {
 	private static final String MOB_APP_CODE = "mobileAppMosn";
@@ -36,8 +39,13 @@ public class EventFactory {
 	public static Event getMobAppEvent(InspectionRecords inspectionRecords) {
 		Event event = getMobAppEvent();
 		if(event!=null){
-			event.setSeverity(inspectionRecords.getRecordAlarmLevel());
-			
+			event.setSeverity(inspectionRecords.getRecordAlarmLevel());    //告警级别
+			event.setOccurtime(ConstantsAndCommon.dateFormat.format(new Date()));    //告警发生时间
+			event.setAddinfo("");    //附加信息
+			event.setCause("");    //告警原因
+			event.setDetail("");    //告警详情
+			event.setOrigininfo("");    //原始信息
+			event.setStatus("");    //告警状态，发生/解除
 		}
 		return event;
 	}

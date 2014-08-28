@@ -26,7 +26,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE N_TARGET_ID = #{targetID} AND DT_TARGET_DEL_TIME IS NULL
 		]]>
 	</update>
-	
+	<select id="countByCondition" resultType="int" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.TargetSearchCondition">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM T_MOB_INS_TARGET
+			WHERE DT_TARGET_DEL_TIME IS NULL
+		]]>
+	</select>
 	<resultMap type="cn.com.dhcc.cgn.mobins.po.MobInsTarget" id="targetMap">
 		<result column="N_TARGET_ID" property="targetID" />
 		<result column="VC_TARGET_NAME" property="targetName" />
@@ -51,6 +57,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	<select id="queryByCondition" resultMap="targetMap" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.TargetSearchCondition">
+		<![CDATA[
+			select 
+				N_TARGET_ID
+		      ,VC_TARGET_NAME
+		      ,VC_TARGET_NOTE
+		      ,CONVERT(varchar(20), DT_TARGET_ADD_TIME, 20) as DT_TARGET_ADD_TIME
+		      ,CONVERT(varchar(20), DT_TARGET_DEL_TIME, 20) as DT_TARGET_DEL_TIME
+		      ,VC_TARGET_INS_VALID
+			from (
+			select row_number()over(order by tc)rn,*
+			from (
+				select top ${pagging.rows + pagging.skip} 0 tc,* 
+					from T_MOB_INS_TARGET
+					WHERE DT_TARGET_DEL_TIME IS NULL
+				)t
+			)tt
+			where ${pagging.skip} < rn
+		]]>
+	</select>
 	<update id="updateValid" parameterType="cn.com.dhcc.cgn.mobins.po.MobInsTarget" >
 		<![CDATA[
 			UPDATE T_MOB_INS_TARGET

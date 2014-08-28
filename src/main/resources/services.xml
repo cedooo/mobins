@@ -49,28 +49,4 @@
 		class="cn.com.dhcc.cgn.mobins.po.InspectionStrage" >
 	</bean>
 	
-	<!--  -->
-	<!-- Action -->
-	
-	<!-- 巡检任务 -->
-	<bean id="targetAction"
-		class="cn.com.dhcc.cgn.mobins.setting.action.TargetAction" >
-		<property name="targetService" ref="targetService"></property>
-		<property name="target" ref="target" ></property>
-	</bean>
-	
-	<!-- 巡检任务 -->
-	<bean id="hostAction"
-		class="cn.com.dhcc.cgn.mobins.setting.action.HostAction" >
-		<property name="hostService" ref="hostService"></property>
-		<property name="mobDestHost" ref="mobDestHost" ></property>
-	</bean>
-	
-	<!-- 巡检策略 -->
-	<bean id="strageAction"
-		class="cn.com.dhcc.cgn.mobins.setting.action.StrageAction" >
-		<property name="strageService" ref="strageService"></property>
-		<property name="strage" ref="strage" ></property>
-	</bean>
-	
 </beans>

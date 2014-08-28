@@ -2,8 +2,11 @@ package cn.com.dhcc.cgn.mobins.setting.action;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
 import cn.com.dhcc.cgn.mobins.pojo.pagging.Pagging;
+import cn.com.dhcc.cgn.mobins.pojo.search.impl.TargetSearchCondition;
 import cn.com.dhcc.cgn.mobins.setting.service.TargetService;
 
 /**
@@ -17,9 +20,11 @@ public class TargetAction extends JQGridAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 50302580215770880L;
-	
+
+	@Autowired
 	private TargetService targetService = null;
-	
+	@Autowired
+	private TargetSearchCondition searchCondition = null;
 	public TargetService getTargetService() {
 		return targetService;
 	}
@@ -28,6 +33,15 @@ public class TargetAction extends JQGridAction {
 		this.targetService = targetService;
 	}
 
+	public TargetSearchCondition getSearchCondition() {
+		return searchCondition;
+	}
+
+	public void setSearchCondition(TargetSearchCondition searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+
+	@Autowired
 	private MobInsTarget target = null;
 	
 	public MobInsTarget getTarget() {
@@ -54,7 +68,6 @@ public class TargetAction extends JQGridAction {
 		}
 	}
 	private List<MobInsTarget> listTarget = null;
-	private Pagging pagging = null;
 	
 	public List<MobInsTarget> getListTarget() {
 		return listTarget;
@@ -64,21 +77,26 @@ public class TargetAction extends JQGridAction {
 		this.listTarget = listTarget;
 	}
 
-	public Pagging getPagging() {
-		return pagging;
-	}
-
-	public void setPagging(Pagging pagging) {
-		this.pagging = pagging;
-	}
-
 	/**
 	 * 巡检目标
 	 * @return
 	 */
 	public String list(){
-		pagging = new Pagging();
-		listTarget = targetService.listTarget(pagging);
+		Pagging pagging = searchCondition.getPagging();
+		pagging.setPage(this.getPage());
+		pagging.setRows(this.getRows());
+		int records = targetService.count(searchCondition);
+		pagging.setRecords(records+"");
+		int rows = 10;
+		try{
+			rows = Integer.parseInt(this.getRows());
+		}catch(NumberFormatException e){
+			
+		}
+		int totals = (int)Math.ceil((records*1d)/rows);
+		pagging.setTotal(totals+"");
+		System.out.println(searchCondition);
+		listTarget = targetService.listTarget(searchCondition);
 		return SUCCESS;
 	}
 
@@ -88,9 +106,21 @@ public class TargetAction extends JQGridAction {
 			return edit();
 		}else if(OPER_ADD.equals(this.getOper())){
 			return add();
+		}else if(OPER_DEL.equals(getOper())){
+			return del();
 		}
 		return SUCCESS;
 	}
+	/**
+	 *删除目标
+	 * @return
+	 */
+	private String del() {
+		target.setTargetID(this.getId());
+		operSuccess = targetService.delTarget(target);
+		return SUCCESS;
+	}
+
 	private String targetID = null;
 	private String targetName = null;
 	private String targetNote = null;

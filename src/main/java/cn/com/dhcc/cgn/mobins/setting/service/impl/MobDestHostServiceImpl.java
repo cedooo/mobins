@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.po.MobDestHost;
-import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
+import cn.com.dhcc.cgn.mobins.pojo.search.impl.DestHostSearchCondition;
 import cn.com.dhcc.cgn.mobins.setting.service.MobDestHostService;
 
 public class MobDestHostServiceImpl implements MobDestHostService {
@@ -89,12 +89,12 @@ public class MobDestHostServiceImpl implements MobDestHostService {
 	}
 
 	@Override
-	public List<MobDestHost> listHostTarget(MobInsTarget target) {
+	public List<MobDestHost> listHostTarget(DestHostSearchCondition condition) {
 		List<MobDestHost> list = new ArrayList<MobDestHost>();
 		SqlSession session = null;
 		try{
 			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
-			List<MobDestHost> li = session.selectList("cn.com.dhcc.cgn.mobins.po.MobDestHost.queryByTarget", target);
+			List<MobDestHost> li = session.selectList("cn.com.dhcc.cgn.mobins.po.MobDestHost.queryByCondition", condition);
 			if(li!=null){
 				list.addAll(li);
 			}
@@ -143,6 +143,23 @@ public class MobDestHostServiceImpl implements MobDestHostService {
 				session.close();
 			}
 		}
+	}
+
+
+	@Override
+	public int count(DestHostSearchCondition searchCondition) {
+		int cont = 0;
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			cont = (Integer)session.selectOne("cn.com.dhcc.cgn.mobins.po.MobDestHost.countByCondition", searchCondition);
+			session.commit();
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
+		return cont;
 	}
 
 }

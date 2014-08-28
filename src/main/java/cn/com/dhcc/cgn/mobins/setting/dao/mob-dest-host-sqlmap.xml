@@ -58,10 +58,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="DT_HOST_ADD_TIME" property="hostAddTime" />
 		<result column="DT_HOST_DEL_TIME" property="hostDelTime" />
 		<result column="VC_INSPECT_VALID" property="inspectValid" />
+		<result column="VC_TARGET_MOSN" property="targetMosn" />
+		
 	</resultMap>
 
 	<!-- 巡检主机列表 -->
-	<select id="query" resultMap="MobDestHostMap">
+	<select id="query" resultMap="MobDestHostMap" parameterType="cn.com.dhcc.cgn.mobins.po.MobInsTarget">
 		<![CDATA[
 			SELECT host.* 
 			FROM T_MOB_DEST_HOST host LEFT JOIN T_MOB_INS_TARGET target ON
@@ -70,7 +72,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND target.VC_TARGET_INS_VALID = 'Y'
 		]]>
 	</select>
-	
+	<!-- 根据条件统计记录条数 -->
+	<select id="countByCondition" resultType="int" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.DestHostSearchCondition">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM T_MOB_DEST_HOST
+			WHERE DT_HOST_DEL_TIME IS NULL 
+				AND N_TARGET_ID = #{targetID}
+		]]>
+	</select>
+	<select id="queryByCondition" resultMap="MobDestHostMap" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.TargetSearchCondition">
+		<![CDATA[
+			select 
+				N_MOB_DEST_HOST_ID
+			      ,N_TARGET_ID
+			      ,VC_MOB_DEST_HOST_IP
+			      ,VC_HOST_USER
+			      ,VC_HOST_PASSWD
+			      ,VC_HOST_NOTE
+			      ,N_HOST_TYPE
+			      ,CONVERT(varchar(20), DT_HOST_ADD_TIME, 20) as DT_HOST_ADD_TIME
+			      ,CONVERT(varchar(20), DT_HOST_DEL_TIME, 20) as DT_HOST_DEL_TIME
+			      ,VC_INSPECT_VALID
+			from (
+			select row_number()over(order by tc)rn,*
+			from (
+				select top ${pagging.rows + pagging.skip} 0 tc,* 
+					from T_MOB_DEST_HOST
+					WHERE DT_HOST_DEL_TIME IS NULL 
+						AND N_TARGET_ID = #{targetID}
+				)t
+			)tt
+			where ${pagging.skip} < rn
+		]]>
+	</select>
 	<select id="queryByTarget" resultMap="MobDestHostMap">
 		<![CDATA[
 			SELECT N_MOB_DEST_HOST_ID

@@ -8,6 +8,8 @@ public class MobInsTarget {
 	private String targetAddTime = null;
 	private String targetDelTime = null;
 	private String targetInsValid = null;
+	private String targetMosn = null;
+	
 	public String getTargetID() {
 		return targetID;
 	}
@@ -44,6 +46,12 @@ public class MobInsTarget {
 	}
 	public void setTargetInsValid(String targetInsValid) {
 		this.targetInsValid = targetInsValid;
+	}
+	public String getTargetMosn() {
+		return targetMosn;
+	}
+	public void setTargetMosn(String targetMosn) {
+		this.targetMosn = targetMosn;
 	}
 	@Override
 	public String toString() {

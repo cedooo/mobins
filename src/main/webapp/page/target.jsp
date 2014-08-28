@@ -228,7 +228,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   		//{name:'targetDelTime',index:'targetDelTime', width:90}
 			   	],
 			   	rowNum:10,
-			   	rowList:[10,20,30],
+			   	rowList:[2, 10,20,30],
 			   	//sortname: 'id',
 			   	autowidth:true,
 			   	height: 440,
@@ -237,9 +237,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				subGrid : true,
 			    jsonReader : {
 			        root:"listTarget",
-			        page: "pagging.page",
-			        total: "pagging.total",
-			        records: "pagging.records",
+			        page: "searchCondition.pagging.page",
+			        total: "searchCondition.pagging.total",
+			        records: "searchCondition.pagging.records",
 			     },
 				 editurl: "<%=basePath%>setting/tagetEdit.action",
 			     gridComplete: function(){
@@ -249,6 +249,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 			var cl = ids[i];
 			 			//edit = "<input class='actBtn edit' type='button' value='编辑' onclick=\"editTarget('"+cl+"');\"  />"; 
 			 			edit = "<span class=\"act ui-icon ui-icon-pencil\"  title='编辑' onclick=\"editTarget('"+cl+"');\"></span>"; 
+			 			//add = "<span class=\"act ui-icon ui-icon-plus\"  title='添加主机' onclick=\"editTarget('"+cl+"');\"></span>"; 
 			 			//add = "<input type='button' value='添加主机' onclick=\"addHost('"+cl+"');\"  />";
 			 			add = '';
 			 			//save = "<input class='actBtn save' type='button' value='保存' onclick=\"jQuery('#list2').saveRow('"+cl+"');\"  />"; 
@@ -290,14 +291,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 			hoverrows:false,
 			 			jsonReader : {
 					        root:"listHost",
-					        page: "pagging.page",
-					        total: "pagging.total",
-					        records: "pagging.records",
-					        cell: "",
-					        id: "0"
+					        page: "searchCondition.pagging.page",
+					        total: "searchCondition.pagging.total",
+					        records: "searchCondition.pagging.records",
 					     },
 					 	editurl: "<%=basePath%>setting/hostEdit.action",
-			 		   	rowNum:20,
+			 		   	rowNum:5,
+					   	rowList:[5, 10,20,30],
 					     gridComplete: function(){
 						    	var $grid = jQuery("#"+subgrid_table_id);
 						 		var ids = $grid.jqGrid('getDataIDs');
@@ -320,12 +320,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									$grid.jqGrid('setRowData',ids[i],{act: edit+save+refresh+del+onoff});
 						 		}
 						 	},
-			 		   	//pager:  '#' + pager_id,
+			 		   	pager:  '#' + pager_id,
 			 		   	sortname: 'num',
 			 		    sortorder: "asc",
 			 		    height: '100%'
 			 		});
-			 		//jQuery("#"+subgrid_table_id).jqGrid('navGrid','#' + pager_id,{edit:false,add:true,search:false,del:false});
+			 		jQuery("#"+subgrid_table_id).jqGrid('navGrid','#' + pager_id,{edit:false,add:true,search:false,del:false});
 			 	},
 			 	subGridRowColapsed: function(subgrid_id, row_id) {
 			 		// this function is called before removing the data
@@ -333,7 +333,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 		//subgrid_table_id = subgrid_id+"_t";
 			 		//jQuery("#"+subgrid_table_id).remove();
 			 	},
-			   	//pager: '#nav',
+			   	pager: '#nav',
 	 			multiselect:false,
 			    sortorder: "desc",
 			    caption:"巡检目标",

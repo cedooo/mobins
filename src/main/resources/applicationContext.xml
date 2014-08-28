@@ -7,7 +7,7 @@
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 	
 	<import resource="inspectionJob.xml" />
-	<import resource="services.xml" />
 	<import resource="searchCondition.xml" />
+	<import resource="services.xml" />
 	
 </beans>

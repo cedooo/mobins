@@ -9,20 +9,26 @@
 		class="cn.com.dhcc.cgn.mobins.pojo.pagging.Pagging" >
 	</bean>
 	
-	<!-- 策略搜素条件 -->
-	<bean id="StrageSearchCondition"
-		class="cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition" >
-		<property name="pagging" ref="Pagging"></property>
-	</bean>
-	<!-- 巡检项目搜素条件 -->
-	<bean id="InspectionItemSearchCondition"
-		class="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionItemSearchCondition" >
-		<property name="pagging" ref="Pagging"></property>
-	</bean>
-	
 	<!-- 巡检项目 巡检点搜素条件 -->
-	<bean id="InspectionPointSearchCondition"
+	<bean id="inspectionPointSearchCondition"
 		class="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionPointSearchCondition" >
 		<property name="pagging" ref="Pagging"></property>
 	</bean>
+	
+	<!-- 策略搜素条件 -->
+	<bean id="strageSearchCondition"
+		class="cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition" >
+		<property name="pagging" ref="Pagging"></property>
+	</bean>
+	<!-- 巡检目标搜素条件 -->
+	<bean id="targetSearchCondition"
+		class="cn.com.dhcc.cgn.mobins.pojo.search.impl.TargetSearchCondition" >
+		<property name="pagging" ref="Pagging"></property>
+	</bean>
+	<!-- 主机搜素条件 -->
+	<bean id="destHostSearchCondition"
+		class="cn.com.dhcc.cgn.mobins.pojo.search.impl.DestHostSearchCondition" >
+		<property name="pagging" ref="Pagging"></property>
+	</bean>
+	
 </beans>

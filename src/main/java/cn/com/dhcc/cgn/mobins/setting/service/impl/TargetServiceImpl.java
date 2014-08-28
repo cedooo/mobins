@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
-import cn.com.dhcc.cgn.mobins.pojo.pagging.Pagging;
+import cn.com.dhcc.cgn.mobins.pojo.search.impl.TargetSearchCondition;
 import cn.com.dhcc.cgn.mobins.setting.service.TargetService;
 
 public class TargetServiceImpl implements TargetService{
@@ -89,12 +89,12 @@ public class TargetServiceImpl implements TargetService{
 	}
 
 	@Override
-	public List<MobInsTarget> listTarget(Pagging pagging) {
+	public List<MobInsTarget> listTarget(TargetSearchCondition condition) {
 		List<MobInsTarget> list = new ArrayList<MobInsTarget>();
 		SqlSession session = null;
 		try{
 			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
-			List<MobInsTarget> li = session.selectList("cn.com.dhcc.cgn.mobins.po.MobInsTarget.queryByPagging", pagging);
+			List<MobInsTarget> li = session.selectList("cn.com.dhcc.cgn.mobins.po.MobInsTarget.queryByCondition", condition);
 			if(li!=null){
 				list.addAll(li);
 			}
@@ -124,6 +124,22 @@ public class TargetServiceImpl implements TargetService{
 				session.close();
 			}
 		}
+	}
+
+	@Override
+	public int count(TargetSearchCondition searchCondition) {
+		int cont = 0;
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			cont = (Integer)session.selectOne("cn.com.dhcc.cgn.mobins.po.MobInsTarget.countByCondition", searchCondition);
+			session.commit();
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
+		return cont;
 	}
 
 }
