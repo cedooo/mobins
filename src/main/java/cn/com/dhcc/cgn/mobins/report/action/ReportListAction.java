@@ -31,7 +31,7 @@ public class ReportListAction extends ActionSupport {
 
 	private String hostID = "0";
 	private String formatDate = "";
-
+	private String targetID = null;
 	public List<InspectionReport> getListReport() {
 		return listReport;
 	}
@@ -40,14 +40,20 @@ public class ReportListAction extends ActionSupport {
 		this.listReport = listReport;
 	}
 
-	
-
 	public String getHostID() {
 		return hostID;
 	}
 
 	public void setHostID(String hostID) {
 		this.hostID = hostID;
+	}
+
+	public String getTargetID() {
+		return targetID;
+	}
+
+	public void setTargetID(String targetID) {
+		this.targetID = targetID;
 	}
 
 	public String getFormatDate() {
@@ -63,5 +69,8 @@ public class ReportListAction extends ActionSupport {
 		listReport = reportService.listReportByDate(hostID, formatDate);
 		return SUCCESS;
 	}
-
+	public String hostReportList(){
+		return SUCCESS;
+	}
+	
 }

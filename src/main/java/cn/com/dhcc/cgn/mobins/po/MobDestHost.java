@@ -11,7 +11,7 @@ public class MobDestHost {
 	private String hostAddTime = null;
 	private String hostDelTime = null;
 	private String inspectValid = null;
-
+	private String hostInfo = null;
 	public String getMobDestHostID() {
 		return mobDestHostID;
 	}
@@ -90,6 +90,14 @@ public class MobDestHost {
 
 	public void setInspectValid(String inspectValid) {
 		this.inspectValid = inspectValid;
+	}
+
+	public String getHostInfo() {
+		return hostInfo;
+	}
+
+	public void setHostInfo(String hostInfo) {
+		this.hostInfo = hostInfo;
 	}
 
 	@Override

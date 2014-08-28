@@ -14,6 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="inspectionTime" column="DT_INSPECTION_TIME" />
 		<result property="inspectionIsException" column="VC_INSPECTION_IS_EXCEPTION" />
 		<result property="inspectionComplete" column="VC_INSPECTION_COMPLETE" />
+		<result property="mobDestHostInfo" column="VC_MOB_DEST_HOST_INFO" />
+		
 	</resultMap>
 
 	<select id="queryAll" resultMap="InspectionReportMap">
@@ -33,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		,VC_INSPECTION_IS_EXCEPTION
 		,VC_INSPECTION_COMPLETE
 		,VC_MOB_DEST_HOST_IP
+		,VC_MOB_DEST_HOST_INFO
 		)
 		VALUES(
 		#{mobDestHostID},
@@ -42,7 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		getdate(),
 		#{inspectionIsException},
 		#{inspectionComplete},
-		#{mobDestHostIP}
+		#{mobDestHostIP},
+		#{mobDestHostInfo}
 		)
 		<selectKey resultType="String" order="AFTER" keyProperty="inspectionReportID">
 			select @@IDENTITY as inspectionReportID
@@ -105,6 +109,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		      ,CONVERT(varchar(20), DT_GENERATE_TIME, 20) as DT_GENERATE_TIME
 		      ,VC_INSPECTION_IS_EXCEPTION
 		      ,VC_INSPECTION_COMPLETE
+				,VC_MOB_DEST_HOST_IP
+				,VC_MOB_DEST_HOST_INFO
 			FROM T_INSPECTION_REPORT	
 			WHERE N_MOB_DEST_HOST_ID = #{hostID} AND CONVERT(VARCHAR(10), DT_GENERATE_TIME,120) = #{formatDate}
 			ORDER BY DT_INSPECTION_TIME DESC

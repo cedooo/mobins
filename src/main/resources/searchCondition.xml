@@ -20,6 +20,11 @@
 		class="cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition" >
 		<property name="pagging" ref="Pagging"></property>
 	</bean>
+	<!--巡检项目条件 -->
+	<bean id="inspectionItemSearchCondition"
+		class="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionItemSearchCondition" >
+		<property name="pagging" ref="Pagging"></property>
+	</bean>
 	<!-- 巡检目标搜素条件 -->
 	<bean id="targetSearchCondition"
 		class="cn.com.dhcc.cgn.mobins.pojo.search.impl.TargetSearchCondition" >

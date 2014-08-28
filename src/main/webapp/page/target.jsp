@@ -213,6 +213,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            });
 			}
 		}
+		function hostRecords(hostID){
+			//alert(targetID+ hostID);
+			var url = '<%=basePath%>report/hostReportList?&hostID='+hostID ;
+			window.open(url , "巡检记录");
+		}
 		$(function(){
 			jQuery("#list2").jqGrid({
 			   	url:'<%=basePath%>setting/targetList.action',
@@ -295,7 +300,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					        total: "searchCondition.pagging.total",
 					        records: "searchCondition.pagging.records",
 					     },
-					 	editurl: "<%=basePath%>setting/hostEdit.action",
+					 	editurl: "<%=basePath%>setting/hostEdit.action?targetID=" + row_id,
 			 		   	rowNum:5,
 					   	rowList:[5, 10,20,30],
 					     gridComplete: function(){
@@ -316,8 +321,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						 			onoff_pause = "ui-icon-pause\"  title='停止巡检' onclick=\"validHostIns('" + subgrid_table_id + "',"+ ids[i]  + "," + false + ")\"";
 									var host = jQuery("#" + subgrid_table_id).jqGrid('getRowData', ids[i]);
 									//alert(target.targetInsValid + (target.targetInsValid=="Y"));
-						 			onoff = "<span class=\"act ui-icon " + (host.inspectValid=="Y"?onoff_pause:onoff_play) + " ></span>";
-									$grid.jqGrid('setRowData',ids[i],{act: edit+save+refresh+del+onoff});
+						 			if(host.hostUser){
+							 			onoff = "<span class=\"act ui-icon " + (host.inspectValid=="Y"?onoff_pause:onoff_play) + " ></span>";
+						 			}else{
+						 				onoff='';
+						 			}
+									//var target = jQuery("#list2").jqGrid('getRowData', row_id);
+						 			//var hostInfo = target.targetName + "-" + host.hostNote + "-";
+						 			records = "<span class=\"act ui-icon ui-icon-document\"  title='巡检记录'  onclick=\"hostRecords('"+cl+"');\"  ></span>";
+						 			
+									$grid.jqGrid('setRowData',ids[i],{act: edit+save+refresh+del+onoff + records});
 						 		}
 						 	},
 			 		   	pager:  '#' + pager_id,
@@ -325,7 +338,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 		    sortorder: "asc",
 			 		    height: '100%'
 			 		});
-			 		jQuery("#"+subgrid_table_id).jqGrid('navGrid','#' + pager_id,{edit:false,add:true,search:false,del:false});
+			 		jQuery("#"+subgrid_table_id).navGrid('#' + pager_id,
+			 				{del:true,search:false,edit:false,add:true},{},{closeAfterAdd: true})
+			 				;//.navButtonAdd("#"+pager_id,{caption:"添加主机", buttonicon:"ui-icon-plus", onClickButton:null, position: "last", title:"", cursor: "pointer"}); ;
 			 	},
 			 	subGridRowColapsed: function(subgrid_id, row_id) {
 			 		// this function is called before removing the data
@@ -336,9 +351,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   	pager: '#nav',
 	 			multiselect:false,
 			    sortorder: "desc",
-			    caption:"巡检目标",
+			    caption:"巡检目标"
 			});
-			jQuery("#list2").jqGrid('navGrid','#nav',{edit:false,add:true,del:true,search:false});
+			jQuery("#list2").jqGrid('navGrid','#nav',{edit:false,add:true,del:true,search:false},{},{closeAfterAdd: true});
 			
 			$("#accform").validate({
 				rules: {

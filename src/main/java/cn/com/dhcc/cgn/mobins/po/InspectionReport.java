@@ -14,7 +14,7 @@ public class InspectionReport {
 	private String generateTime = null;
 	private String inspectionIsException = null;
 	private String inspectionComplete = null;
-	
+	private String mobDestHostInfo = null;    //VC_MOB_DEST_HOST_INFO
 	public String getInspectionReportID() {
 		return inspectionReportID;
 	}
@@ -68,6 +68,12 @@ public class InspectionReport {
 	}
 	public void setInspectionComplete(String inspectionComplete) {
 		this.inspectionComplete = inspectionComplete;
+	}
+	public String getMobDestHostInfo() {
+		return mobDestHostInfo;
+	}
+	public void setMobDestHostInfo(String mobDestHostInfo) {
+		this.mobDestHostInfo = mobDestHostInfo;
 	}
 	@Override
 	public String toString() {

@@ -22,5 +22,5 @@ public class InspectionJobImplTest {
 		System.out.println(ac);
 		assertEquals(true, ac!=null);
 	}
-
+	
 }

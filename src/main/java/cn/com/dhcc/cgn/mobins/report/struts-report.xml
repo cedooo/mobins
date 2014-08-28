@@ -11,6 +11,10 @@
             <result>/page/report.jsp</result>
 		</action>
 		
+		<action name="hostReportList" class="cn.com.dhcc.cgn.mobins.report.action.ReportListAction" method="hostReportList">
+            <result>/report/hostReport.jsp</result>
+		</action>
+		
 		<action name="targetList" class="cn.com.dhcc.cgn.mobins.report.action.AllTargetAction">
             <result type="json">
             	<param  name="excludeProperties">reportService</param>

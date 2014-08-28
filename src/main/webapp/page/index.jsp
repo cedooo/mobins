@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    <li><a href="<%=basePath %>setting/targetJSP">巡检目标</a></li>
 		    <li><a href="<%=basePath %>report/reportJSP">巡检记录</a></li>
 		    <li><a href="<%=basePath %>setting/strageJSP">巡检策略</a></li>
-		    <!-- <li><a href="#tabs-4">策略应用</a></li> -->
+		    <li><a href="#tabs-4">策略应用</a></li> 
 		  </ul>
 		  <div id="tabs-4">
 		  </div>

@@ -44,11 +44,11 @@ public class InspectionJobImpl implements cn.com.dhcc.cgn.mobins.inspection.job.
 		List<MobDestHost> listHost = mobHostService.query(null);
 		try{
 			for (MobDestHost mobDestHost : listHost) {
-				LOG.debug(mobDestHost.toString());
+				LOG.debug("巡检主机信息：" + mobDestHost.toString());
 				//执行巡检
 				List<HostInspectionPoint> listHostPoint = hostInspectionPointService.getListByMobDestHost(mobDestHost);
 				ConnectResult result = commandExecutor.connectValid(mobDestHost);
-				LOG.debug(listHostPoint.toString());
+				LOG.debug("巡检点：" + listHostPoint.toString());
 				if(result.isSuccess()){
 					LOG.info("可以连接，开始巡检,主机ip：" + mobDestHost.getMobDestHostIP());
 					Map<HostInspectionPoint, ExecutorResult> resultsMap = commandExecutor.execute(mobDestHost, listHostPoint);
@@ -120,6 +120,7 @@ public class InspectionJobImpl implements cn.com.dhcc.cgn.mobins.inspection.job.
 		report.setMaintUser(host.getHostUser());
 		report.setMobDestHostID(host.getMobDestHostID());
 		report.setMobDestHostIP(host.getMobDestHostIP());
+		report.setMobDestHostInfo(host.getHostNote() + "["  + host.getMobDestHostIP() + "]");
 		return report;
 	}
 	/**

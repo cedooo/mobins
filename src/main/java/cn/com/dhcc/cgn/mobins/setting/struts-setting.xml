@@ -38,7 +38,7 @@
 		<!-- 主机编辑 -->
 		<action name="hostEdit" class="cn.com.dhcc.cgn.mobins.setting.action.HostAction" method="execute">
             <result type="json">
-            	<param  name="excludeProperties">hostService,targetID</param>
+            	<param  name="includeProperties">operSuccess</param>
             </result>
 		</action>
 		

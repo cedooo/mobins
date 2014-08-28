@@ -23,7 +23,7 @@ public class HostInspectionPointServiceImplTest {
 		MobDestHost MHost = new MobDestHost();
 		MHost.setMobDestHostID("2");
 		List<HostInspectionPoint> list = serviceImpl.getListByMobDestHost(MHost);
-		System.out.println(list);
+		System.out.println("巡检点" + list);
 		assertEquals(true, list!=null&&list.size()>0);
 	}
 

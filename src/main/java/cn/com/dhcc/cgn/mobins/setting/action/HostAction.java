@@ -146,8 +146,8 @@ public class HostAction extends JQGridAction {
 	}
 	public String del(){
 		MobDestHost host = new MobDestHost();
-		host.setMobDestHostID(mobDestHostID);
-		hostService.del(host);
+		host.setMobDestHostID(this.getId());
+		this.operSuccess = hostService.del(host);
 		return SUCCESS;
 	}
 
@@ -199,7 +199,7 @@ public class HostAction extends JQGridAction {
 		host.setHostType(hostType);
 		host.setHostUser(hostUser);
 		host.setMobDestHostIP(mobDestHostIP);
-		hostService.add(host);
+		this.operSuccess = hostService.add(host);
 		return SUCCESS;
 	}
 	private MobDestHost mobDestHost = null;

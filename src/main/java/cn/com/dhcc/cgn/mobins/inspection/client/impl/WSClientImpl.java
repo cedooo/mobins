@@ -44,18 +44,20 @@ public class WSClientImpl extends WSClient {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-		    ClientConfig config = new DefaultClientConfig();
-			Client client = Client.create(config);
-			client.setFollowRedirects(true);
-			client.setConnectTimeout(TIME_OUT_INTERN);
-			WebResource webRes = client.resource(BASE_URI);
-			WebResource webResParam = webRes.queryParam("params", queryParam);
 			try{
+			    ClientConfig config = new DefaultClientConfig();
+				Client client = Client.create(config);
+				client.setFollowRedirects(true);
+				client.setConnectTimeout(TIME_OUT_INTERN);
+				WebResource webRes = client.resource(BASE_URI);
+				WebResource webResParam = webRes.queryParam("params", queryParam);
 				response = webResParam.accept(MediaType.APPLICATION_XML).post(String.class);
+				System.out.println(webResParam.head());
 			}catch(UniformInterfaceException ue){
 				System.out.println(ue.getMessage());
+			}catch(Exception e ){
+				
 			}
-			System.out.println(webResParam.head());
 		}else{
 			response = "事件格式错误，告警无效.";
 		}

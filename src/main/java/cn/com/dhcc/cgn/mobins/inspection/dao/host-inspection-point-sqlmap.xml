@@ -6,9 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<resultMap type="cn.com.dhcc.cgn.mobins.po.HostInspectionPoint" id="HostInspectionPointMap" >
 		<result column="N_MOB_DEST_HOST_ID" property="mobDestHostID" />
-		<result column="VC_MOB_DEST_HOST_IP" property="mobDestHostIP" />
-		<result column="VC_HOST_USER" property="hostUser" />
-		<result column="VC_HOST_PASSWD" property="hostPasswd" />
 		<result column="VC_HOST_NOTE" property="hostNote" />
 		<result column="N_HOST_TYPE" property="hostType" />
 		<result column="VC_STRAGE_NAME" property="strageName" />
@@ -33,9 +30,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="queryAll" resultMap="HostInspectionPointMap">
 		<![CDATA[
 			SELECT N_MOB_DEST_HOST_ID
-		      ,VC_MOB_DEST_HOST_IP
-		      ,VC_HOST_USER
-		      ,VC_HOST_PASSWD
 		      ,VC_HOST_NOTE
 		      ,N_HOST_TYPE
 		      ,VC_STRAGE_NAME
@@ -64,9 +58,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="queryByDestHost" resultMap="HostInspectionPointMap" parameterType="cn.com.dhcc.cgn.mobins.po.MobDestHost" >
 		<![CDATA[
 			SELECT N_MOB_DEST_HOST_ID
-		      ,VC_MOB_DEST_HOST_IP
-		      ,VC_HOST_USER
-		      ,VC_HOST_PASSWD
 		      ,VC_HOST_NOTE
 		      ,N_HOST_TYPE
 		      ,VC_STRAGE_NAME
