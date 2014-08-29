@@ -31,10 +31,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 	
 		$(function(){
-		});
-	
-
-		$(function(){
 			$( ".backBtn" ).button({
 			      //text: false,
 			      icons: {
@@ -111,6 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		}
 		$(function(){
+			initStrageItems();
 			jQuery("#listStrage").jqGrid({
 			   	url:'<%=basePath%>setting/listStrage.action',
 				datatype: "json",
@@ -127,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   	/* [{"strageAddTime":"2014-07-31 15:26:32","strageDelTime":null,"strageID":"1","strageName":"目标巡检策略-测试","strageNote":"添加测试用","strageValid":"1"}],
 			   	"strageSearchCondition":{"pagging":{"page":"1","records":null,"rows":"10","total":null}}} */
 			   	rowNum:10,
-			   	rowList:[10,20,30],
+			   	//rowList:[10,20,30],
 			   	//sortname: 'id',
 			   	autowidth:true,
 			   	//height: 220,
@@ -160,6 +157,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 			onoff = "<span class=\"act ui-icon " + (host.strageValid=="Y"?onoff_pause:onoff_play) + " ></span>";
 						
 			 			$grid.jqGrid('setRowData',ids[i],{act:edit+save + add + onoff});
+			 			//如果有效，这选中
+			 			
 			 		}	
 
 					var strageIDs = jQuery("#listStrage").jqGrid('getDataIDs');
@@ -167,7 +166,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					if(strageIDs.length>0){
 						strageID = strageIDs[0];
 					}
-					loadStrageItem(strageID);
+
+			 		jQuery("#listStrageItem").setGridParam({
+					   	url:'<%=basePath%>setting/listInspectionItem.action?strageID='+ strageID
+			 		}).trigger("reloadGrid");	
+					//loadStrageItem(strageID);
 					jQuery("#listStrage")
 					.jqGrid('setSelection', strageID);
 					var strage = jQuery("#listStrage").jqGrid('getRowData', strageID);
@@ -186,24 +189,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}
 			 	},
 			 	onSelectRow: function(id){
+			 		
 			 		jQuery("#listStrageItem").setGridParam({
 					   	url:'<%=basePath%>setting/listInspectionItem.action?strageID='+ id
-			 		}).trigger("reloadGrid");				   	
+			 		})
+			 		.jqGrid('setGridParam',{
+				 			 onSelectRow: function(aRowids,status){}
+			 		})
+			 		.trigger("reloadGrid");				   	
 			 	},
 			   	pager: '#strageNav',
 	 			multiselect:false,
 			    sortorder: "desc",
 			    caption:"策略",
 			});
-			jQuery("#listStrage").jqGrid('navGrid','#strageNav',{edit:false,add:true,del:true,search:false});
+			jQuery("#listStrage").jqGrid('navGrid','#strageNav',
+					{edit:false,add:true,del:true,addtext:'添加&nbsp;',addtitle:'添加策略',deltext:'删除 &nbsp;',deltitle:'删除策略',search:false},
+					{},
+					{closeAfterAdd: true}
+				);
 			
 		});
+
 		//策略项目
-		function loadStrageItem(strageID){
+		function initStrageItems(){
 			jQuery("#listStrageItem").jqGrid({
-			   	url:'<%=basePath%>setting/listInspectionItem.action?strageID='+ strageID,
+			   	//url:'<%=basePath%>setting/listInspectionItem.action?strageID='+ strageID,
 				datatype: "json",
-			   	colNames:[ '编号','名称', '备注', '巡检类型'],
+			   	colNames:[ '编号','名称', '备注', '巡检类型','有效'],
 			   	colModel:[
 			   		{name:'inspectionItemID',index:'inspectionItemID', width:20,align:"center", sortable:false, key:true, hidden:true},
 			   		{name:'itemName',index:'itemName', width:80,align:"center", sortable:false,editable:true,editrules:{required:true}},
@@ -212,9 +225,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   			//{name:'act',index:'act', width:35,sortable:false,align:"center"}
 			   		//{name:'targetDelTime',index:'targetDelTime', width:90}
 			   		//{"inspectionItemID":"1","inspectionItemNote":"ping www.baidu.com, 测试外网IP。","inspectionType":"硬件巡检","itemName":"检查网络连接是否可用"}
+	 				{name:"valid",index:"valid",width:20,align:"center", sortable:false, hidden:true},
 			   	],
 			   	rowNum:10,
-			   	rowList:[10,20,30],
+			   	//rowList:[10,20,30],
 			   	//sortname: 'id',
 			   	autowidth:true,
 			   	height: 220,
@@ -293,12 +307,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 		//subgrid_table_id = subgrid_id+"_t";
 			 		//jQuery("#"+subgrid_table_id).remove();
 			 	},
+			     gridComplete: function(){
+			    	 jQuery("#gbox_listStrageItem th input[type=checkbox]").hide();
+
+				    	var $grid = jQuery("#listStrageItem");
+				 		var ids = $grid.jqGrid('getDataIDs');
+				 		for(var i=0;i < ids.length;i++){
+							var targetItem = $grid.jqGrid('getRowData', ids[i]);
+							//alert(targetItem.valid);
+							if(targetItem.valid=='true'){
+								//alert(true);
+						 		$grid.jqGrid('setSelection', ids[i], function(){});
+							}else{
+								///alert('wr');
+							}
+				 		}
+				 		$grid.jqGrid('setGridParam',{
+				 			 onSelectRow: function(aRowids,status){
+					 			   //alert("!!!");
+							 		var strageID = 0;
+							 		strageID = jQuery("#listStrage").jqGrid('getGridParam','selrow');
+							 		valid = status?"Y":"N";
+							 		//alert(strageID + aRowids + status);
+							 		 $.ajax({
+							                url:"<%=basePath%>setting/updateInspectionItemApply.action",
+							                data:{
+							                	"itemApply.inspectionItemID" : aRowids,
+							                	"itemApply.strageID" : strageID,
+							                	"valid" : valid,
+							                	
+							                },
+							                dataType:"json",
+							                type: "POST",
+							                error:function(data){
+							                    alert(data);
+							                },
+							                success:function(data){
+							                    if(data.operSuccess){
+							                    }else{
+							        				alert("操作失败");
+							                    }
+							                }
+							            });
+							 	}
+				 		});
+				 	},
+		 		  
 			   	pager: '#strageItemNav',
-	 			multiselect:false,
+	 			multiselect:true,
 			    sortorder: "desc",
 			    caption:"检查项目",
 			});
-			jQuery("#listStrageItem").jqGrid('navGrid','#strageItemNav',{refresh:true,edit:false,add:false,del:false,search:false});
+			jQuery("#listStrageItem").navGrid('#strageItemNav',{refresh:true,edit:false,add:false,del:false,search:false,refresh:false})
+	 			;//.navButtonAdd("#strageItemNav",{caption:"更新&nbsp;", buttonicon:"ui-icon-circle-arrow-n", onClickButton:addInspectionItem, position: "last", title:"更新巡检项", cursor: "pointer"}); 
 			
 		};
 	</script>
@@ -310,5 +371,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="strageNav"></div>
 		<table id="listStrageItem"></table>
 		<div id="strageItemNav"></div>
+		
 	</body>
 </html>

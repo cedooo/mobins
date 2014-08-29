@@ -215,7 +215,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		function hostRecords(hostID){
 			//alert(targetID+ hostID);
-			var url = '<%=basePath%>report/hostReportList?&hostID='+hostID ;
+			var url = '<%=basePath%>report/hostReportList?hostID='+hostID ;
 			window.open(url , "巡检记录");
 		}
 		$(function(){
@@ -339,8 +339,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 		    height: '100%'
 			 		});
 			 		jQuery("#"+subgrid_table_id).navGrid('#' + pager_id,
-			 				{del:true,search:false,edit:false,add:true},{},{closeAfterAdd: true})
-			 				;//.navButtonAdd("#"+pager_id,{caption:"添加主机", buttonicon:"ui-icon-plus", onClickButton:null, position: "last", title:"", cursor: "pointer"}); ;
+			 				{del:true,search:false,edit:false,add:true,addtext:'添加&nbsp;',addtitle:'添加主机',deltext:'删除 &nbsp;',deltitle:'删除主机'},{},{closeAfterAdd: true})
+			 				;//.navButtonAdd("#"+pager_id,{caption:"添加主机", buttonicon:"ui-icon-plus", onClickButton:null, position: "last", title:"", cursor: "pointer"});
 			 	},
 			 	subGridRowColapsed: function(subgrid_id, row_id) {
 			 		// this function is called before removing the data
@@ -353,7 +353,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    sortorder: "desc",
 			    caption:"巡检目标"
 			});
-			jQuery("#list2").jqGrid('navGrid','#nav',{edit:false,add:true,del:true,search:false},{},{closeAfterAdd: true});
+			jQuery("#list2").jqGrid('navGrid','#nav',
+					{edit:false,add:true,del:true,addtext:'添加&nbsp;',addtitle:'添加目标',deltext:'删除 &nbsp;',deltitle:'删除目标',search:false},{},{closeAfterAdd: true});
 			
 			$("#accform").validate({
 				rules: {

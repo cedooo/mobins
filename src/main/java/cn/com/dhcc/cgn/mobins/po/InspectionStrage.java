@@ -8,6 +8,7 @@ public class InspectionStrage {
 	private String strageAddTime = null;
 	private String strageDelTime = null;
 
+	private String hostApplyValid = null;
 	public String getStrageID() {
 		return strageID;
 	}
@@ -56,14 +57,21 @@ public class InspectionStrage {
 		this.strageDelTime = strageDelTime;
 	}
 
+	public String getHostApplyValid() {
+		return hostApplyValid;
+	}
+
+	public void setHostApplyValid(String hostApplyValid) {
+		this.hostApplyValid = hostApplyValid;
+	}
+
 	@Override
 	public String toString() {
 		return "InspectionStrage [strageID=" + strageID + ", strageName="
 				+ strageName + ", strageValid=" + strageValid + ", strageNote="
 				+ strageNote + ", strageAddTime=" + strageAddTime
-				+ ", strageDelTime=" + strageDelTime + "]";
+				+ ", strageDelTime=" + strageDelTime + ", hostApplyValid="
+				+ hostApplyValid + "]";
 	}
-
-	
 	
 }

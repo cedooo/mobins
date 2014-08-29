@@ -5,12 +5,18 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.opensymphony.xwork2.util.logging.Logger;
+import com.opensymphony.xwork2.util.logging.LoggerFactory;
+
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
+import cn.com.dhcc.cgn.mobins.inspection.job.impl.InspectionJobImpl;
 import cn.com.dhcc.cgn.mobins.po.InspectionStrage;
+import cn.com.dhcc.cgn.mobins.po.StrageApplyHost;
 import cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition;
 import cn.com.dhcc.cgn.mobins.setting.service.StrageService;
 
 public class StrageServiceImpl implements StrageService {
+	static final private Logger LOG = LoggerFactory.getLogger(InspectionJobImpl.class.getClass());
 
 	@Override
 	public List<InspectionStrage> list(StrageSearchCondition condition) {
@@ -121,6 +127,39 @@ public class StrageServiceImpl implements StrageService {
 				session.close();
 			}
 		}
+	}
+
+	@Override
+	public List<InspectionStrage> listWithHostApply(
+			StrageSearchCondition strageSearchCondition) {
+		List<InspectionStrage> list = new ArrayList<InspectionStrage>();
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			List<InspectionStrage> li = session.selectList("cn.com.dhcc.cgn.mobins.po.InspectionStrage.queryByCondition", strageSearchCondition);
+			StrageApplyHost strageApplyHost = new StrageApplyHost();
+			strageApplyHost.setMobDestHostID(strageSearchCondition.getHostID());
+			for (InspectionStrage inspectionStrage : li) {
+				LOG.info(inspectionStrage.toString());
+				strageApplyHost.setStrageID(inspectionStrage.getStrageID());
+				LOG.info(strageApplyHost.toString());
+				int count = session.selectOne("cn.com.dhcc.cgn.mobins.po.InspectionStrage.countApply", strageApplyHost);
+				if(count==1){
+					inspectionStrage.setHostApplyValid("true");
+				}else{
+					inspectionStrage.setHostApplyValid("false");
+				}
+			}
+			if(li!=null){
+				list.addAll(li);
+			}
+			session.commit();
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
+		return list;
 	}
 
 }

@@ -1,8 +1,6 @@
 package cn.com.dhcc.cgn.mobins.setting.action;
 
-import com.opensymphony.xwork2.ActionSupport;
-
-public class DefaultAction extends ActionSupport {
+public class DefaultAction extends JQGridAction {
 
 	/**
 	 * 
@@ -25,6 +23,13 @@ public class DefaultAction extends ActionSupport {
 	 * @return
 	 */
 	public String strage(){
+		return SUCCESS;
+	}
+	/**
+	 * 策略应用
+	 * @return
+	 */
+	public String strageApply(){
 		return SUCCESS;
 	}
 }

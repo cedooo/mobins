@@ -47,4 +47,12 @@ public class StrageApplyHost {
 		this.applyValid = applyValid;
 	}
 
+	@Override
+	public String toString() {
+		return "StrageApplyHost [mobDestHostID=" + mobDestHostID
+				+ ", strageID=" + strageID + ", applyAddTime=" + applyAddTime
+				+ ", applyDelTime=" + applyDelTime + ", applyValid="
+				+ applyValid + "]";
+	}
+
 }

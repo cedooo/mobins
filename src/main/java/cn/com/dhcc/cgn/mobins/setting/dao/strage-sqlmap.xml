@@ -73,4 +73,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	
+	<!-- 应用记录条数-->
+	<select id="countApply" resultType="int" parameterType="cn.com.dhcc.cgn.mobins.po.StrageApplyHost">
+		<![CDATA[
+			SELECT count(*)
+			from T_STRAGE_APPLY_HOST
+			where N_MOB_DEST_HOST_ID = #{mobDestHostID}
+      			AND N_STRAGE_ID =#{strageID}
+      			AND VC_APPLY_VALID = 'Y'
+		]]>
+	</select>
 </mapper>

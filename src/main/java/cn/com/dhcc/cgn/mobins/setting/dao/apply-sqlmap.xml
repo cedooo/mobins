@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.mobins.po.InspectionApply">
+	
+	<!-- 启用、添加巡检项目 -->
+	<update id="updateItemValid" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionItemApply">
+		UPDATE T_INSPECTION_ITEM_APPLY
+		SET VC_INS_ITEM_VALID = 'Y'
+     	WHERE 
+     		N_INSPECTION_ITEM_ID = #{inspectionItemID}
+	      AND N_STRAGE_ID = #{strageID}
+	</update>
+	<insert id="insertItemValid" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionItemApply">
+	    INSERT INTO T_INSPECTION_ITEM_APPLY (
+	    	N_INSPECTION_ITEM_ID
+	      ,N_STRAGE_ID
+	      ,DT_INSPECTION_APPLY_ADD_TIME
+	      ,VC_INS_ITEM_VALID
+	      )
+  		VALUES(#{inspectionItemID},#{strageID},getdate(), 'Y')
+	</insert>
+	
+	<!-- 停用巡检项目 -->
+	<update id="updateItemInvalid" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionItemApply">
+		UPDATE T_INSPECTION_ITEM_APPLY
+		SET VC_INS_ITEM_VALID = 'N'
+     	WHERE 
+     		N_INSPECTION_ITEM_ID = #{inspectionItemID}
+	      AND N_STRAGE_ID = #{strageID}
+	    
+	</update>
+	
+	
+	<!-- 启用、添加巡检项目 -->
+	<update id="updateStrageValid" parameterType="cn.com.dhcc.cgn.mobins.po.StrageApplyHost">
+		UPDATE T_STRAGE_APPLY_HOST
+		SET VC_APPLY_VALID = 'Y'
+     	WHERE 
+     		N_MOB_DEST_HOST_ID = #{mobDestHostID}
+	      AND N_STRAGE_ID = #{strageID}
+	</update>
+	<insert id="insertStrageValid" parameterType="cn.com.dhcc.cgn.mobins.po.StrageApplyHost">
+	    INSERT INTO T_STRAGE_APPLY_HOST (
+	    	N_MOB_DEST_HOST_ID
+	      ,N_STRAGE_ID
+	      ,DT_APPLY_ADD_TIME
+	      ,VC_APPLY_VALID
+	      )
+  		VALUES(#{mobDestHostID},#{strageID},getdate(), 'Y')
+	</insert>
+	
+	<!-- 停用巡检项目 -->
+	<update id="updateStrageInvalid" parameterType="cn.com.dhcc.cgn.mobins.po.StrageApplyHost">
+		UPDATE T_STRAGE_APPLY_HOST
+		SET VC_APPLY_VALID = 'N'
+     	WHERE 
+     		N_MOB_DEST_HOST_ID = #{mobDestHostID}
+	      AND N_STRAGE_ID = #{strageID}
+	    
+	</update>
+</mapper>

@@ -11,13 +11,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="VC_INSPECTION_TYPE" property="inspectionType" />
 		<result column="VC_INSPECTION_ITEM_NOTE" property="inspectionItemNote" />
 	</resultMap>
-
+	<!-- 选出某个策略的巡检项目数目 -->
 	<select id="countByCondition" resultType="int" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionItemSearchCondition">
 		<![CDATA[
 			SELECT count(*)
 			from T_INSPECTION_ITEM_APPLY apply left join T_INSPECTION_ITEM items 
 				on apply.N_INSPECTION_ITEM_ID = items.N_INSPECTION_ITEM_ID
 			where apply.N_STRAGE_ID = #{strageID}
+		]]>
+	</select>
+	<!-- 所有支持巡检的项目 -->
+	<select id="countAll" resultType="int" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionItemSearchCondition">
+		<![CDATA[
+			SELECT count(*)
+			from T_INSPECTION_ITEM  
 		]]>
 	</select>
 	<select id="queryByCondition" resultMap="InspectionItemMap" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionItemSearchCondition">
@@ -42,5 +49,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where ${pagging.skip} < rn
 		]]>
 	</select>
-	
+	<!-- 所有巡检记录分页 -->
+	<select id="queryAllByPagging" resultMap="InspectionItemMap" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionItemSearchCondition">
+		<![CDATA[
+			select 
+				N_INSPECTION_ITEM_ID
+			      ,VC_ITEM_NAME
+			      ,VC_INSPECTION_TYPE
+			      ,VC_INSPECTION_ITEM_NOTE
+			from (
+				select row_number()over(order by tc)rn,*
+				from (
+					select top ${pagging.rows + pagging.skip} 0 tc,
+						N_INSPECTION_ITEM_ID
+					  ,VC_ITEM_NAME
+					  ,VC_INSPECTION_TYPE
+					  ,VC_INSPECTION_ITEM_NOTE 
+					from T_INSPECTION_ITEM 
+					)t
+				)tt
+			where ${pagging.skip} < rn
+		]]>
+	</select>
+	<!-- 应用记录条数-->
+	<select id="countApply" resultType="int" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionItemApply">
+		<![CDATA[
+			SELECT count(*)
+			from T_INSPECTION_ITEM_APPLY
+			where N_INSPECTION_ITEM_ID = #{inspectionItemID}
+      			AND N_STRAGE_ID =#{strageID}
+      			AND VC_INS_ITEM_VALID = 'Y'
+		]]>
+	</select>
 </mapper>

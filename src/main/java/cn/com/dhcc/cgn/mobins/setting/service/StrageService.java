@@ -43,4 +43,11 @@ public interface StrageService {
 	 * @return
 	 */
 	boolean validStrageInspect(InspectionStrage strage);
+	/**
+	 * 根据主机，查找所有策略，以及策略应用情况
+	 * @param strageSearchCondition
+	 * @return
+	 */
+	List<InspectionStrage> listWithHostApply(
+			StrageSearchCondition strageSearchCondition);
 }

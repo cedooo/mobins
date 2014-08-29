@@ -33,6 +33,18 @@
 	<bean id="inspectionPointService"
 		class="cn.com.dhcc.cgn.mobins.setting.service.impl.InspectionPointServiceImpl" >
 	</bean>
+	
+	
+	<!-- 巡检巡检项目 应用  -->
+	<bean id="inspectionItemApplyService"
+		class="cn.com.dhcc.cgn.mobins.setting.service.impl.InspectionItemApplyServiceImpl" >
+	</bean>
+	
+	
+	<!-- 巡检策略 应用  -->
+	<bean id="strageApplyService"
+		class="cn.com.dhcc.cgn.mobins.setting.service.impl.StrageApplyServiceImpl" >
+	</bean>
 	<!--  -->
 	<!-- PO -->
 	

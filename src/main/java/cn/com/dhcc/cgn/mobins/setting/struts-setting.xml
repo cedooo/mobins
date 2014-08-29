@@ -62,12 +62,23 @@
 		<action name="strageJSP" class="cn.com.dhcc.cgn.mobins.setting.action.DefaultAction" method="strage">
             <result>/page/strage.jsp</result>
 		</action>	
+		<action name="strageApplyJSP" class="cn.com.dhcc.cgn.mobins.setting.action.DefaultAction" method="strageApply">
+            <result>/page/strageApply.jsp</result>
+		</action>	
+		
 		<!-- 巡检策略列表 -->
 		<action name="listStrage" class="cn.com.dhcc.cgn.mobins.setting.action.StrageAction" method="list">
             <result type="json">
             	<param  name="excludeProperties">strageService</param>
             </result>
 		</action>
+		<!-- 巡检策略列表 -->
+		<action name="listStrageWithHost" class="cn.com.dhcc.cgn.mobins.setting.action.StrageAction" method="listWithHostApply">
+            <result type="json">
+            	<param  name="excludeProperties">strageService</param>
+            </result>
+		</action>
+		
 		<!-- 策略修改 -->
 		<action name="strageEdit" class="cn.com.dhcc.cgn.mobins.setting.action.StrageAction">
             <result type="json">
@@ -94,12 +105,25 @@
             	<param  name="excludeProperties">inspectionItemService</param>
             </result>
 		</action>
-		
+		<!-- 巡检策略巡检项目修改状态 -->
+		<action name="updateInspectionItemApply" class="cn.com.dhcc.cgn.mobins.setting.action.InspectionItemApplyAction" >
+            <result type="json">
+            	<param  name="includeProperties">operSuccess</param>
+            </result>
+		</action>
 		
 		<!-- 巡检策略巡检项目 巡检点列表 -->
 		<action name="listInspectionPoint" class="cn.com.dhcc.cgn.mobins.setting.action.InspectionPointAction" method="list">
             <result type="json">
             	<param  name="excludeProperties">inspectionPointService</param>
+            </result>
+		</action>
+		
+		
+		<!-- 巡检策略应用 修改状态 -->
+		<action name="updateStrageApply" class="cn.com.dhcc.cgn.mobins.setting.action.StrageApplyAction" >
+            <result type="json">
+            	<param  name="includeProperties">operSuccess</param>
             </result>
 		</action>
     </package>

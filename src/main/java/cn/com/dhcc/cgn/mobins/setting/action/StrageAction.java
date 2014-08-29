@@ -63,6 +63,39 @@ public class StrageAction extends JQGridAction {
 		listStrage = this.strageService.list(strageSearchCondition);
 		return SUCCESS;
 	}
+	private String hostID = null;
+	
+	public String getHostID() {
+		return hostID;
+	}
+	public void setHostID(String hostID) {
+		this.hostID = hostID;
+	}
+	/**
+	 * 根据hostid查找带有可用状态的巡检策略
+	 * @return
+	 */
+	public String listWithHostApply(){
+		LOG.debug("查询策略");
+		Pagging pagging = strageSearchCondition.getPagging();
+		pagging.setPage(this.getPage());
+		pagging.setRows(this.getRows());
+		int records = strageService.count(strageSearchCondition);
+		pagging.setRecords(records+"");
+		int rows = 10;
+		try{
+			rows = Integer.parseInt(this.getRows());
+		}catch(NumberFormatException e){
+			
+		}
+		int totals = (int)Math.ceil((records*1d)/rows);
+		pagging.setTotal(totals+"");
+		LOG.debug("pagging = " + pagging + "\n" + pagging.getSkip());
+		LOG.debug("记录总条数" + records);
+		strageSearchCondition.setHostID(hostID);
+		listStrage = this.strageService.listWithHostApply(strageSearchCondition);
+		return SUCCESS;
+	}
 	@Override
 	public String execute(){
 		if(OPER_EDIT.equals(this.getOper())){

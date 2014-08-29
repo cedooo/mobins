@@ -5,6 +5,8 @@ public class InspectionItemApply {
 	private String strageID = null;
 	private String inspectionApplyAddTime = null;
 	private String inspectionApplyDelTime = null;
+	private String insItemValid = null;
+	private String alarmLevel = null;
 
 	public String getInspectionItemID() {
 		return inspectionItemID;
@@ -36,6 +38,31 @@ public class InspectionItemApply {
 
 	public void setInspectionApplyDelTime(String inspectionApplyDelTime) {
 		this.inspectionApplyDelTime = inspectionApplyDelTime;
+	}
+
+	public String getInsItemValid() {
+		return insItemValid;
+	}
+
+	public void setInsItemValid(String insItemValid) {
+		this.insItemValid = insItemValid;
+	}
+
+	public String getAlarmLevel() {
+		return alarmLevel;
+	}
+
+	public void setAlarmLevel(String alarmLevel) {
+		this.alarmLevel = alarmLevel;
+	}
+
+	@Override
+	public String toString() {
+		return "InspectionItemApply [inspectionItemID=" + inspectionItemID
+				+ ", strageID=" + strageID + ", inspectionApplyAddTime="
+				+ inspectionApplyAddTime + ", inspectionApplyDelTime="
+				+ inspectionApplyDelTime + ", insItemValid=" + insItemValid
+				+ ", alarmLevel=" + alarmLevel + "]";
 	}
 
 }

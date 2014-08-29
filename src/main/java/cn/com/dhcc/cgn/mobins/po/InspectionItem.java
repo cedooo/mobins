@@ -6,6 +6,7 @@ public class InspectionItem {
 	private String inspectionType = null;
 	private String inspectionItemNote = null;
 
+	private String valid = null;
 	public String getInspectionItemID() {
 		return inspectionItemID;
 	}
@@ -36,6 +37,14 @@ public class InspectionItem {
 
 	public void setInspectionItemNote(String inspectionItemNote) {
 		this.inspectionItemNote = inspectionItemNote;
+	}
+
+	public String getValid() {
+		return valid;
+	}
+
+	public void setValid(String valid) {
+		this.valid = valid;
 	}
 
 }
