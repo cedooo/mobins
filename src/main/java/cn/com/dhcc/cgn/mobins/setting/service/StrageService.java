@@ -2,6 +2,7 @@ package cn.com.dhcc.cgn.mobins.setting.service;
 
 import java.util.List;
 
+import cn.com.dhcc.cgn.mobins.po.InspectionAlarmHold;
 import cn.com.dhcc.cgn.mobins.po.InspectionStrage;
 import cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition;
 
@@ -50,4 +51,8 @@ public interface StrageService {
 	 */
 	List<InspectionStrage> listWithHostApply(
 			StrageSearchCondition strageSearchCondition);
+	/**
+	 * 添加告警阀值设置
+	 */
+	boolean refreshAlarmHold(InspectionAlarmHold alarmHold);
 }

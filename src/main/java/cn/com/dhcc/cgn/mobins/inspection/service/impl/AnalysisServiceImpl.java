@@ -15,6 +15,7 @@ import cn.com.dhcc.cgn.mobins.inspection.dao.AnalysisInfo;
 import cn.com.dhcc.cgn.mobins.inspection.match.ResultMatch;
 import cn.com.dhcc.cgn.mobins.inspection.match.result.MatchResult;
 import cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService;
+import cn.com.dhcc.cgn.mobins.po.InspectionAlarmHold;
 
 public class AnalysisServiceImpl implements AnalysisService {
 	static final private Logger LOG = LoggerFactory.getLogger(AnalysisServiceImpl.class.getClass());
@@ -29,6 +30,27 @@ public class AnalysisServiceImpl implements AnalysisService {
 			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
 			List<AnalysisInfo> li = session
 					.selectList("cn.com.dhcc.cgn.mobins.inspection.service.AnalysisService.queryRecordsNoAnalysis");
+			// 更新自定义阀值
+			for (AnalysisInfo analysisInfo : li) {
+				String holdStrageID = analysisInfo.getStrageID();
+				String inspectionPointID = analysisInfo.getPointID();
+				InspectionAlarmHold alarmHold = new InspectionAlarmHold();
+				alarmHold.setInspectionPointID(inspectionPointID);
+				alarmHold.setHoldStrageID(holdStrageID);
+				//LOG.info("解析结果:策略ID=" + holdStrageID  +",巡检点ID = " + inspectionPointID);
+				List<InspectionAlarmHold> listHold = session.selectList("cn.com.dhcc.cgn.mobins.po.InspectionPoint.selectAlarmHold", alarmHold);
+				for (InspectionAlarmHold inspectionAlarmHold : listHold) {
+					if(inspectionAlarmHold.getValueMax()!=null){
+						analysisInfo.setValCompareMax(inspectionAlarmHold.getValueMax());
+					}
+					if(inspectionAlarmHold.getValueMin()!=null){
+						analysisInfo.setValCompareMin(inspectionAlarmHold.getValueMin());
+					}
+					if(inspectionAlarmHold.getAlarmLevel()!=null){
+						analysisInfo.setAlarmLevel(inspectionAlarmHold.getAlarmLevel());
+					}
+				}
+			}
 			if (li != null) {
 				list.addAll(li);
 			}

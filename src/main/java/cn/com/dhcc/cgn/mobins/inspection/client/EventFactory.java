@@ -42,10 +42,10 @@ public class EventFactory {
 			event.setSeverity(inspectionRecords.getRecordAlarmLevel());    //告警级别
 			event.setOccurtime(ConstantsAndCommon.dateFormat.format(new Date()));    //告警发生时间
 			event.setAddinfo("");    //附加信息
-			event.setCause("");    //告警原因
-			event.setDetail("");    //告警详情
-			event.setOrigininfo("");    //原始信息
-			event.setStatus("");    //告警状态，发生/解除
+			event.setCause("巡检:" + inspectionRecords.getCheckItem());    //告警原因
+			event.setDetail(inspectionRecords.getCheckResult());    //告警详情
+			event.setOrigininfo(inspectionRecords.getProtoData());    //原始信息
+			event.setStatus(Event.OCCUR);    //告警状态，发生/解除
 		}
 		return event;
 	}

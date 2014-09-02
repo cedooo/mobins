@@ -9,14 +9,14 @@ import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
 import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
-import cn.com.dhcc.cgn.mobins.inspection.job.impl.InspectionJobImpl;
+import cn.com.dhcc.cgn.mobins.po.InspectionAlarmHold;
 import cn.com.dhcc.cgn.mobins.po.InspectionStrage;
 import cn.com.dhcc.cgn.mobins.po.StrageApplyHost;
 import cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition;
 import cn.com.dhcc.cgn.mobins.setting.service.StrageService;
 
 public class StrageServiceImpl implements StrageService {
-	static final private Logger LOG = LoggerFactory.getLogger(InspectionJobImpl.class.getClass());
+	static final private Logger LOG = LoggerFactory.getLogger(StrageServiceImpl.class.getClass());
 
 	@Override
 	public List<InspectionStrage> list(StrageSearchCondition condition) {
@@ -160,6 +160,31 @@ public class StrageServiceImpl implements StrageService {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public boolean refreshAlarmHold(InspectionAlarmHold alarmHold) {
+		SqlSession session = null;
+		try{
+			session = DBFactoryBuilder.getSqlSessionFactory().openSession(false);
+			int upd = session.update("cn.com.dhcc.cgn.mobins.po.InspectionStrage.updateHold", alarmHold);
+			session.commit();
+			if(upd==1){
+				return true;
+			}else{
+				int insertCount = session.update("cn.com.dhcc.cgn.mobins.po.InspectionStrage.insertHold", alarmHold);
+				session.commit();
+				if(insertCount==1){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		}finally{
+			if(session!=null){
+				session.close();
+			}
+		}
 	}
 
 }

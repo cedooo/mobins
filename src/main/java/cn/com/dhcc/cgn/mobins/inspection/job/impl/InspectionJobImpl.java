@@ -58,19 +58,20 @@ public class InspectionJobImpl implements cn.com.dhcc.cgn.mobins.inspection.job.
 					boolean addReportSucc = reportService.addReport(report);
 					LOG.info("生成巡检报告：" + report);
 	
-					LOG.debug("添加巡检记录报告成功：id = " + report.getInspectionReportID());
 					if(addReportSucc){
+						LOG.debug("添加巡检记录报告成功：id = " + report.getInspectionReportID());
 						//生成报告项目
 						Iterator<Entry<HostInspectionPoint, ExecutorResult>> iterator = resultsMap.entrySet().iterator();
 						while(iterator.hasNext()){
 							Map.Entry<HostInspectionPoint, ExecutorResult> entry = iterator.next();
 							HostInspectionPoint hostInspectionPoint = entry.getKey();
+							LOG.debug("巡检点：" + hostInspectionPoint.toString());
 							InspectionRecords record = generateInspectionRecord(hostInspectionPoint);
 							record.setInspectionReportID(report.getInspectionReportID());
 							record.setProtoData(entry.getValue().getStrResultVector());
 							LOG.debug("添加巡检记录:" + record);
-							recordsService.addInspectionRecord(record);
-							LOG.info("添加成功：" + record);
+							boolean addSuccess = recordsService.addInspectionRecord(record);
+							LOG.info("巡检记录入库..." + (addSuccess?"[成功]":"[失败]"));
 						}
 					}else{
 						LOG.warn("巡检报告-报告头入库失败,巡检记录无法入库。");
@@ -99,10 +100,8 @@ public class InspectionJobImpl implements cn.com.dhcc.cgn.mobins.inspection.job.
 			/**
 			 * 结果解析
 			 */
-			LOG.info("解析巡检记录..");
 			int analysisResult = analysisService.analysis();
-			//更新报告状态为已完成，记录巡检结果
-			LOG.info("巡检记录解析结果：" + analysisResult );
+			LOG.info("解析巡检记录.." + (analysisResult==1?"[成功]":"[失败]"));
 			LOG.info("异常扫描...");
 			alarmService.explore();
 			LOG.info("异常扫描完成...");
@@ -141,7 +140,9 @@ public class InspectionJobImpl implements cn.com.dhcc.cgn.mobins.inspection.job.
 		
 		records.setShowSortNum(hostPoint.getSortNum());
 		records.setRecordsExceptionWeight(hostPoint.getExceptionWeight());
-		records.setRecordAlarmLevel(hostPoint.getAlarmLevel());
+		records.setRecordAlarmLevel(hostPoint.getExceptionWeight());    //异常权重 -> 告警级别
+		records.setStrageID(hostPoint.getStrageID());
+		records.setPointID(hostPoint.getPointID());
 		return records;
 	}
 	public HostInspectionPointService getHostInspectionPointService() {

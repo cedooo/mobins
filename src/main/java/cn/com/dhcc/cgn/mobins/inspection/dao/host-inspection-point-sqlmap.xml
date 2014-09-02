@@ -25,6 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="N_SORT_NUM" property="sortNum" />
 		<result column="N_EXCEPTION_WEIGHT" property="exceptionWeight" />
 		<result column="N_ALARM_LEVEL" property="alarmLevel" />
+		<result column="N_INSPECTION_POINT_ID" property="pointID" />
+		<result column="N_STRAGE_ID" property="strageID" />
 	</resultMap>
 
 	<select id="queryAll" resultMap="HostInspectionPointMap">
@@ -32,10 +34,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SELECT N_MOB_DEST_HOST_ID
 		      ,VC_HOST_NOTE
 		      ,N_HOST_TYPE
+		      ,N_STRAGE_ID
 		      ,VC_STRAGE_NAME
 		      ,VC_STRAGE_VALID
 		      ,VC_STRAGE_NOTE
 		      ,VC_ITEM_NAME
+		      ,N_INSPECTION_POINT_ID
 		      ,VC_INSPECTION_TYPE
 		      ,VC_INSPECTION_ITEM_NOTE
 		      ,VC_OPER_COMMAND
@@ -60,10 +64,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SELECT N_MOB_DEST_HOST_ID
 		      ,VC_HOST_NOTE
 		      ,N_HOST_TYPE
+		      ,N_STRAGE_ID
 		      ,VC_STRAGE_NAME
 		      ,VC_STRAGE_VALID
 		      ,VC_STRAGE_NOTE
 		      ,VC_ITEM_NAME
+		      ,N_INSPECTION_POINT_ID
 		      ,VC_INSPECTION_TYPE
 		      ,VC_INSPECTION_ITEM_NOTE
 		      ,VC_OPER_COMMAND

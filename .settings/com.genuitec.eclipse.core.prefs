@@ -1,3 +1,3 @@
 eclipse.preferences.version=1
-validator.Checked=src/main/java/cn/com/dhcc/cgn/mobins/setting/struts-setting.xml,src/main/java/cn/com/dhcc/cgn/mobins/report/struts-report.xml,src/main/java/applicationContext.xml,src/main/webapp
+validator.Checked=src/main/java/cn/com/dhcc/cgn/mobins/setting/struts-setting.xml,src/main/java/cn/com/dhcc/cgn/mobins/report/struts-report.xml,src/main/java/applicationContext.xml,src/main/webapp,src/main/java/cn/com/dhcc/cgn/mobins/init/struts-init.xml,src/main/java/cn/com/dhcc/cgn/mobins/setting/struts-setting-strage-hold.xml
 validator.Unchecked=

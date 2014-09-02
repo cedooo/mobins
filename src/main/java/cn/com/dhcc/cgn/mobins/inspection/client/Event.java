@@ -1,6 +1,12 @@
 package cn.com.dhcc.cgn.mobins.inspection.client;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class Event {
+	public static final String OCCUR = "发生";
+	public static final String CLEAR = "清除";
+	static private final String DEFAULT_ENCODE = "GBK";
 	//设备号
 	private String mosn = null;
 	//附加信息
@@ -70,10 +76,17 @@ public class Event {
 	 * @return
 	 */
 	public String parseRequestParam(){
-		String repa = "mosn=" + mosn + "&addinfo=" + addinfo + "&cause="
-				+ cause + "&origininfo=" + origininfo + "&detail=" + detail
-				+ "&occurtime=" + occurtime + "&severity=" + severity
-				+ "&status=" + status ;
+		String repa = "";;
+		try {
+			repa = "mosn=" + URLEncoder.encode(mosn, DEFAULT_ENCODE) + "&addinfo=" + URLEncoder.encode(addinfo, DEFAULT_ENCODE) + "&cause="
+					+ URLEncoder.encode(cause, DEFAULT_ENCODE) + "&origininfo=" + URLEncoder.encode(origininfo, DEFAULT_ENCODE) + "&detail=" + URLEncoder.encode(detail, DEFAULT_ENCODE)
+					+ "&occurtime=" + occurtime + "&severity=" + URLEncoder.encode(severity, DEFAULT_ENCODE)
+					+ "&status=" + URLEncoder.encode(status, DEFAULT_ENCODE);
+			repa = URLEncoder.encode(repa, DEFAULT_ENCODE);
+			repa = repa.replaceAll("\\+", "%20");    //处理空格
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		return repa;
 	}
 	@Override

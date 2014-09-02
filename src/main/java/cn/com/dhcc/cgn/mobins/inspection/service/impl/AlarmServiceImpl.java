@@ -46,12 +46,17 @@ public class AlarmServiceImpl extends AlarmService {
 					int excepCount = 0;
 					for (InspectionRecords inspectionRecords : listRecords) {
 						if(ResultMatch.EXCEPTION.equals(inspectionRecords.getIsException())){
-							Alarm alarm = Alarm.parseAlarm(inspectionRecords);
-							if(alarm!=null){
-								LOG.info(alarm.toString());
-								//TODO 异常入库
-								Event event = EventFactory.getMobAppEvent(inspectionRecords);
-								client.postAlarm(event);
+							//异常入库
+							Event event = EventFactory.getMobAppEvent(inspectionRecords);
+							int level = -1;
+							try{
+								level = Integer.parseInt(event.getSeverity());
+							}catch(NumberFormatException e){
+								
+							}
+							if(level>0){
+								LOG.info("发出告警: " + event.toString());
+								//TODO client.postAlarm(event);
 								excepCount++;
 							}
 						}

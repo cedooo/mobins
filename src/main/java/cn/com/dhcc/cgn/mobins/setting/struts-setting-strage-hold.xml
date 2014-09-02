@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <package name="sethold" namespace="/sethold" extends="default,json-default">
+		
+		<!-- 目标编辑 -->
+		<action name="refreshHold" class="cn.com.dhcc.cgn.mobins.setting.action.StrageHoldAction" method="refreshHold">
+            <result type="json">
+            	<param  name="includeProperties">operSuccess</param>
+            </result>
+		</action>
+		
+    </package>
+    
+</struts>

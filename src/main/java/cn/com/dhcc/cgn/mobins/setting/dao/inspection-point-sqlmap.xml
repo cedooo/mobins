@@ -6,29 +6,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<resultMap type="cn.com.dhcc.cgn.mobins.po.InspectionPoint"
 		id="InspectionPointMap">
-		 <result column="N_INSPECTION_POINT_ID" property="inspectionPointID" />
-		  <result column="N_INSPECTION_ITEM_ID" property="inspectionItemID" />
-		   <result column="VC_OPER_COMMAND" property="operCommand" />
-		   <result column="VC_OPER_NOTE" property="operNote" />
-		   <result column="VC_CHECK_POINT_NAME" property="checkPointName" />
-		   <result column="VC_KEY_REGEX" property="keyRegex" />
-		   <result column="D_VAL_COMPARE_MIN" property="valCompareMin" />
-		   <result column="D_VAL_COMPARE_MAX" property="valCompareMax" />
-		   <result column="N_MATCH_TYPE" property="matchType" />
-		   <result column="VC_INSPECTION_CODE" property="inspectionCode" />
-		   <result column="VC_RESULT_FORMAT" property="resultFormat" />
-		   <result column="N_SORT_NUM" property="sortNum" />
-		   <result column="N_EXCEPTION_WEIGHT" property="exceptionWeight" /> 
+		<result column="N_INSPECTION_POINT_ID" property="inspectionPointID" />
+		<result column="N_INSPECTION_ITEM_ID" property="inspectionItemID" />
+		<result column="VC_OPER_COMMAND" property="operCommand" />
+		<result column="VC_OPER_NOTE" property="operNote" />
+		<result column="VC_CHECK_POINT_NAME" property="checkPointName" />
+		<result column="VC_KEY_REGEX" property="keyRegex" />
+		<result column="D_VAL_COMPARE_MIN" property="valCompareMin" />
+		<result column="D_VAL_COMPARE_MAX" property="valCompareMax" />
+		<result column="N_MATCH_TYPE" property="matchType" />
+		<result column="VC_INSPECTION_CODE" property="inspectionCode" />
+		<result column="VC_RESULT_FORMAT" property="resultFormat" />
+		<result column="N_SORT_NUM" property="sortNum" />
+		<result column="N_EXCEPTION_WEIGHT" property="exceptionWeight" />
 	</resultMap>
 
-	<select id="countByCondition" resultType="int" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionPointSearchCondition">
+	<select id="countByCondition" resultType="int"
+		parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionPointSearchCondition">
 		<![CDATA[
 			SELECT COUNT(*)
 			FROM T_INSPECTION_POINT
 			WHERE  N_INSPECTION_ITEM_ID = #{inspectionItemID}
 		]]>
 	</select>
-	<select id="queryByCondition" resultMap="InspectionPointMap" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionPointSearchCondition">
+	<select id="queryByCondition" resultMap="InspectionPointMap"
+		parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionPointSearchCondition">
 		<![CDATA[
 			select 
 				N_INSPECTION_POINT_ID
@@ -55,5 +57,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where ${pagging.skip} < rn
 		]]>
 	</select>
-	
+	<resultMap type="cn.com.dhcc.cgn.mobins.po.InspectionAlarmHold"
+		id="InspectionAlarmHoldMap">
+		<result column="N_HOLD_STRAGE_ID" property="holdStrageID" />
+		<result column="N_INSPECTION_POINT_ID" property="inspectionPointID" />
+		<result column="D_VALUE_MAX" property="valueMax" />
+		<result column="D_VALUE_MIN" property="valueMin" />
+		<result column="DT_HOLD_ADD_TIME" property="holdAddTime" />
+		<result column="DT_HOLD_DEL_TIME" property="holdDelTime" />
+		<result column="VC_HOLD_VALID" property="holdValid" />
+		<result column="N_ALARM_LEVEL" property="alarmLevel" />
+	</resultMap>
+
+	<select id="selectAlarmHold" resultMap="InspectionAlarmHoldMap" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionAlarmHold">
+		SELECT N_HOLD_STRAGE_ID
+		,N_INSPECTION_POINT_ID
+		,D_VALUE_MAX
+		,D_VALUE_MIN
+		,DT_HOLD_ADD_TIME
+		,DT_HOLD_DEL_TIME
+		,VC_HOLD_VALID
+		,N_ALARM_LEVEL
+		FROM T_INSPECTION_ALARM_HOLD
+		WHERE N_HOLD_STRAGE_ID = #{holdStrageID}
+		AND N_INSPECTION_POINT_ID = #{inspectionPointID}
+		AND DT_HOLD_DEL_TIME IS NULL
+		ORDER BY DT_HOLD_ADD_TIME 
+	</select>
 </mapper>

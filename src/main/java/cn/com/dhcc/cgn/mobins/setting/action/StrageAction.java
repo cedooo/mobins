@@ -15,6 +15,7 @@ public class StrageAction extends JQGridAction {
 	 * 
 	 */
 	private static final long serialVersionUID = 7442713406083582833L;
+	@Autowired
 	private StrageService strageService = null;
 	@Autowired
 	private StrageSearchCondition strageSearchCondition = null;

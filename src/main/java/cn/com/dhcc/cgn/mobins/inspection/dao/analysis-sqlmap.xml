@@ -20,6 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="matchType" column="N_MATCH_TYPE" />
 		<result property="resultFormat" column="VC_RESULT_FORMAT" />
 		
+		<result property="alarmLevel" column="N_RECORD_ALARM_LEVEL" />
+		<result property="strageID" column="N_RECORD_STRAGE_ID" />
+		<result property="pointID" column="N_RECORD_POINT_ID" />
+		
 	</resultMap>
 
 	<!-- 通过目标ID查找主机列表 -->
@@ -31,7 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,VC_PROTO_DATA
 			,VC_DEAL_RESULT
 			,VC_CHECK_CODE
-	
+			,N_RECORD_STRAGE_ID
+			,N_RECORD_POINT_ID
+			,N_RECORD_ALARM_LEVEL
+			
 			,VC_CHECK_POINT_NAME
 			,VC_KEY_REGEX
 			,D_VAL_COMPARE_MIN
@@ -46,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateResult" parameterType="cn.com.dhcc.cgn.mobins.inspection.dao.AnalysisInfo">
 		UPDATE T_INSPECTION_RECORDS
 		SET VC_IS_EXCEPTION = #{isException}, VC_CHECK_RESULT = #{checkResult},
-			VC_CHECK_COMPLETE = #{checkComplete}
+			VC_CHECK_COMPLETE = #{checkComplete}, N_RECORD_ALARM_LEVEL = #{alarmLevel}
 		WHERE N_INSPECTION_RECORDS_ID = #{inspectionRecordsID}
 	</update>
 

@@ -25,14 +25,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="DT_STRAGE_DEL_TIME" property="strageDelTime" />
 	</resultMap>
 
-	<select id="countByCondition" resultType="int" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition">
+	<select id="countByCondition" resultType="int"
+		parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition">
 		<![CDATA[
 			SELECT COUNT(*)
 			FROM T_INSPECTION_STRAGE
 			WHERE DT_STRAGE_DEL_TIME IS NULL
 		]]>
 	</select>
-	<select id="queryByCondition" resultMap="InspectionStrageMap" parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition">
+	<select id="queryByCondition" resultMap="InspectionStrageMap"
+		parameterType="cn.com.dhcc.cgn.mobins.pojo.search.impl.StrageSearchCondition">
 		<![CDATA[
 			select 
 				N_STRAGE_ID
@@ -55,26 +57,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 更新策略 -->
 	<update id="update" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionStrage">
 		UPDATE T_INSPECTION_STRAGE
-		SET VC_STRAGE_NAME = #{strageName}
-      		,VC_STRAGE_NOTE = #{strageNote}
-      WHERE N_STRAGE_ID = #{strageID}
+		SET
+		VC_STRAGE_NAME = #{strageName}
+		,VC_STRAGE_NOTE = #{strageNote}
+		WHERE
+		N_STRAGE_ID = #{strageID}
 	</update>
 	<!-- 启用、停用巡检 -->
 	<update id="updateValid" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionStrage">
-		UPDATE T_INSPECTION_STRAGE
+		UPDATE
+		T_INSPECTION_STRAGE
 		SET VC_STRAGE_VALID = #{strageValid}
-     	WHERE N_STRAGE_ID = #{strageID}
+		WHERE
+		N_STRAGE_ID = #{strageID}
 	</update>
 	<!-- 删除巡检（伪删除） -->
 	<update id="updateDelete" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionStrage">
-		UPDATE T_INSPECTION_STRAGE
+		UPDATE
+		T_INSPECTION_STRAGE
 		SET DT_STRAGE_DEL_TIME = getdate()
-     	WHERE N_STRAGE_ID = #{strageID}
+		WHERE N_STRAGE_ID
+		= #{strageID}
 	</update>
-	
-	
-	<!-- 应用记录条数-->
-	<select id="countApply" resultType="int" parameterType="cn.com.dhcc.cgn.mobins.po.StrageApplyHost">
+
+
+	<!-- 应用记录条数 -->
+	<select id="countApply" resultType="int"
+		parameterType="cn.com.dhcc.cgn.mobins.po.StrageApplyHost">
 		<![CDATA[
 			SELECT count(*)
 			from T_STRAGE_APPLY_HOST
@@ -83,4 +92,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       			AND VC_APPLY_VALID = 'Y'
 		]]>
 	</select>
+
+	<!-- 更新策略阀值 -->
+	<update id="updateHold" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionAlarmHold">
+		UPDATE T_INSPECTION_ALARM_HOLD
+		SET
+		<trim suffixOverrides=",">
+			<if test="valueMax!=null">D_VALUE_MAX=#{valueMax},</if>
+			<if test="valueMin!=null">D_VALUE_MIN=#{valueMin},</if>
+			<if test="holdValid!=null">VC_HOLD_VALID=#{holdValid},</if>
+			<if test="alarmLevel!=null">N_ALARM_LEVEL=#{alarmLevel},</if>
+		</trim>
+		WHERE N_HOLD_STRAGE_ID = #{holdStrageID} AND N_INSPECTION_POINT_ID =
+		#{inspectionPointID}
+	</update>
+	<insert id="insertHold" parameterType="cn.com.dhcc.cgn.mobins.po.InspectionAlarmHold">
+		INSERT INTO
+		T_INSPECTION_ALARM_HOLD(
+		N_HOLD_STRAGE_ID
+		,N_INSPECTION_POINT_ID
+		,D_VALUE_MAX
+		,D_VALUE_MIN
+		,DT_HOLD_ADD_TIME
+		,VC_HOLD_VALID
+		,N_ALARM_LEVEL
+		)
+		VALUES(
+		#{holdStrageID},#{inspectionPointID},#{valueMax},#{valueMin},
+		getdate(),#{holdValid},#{alarmLevel}
+		)
+	</insert>
+
 </mapper>

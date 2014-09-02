@@ -18,6 +18,8 @@ public class InspectionRecords {
 	private String showSortNum = null;
 	private String recordsExceptionWeight = null;//RECORDS_EXCEPTION_WEIGHT
 	private String recordAlarmLevel = null;    //告警级别
+	private String strageID = null;
+	private String pointID = null;
 	
 	public String getInspectionRecordsID() {
 		return inspectionRecordsID;
@@ -155,6 +157,22 @@ public class InspectionRecords {
 		this.recordAlarmLevel = recordAlarmLevel;
 	}
 
+	public String getStrageID() {
+		return strageID;
+	}
+
+	public void setStrageID(String strageID) {
+		this.strageID = strageID;
+	}
+
+	public String getPointID() {
+		return pointID;
+	}
+
+	public void setPointID(String pointID) {
+		this.pointID = pointID;
+	}
+
 	@Override
 	public String toString() {
 		return "InspectionRecords [inspectionRecordsID=" + inspectionRecordsID
@@ -164,9 +182,12 @@ public class InspectionRecords {
 				+ isException + ", checkResult=" + checkResult + ", protoData="
 				+ protoData + ", dealResult=" + dealResult
 				+ ", inspectionType=" + inspectionType + ", addTime=" + addTime
-				+ ", checkCode=" + checkCode + "]";
+				+ ", checkCode=" + checkCode + ", checkComplete="
+				+ checkComplete + ", showSortNum=" + showSortNum
+				+ ", recordsExceptionWeight=" + recordsExceptionWeight
+				+ ", recordAlarmLevel=" + recordAlarmLevel + ", strageID="
+				+ strageID + ", pointID=" + pointID + "]";
 	}
 
-	
 	
 }

@@ -24,6 +24,9 @@ public class AnalysisInfo {
 	private String resultFormat = null;
 	private String checkComplete = null;
 	
+	private String alarmLevel = null;
+	private String strageID = null;
+	private String pointID = null;
 	public String getInspectionRecordsID() {
 		return inspectionRecordsID;
 	}
@@ -102,6 +105,24 @@ public class AnalysisInfo {
 	public void setCheckComplete(String checkComplete) {
 		this.checkComplete = checkComplete;
 	}
+	public String getAlarmLevel() {
+		return alarmLevel;
+	}
+	public void setAlarmLevel(String alarmLevel) {
+		this.alarmLevel = alarmLevel;
+	}
+	public String getStrageID() {
+		return strageID;
+	}
+	public void setStrageID(String strageID) {
+		this.strageID = strageID;
+	}
+	public String getPointID() {
+		return pointID;
+	}
+	public void setPointID(String pointID) {
+		this.pointID = pointID;
+	}
 	@Override
 	public String toString() {
 		return "AnalysisInfo [inspectionRecordsID=" + inspectionRecordsID
@@ -110,9 +131,10 @@ public class AnalysisInfo {
 				+ dealResult + ", checkCode=" + checkCode + ", checkPointName="
 				+ checkPointName + ", keyRegex=" + keyRegex
 				+ ", valCompareMin=" + valCompareMin + ", valCompareMax="
-				+ valCompareMax + ", matchType=" + matchType + "]";
+				+ valCompareMax + ", matchType=" + matchType
+				+ ", resultFormat=" + resultFormat + ", checkComplete="
+				+ checkComplete + ", alarmLevel=" + alarmLevel + ", strageID="
+				+ strageID + ", pointID=" + pointID + "]";
 	}
 
-	
-	
 }

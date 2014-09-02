@@ -142,6 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							var checkResult = data.listRecord[i].checkResult;
 							var protoData = data.listRecord[i].protoData;
 							var inspectionType = data.listRecord[i].inspectionType;
+							var alarmLevel = data.listRecord[i].recordAlarmLevel;
 							
 							var trTag = "<tr class='normal'>";
 							if(isException=="异常"){
@@ -149,12 +150,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							}else if(isException==null){
 								trTag = "<tr class='errors'>";								
 							}
+							var exceptionLevel = "";
+							if(alarmLevel==1){
+								exceptionLevel = "未知";
+							}else if(alarmLevel==2){
+								exceptionLevel = "警告";
+							}else if(alarmLevel==3){
+								exceptionLevel = "次要";
+							}else if(alarmLevel==4){
+								exceptionLevel = "主要";
+							}else if(alarmLevel==5){
+								exceptionLevel = "严重";
+							}
 							var htmlRecord = trTag + 
 									"<td>" + inspectionType + "</td>" + 
 									"<td>" + checkItem + "</td>" + 
 									"<td>" + checkPoint + "</td>" + 
 									"<td>" + operNote + "</td>" + 
-									"<td>" + isException + "</td>" + 
+									"<td>" + (isException=='异常'?exceptionLevel : isException) + "</td>" + 
 									"<td>" + checkResult + "</td>" + 
 									"<td>" + protoData + "</td>" + 
 								"</tr>";

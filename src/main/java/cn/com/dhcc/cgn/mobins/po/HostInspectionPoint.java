@@ -13,6 +13,8 @@ public class HostInspectionPoint {
 	private String hostPasswd = null;
 	private String hostNote = null;
 	private String hostType = null;
+	private String strageID = null;
+	private String pointID = null;
 	private String strageName = null;
 	private String strageValid = null;
 	private String strageNote = null;
@@ -76,6 +78,22 @@ public class HostInspectionPoint {
 
 	public void setHostType(String hostType) {
 		this.hostType = hostType;
+	}
+
+	public String getStrageID() {
+		return strageID;
+	}
+
+	public void setStrageID(String strageID) {
+		this.strageID = strageID;
+	}
+
+	public String getPointID() {
+		return pointID;
+	}
+
+	public void setPointID(String pointID) {
+		this.pointID = pointID;
 	}
 
 	public String getStrageName() {

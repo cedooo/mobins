@@ -259,22 +259,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 		subgrid_table_id = subgrid_id+"_t";
 			 		pager_id = "p_"+subgrid_table_id;
 			 		$("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
+			 		strageID = jQuery("#listStrage").jqGrid('getGridParam','selrow');
+			 		console.log("策略ID=" + strageID + ",巡检点ID=" + row_id);
 			 		jQuery("#"+subgrid_table_id).jqGrid({
-			 			url:"<%=basePath%>setting/listInspectionPoint.action?searchCondition.inspectionItemID=" + row_id,
+			 			url:"<%=basePath%>setting/listInspectionPoint.action?searchCondition.inspectionItemID=" + row_id + "&searchCondition.inspectionStrageID=" + strageID ,
 			 			datatype: "json",
-			 			colNames: ['编号','巡检项ID','巡检点名称','操作','备注','编码','排序','权重'],
+			 			colNames: ['编号','巡检项ID','巡检点名称','操作','备注','编码','排序','权重','操作','最大值阀值','最小阀值','异常级别'],
 					   	autowidth:true,
 					   	rownumbers: true,
 			 			colModel: [
 			 				{name:"inspectionPointID",index:"inspectionPointID",align:"center", width:40,key:true, sortable:false, hidden:true},
 			 				{name:"inspectionItemID",index:"inspectionItemID",width:100,align:"center", sortable:false, hidden:true},
-			 				{name:"checkPointName",index:"checkPointName",width:70,align:"center", sortable:false,editable:true,editable:true,editrules:{ required:true}},
-			 				{name:"operCommand",index:"operCommand",width:120,align:"center", sortable:false,editable:false, hidden:false, edittype:"select",editoptions:{value:"0:备机;1:主机"}},
-			 				{name:"operNote",index:"operNote",width:120,align:"center", sortable:false,editable:false},
+			 				{name:"checkPointName",index:"checkPointName",width:50,align:"center", sortable:false,editable:true,editable:true,editrules:{ required:true}},
+			 				{name:"operCommand",index:"operCommand",width:80,align:"center", sortable:false,editable:false, hidden:false, edittype:"select",editoptions:{value:"0:备机;1:主机"}},
+			 				{name:"operNote",index:"operNote",width:80,align:"center", sortable:false,editable:false},
 			 				{name:"inspectionCode",index:"inspectionCode",width:70,align:"center",sortable:false, hidden:true},
 			 				{name:"sortNum",index:"sortNum",width:20,align:"center", sortable:false, hidden:true},
 			 				{name:"exceptionWeight",index:"exceptionWeight",width:20,align:"center", sortable:false, hidden:true},
-				   			//{name:'act',index:'act', width:35,sortable:false,align:"center"}
+				   			{name:'act',index:'act', width:75,sortable:false,align:"center"},
+				   			{name:'valCompareMax',index:'valCompareMax', width:35,sortable:false,align:"center", hidden:true},
+				   			{name:'valCompareMin',index:'valCompareMin', width:35,sortable:false,align:"center", hidden:true},
+				   			{name:'exceptionWeight',index:'exceptionWeight', width:155,sortable:false,align:"center", hidden:true}
 			 				//{"checkPointName":"测试连接外网","exceptionWeight":"2","inspectionCode":"PING-BAIDU","inspectionItemID":"1",
 			 					//"inspectionPointID":"1","keyRegex":".*(\\d+)% packet loss.*","matchType":"2","operCommand":"ping baidu.com -c 5 -i 0.3",
 			 					//"operNote":"ping 百度","resultFormat":"丢包率为%s%%,%s","sortNum":"1","valCompareMax":"10.00","valCompareMin":"0.00"}
@@ -292,8 +297,122 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 	editurl: "<%=basePath%>setting/hostEdit.action",
 			 		   	rowNum:20,
 					     gridComplete: function(){
-						    
-						 	},
+					    	 //alert(subgrid_id);
+					    	 var $grid = $("#"+subgrid_table_id);
+					 		var ids = $grid.jqGrid('getDataIDs');
+					 		
+					 		for(var i=0;i < ids.length;i++){
+					 			var cl = ids[i];
+								var point =  $grid.jqGrid('getRowData', cl);
+								console.log("巡检点ID = " + cl);
+						 		var alarmWeight = point.exceptionWeight;
+						 		var seleID = subgrid_table_id + "-alarm-sele-"+i;
+						 		console.log("select id = " + seleID);
+						 		//告警级别选择
+					 			var alarmSelect = "异常告警：<select id=" + seleID + ">";
+					 			alarmSelect += "<option value='0' " + (0==alarmWeight?"selected='selected' ":" ") + ">不告警</option>";
+					 			alarmSelect += "<option value='1' " + (1==alarmWeight?"selected='selected' ":" ") + ">未知</option>";
+					 			alarmSelect += "<option value='2' " + (2==alarmWeight?"selected='selected' ":" ") + ">警告</option>";
+					 			alarmSelect += "<option value='3' " + (3==alarmWeight?"selected='selected' ":" ") + ">次要</option>";
+					 			alarmSelect += "<option value='4' " + (4==alarmWeight?"selected='selected' ":" ") + ">主要</option>";
+					 			alarmSelect += "<option value='5' " + (5==alarmWeight?"selected='selected' ":" ") + ">严重</option>";
+					 			alarmSelect += "</select>";
+					 			//阀值范围
+					 			var holdID = subgrid_table_id + "-slider-range";
+						 		var maxV = point.valCompareMax;
+						 		var minV = point.valCompareMin;
+					 			var holdRange = ((maxV||minV)?"<div><span></span><span></span>-<span></span>":"") + "</div><div id='" + holdID + "'></div>";
+						 		
+					 			$grid.jqGrid('setRowData',cl,{act:alarmSelect + holdRange});
+
+			 			       console.log("pointID = " + cl);
+			 			       var strageID = jQuery("#listStrage").jqGrid( "getGridParam" , "selrow" );
+					 			$("#"  + seleID).change(function(event){
+					 				var selected = $(this).val();
+					 				var pointID = $(this).parents("tr[role='row']").attr("id");
+					 				console.log("巡检点ID=" + pointID +  ",策略ID=" + strageID +"告警级别：" + selected);
+					 				 $.ajax({
+							                url:"<%=basePath%>sethold/refreshHold.action",
+							                data:{
+							                	"alarmHold.alarmLevel" : selected,
+							                	"alarmHold.holdStrageID" : strageID,
+							                	"alarmHold.inspectionPointID" : pointID
+							                },
+							                dataType:"json",
+							                type: "POST",
+							                error:function(data){
+							                    alert(data);
+							                },
+							                success:function(data){
+							                    if(data.operSuccess){
+							                    }else{
+							        				alert("操作失败");
+							                    }
+							                }
+							            });	
+					 			});
+					 			var pointID = cl; 
+						 		var maxAllow = 100;
+						 		if(point.inspectionCode =='FILE-NR'){
+						 			maxAllow = 10000;
+						 		}
+						 		if(maxV||minV){
+						 			var $preText = $( "#" + holdID ).prev();
+						 			$preText.children("span:eq(0)").text("正常范围:");
+					 			 	$( "#" + holdID ).slider({
+					 			      range: true,
+					 			      min: 0,
+					 			      max: maxAllow,
+					 			      values: [ minV, maxV ],
+					 			      slide: function( event, ui ) {
+					 			        if(maxV){
+							 			 	$preText.children("span:eq(1)").html( ui.values[ 0 ]);
+					 			        }
+					 			        if(minV){
+							 			 	$preText.children("span:eq(2)").html( ui.values[ 1 ]);
+					 			        }
+					 			      },
+					 			     change: function( event, ui ) {
+						 			        if(maxV){
+								 			 	$preText.children("span:eq(1)").html( ui.values[ 0 ]);
+						 			        }
+						 			        if(minV){
+								 			 	$preText.children("span:eq(2)").html( ui.values[ 1 ]);
+						 			        }
+						 			        
+						 			       console.log("巡检点ID = " + pointID + ",策略ID = " + strageID);
+						 			      $.ajax({
+								                url:"<%=basePath%>sethold/refreshHold.action",
+								                data:{
+								                	"alarmHold.valueMax" : ui.values[ 1 ],
+								                	"alarmHold.valueMin" :  ui.values[ 0 ],
+								                	"alarmHold.holdStrageID" : strageID,
+								                	"alarmHold.inspectionPointID" : pointID,
+								                },
+								                dataType:"json",
+								                type: "POST",
+								                error:function(data){
+								                    alert(data);
+								                },
+								                success:function(data){
+								                    if(data.operSuccess){
+								                    }else{
+								        				alert("操作失败");
+								                    }
+								                }
+								            });				 			       
+							 			}
+					 			    });			
+				 			        if(maxV){
+						 			 	$preText.children(":eq(1)").text($( "#" + holdID ).slider( "values" )[0]);
+				 			        }
+				 			        if(minV){
+						 			 	$preText.children(":eq(2)").text($( "#" + holdID ).slider( "values" )[1]);
+				 			        }
+						 		}//end if(maxV||minV){
+					 			
+					 		}	
+						 },
 			 		   	//pager:  '#' + pager_id,
 			 		   	//sortname: 'num',
 			 		    sortorder: "asc",

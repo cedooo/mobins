@@ -9,5 +9,8 @@ public class InitAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = -4232857155956865646L;
 	
-
+	@Override
+	public String execute(){
+		return SUCCESS;
+	}
 }
