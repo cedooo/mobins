@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.mobins.mosn">
+	
+	<!-- 启用、添加巡检项目 -->
+	<update id="update" parameterType="String">
+		UPDATE T_INSPECT_CNF
+		SET VC_INS_CNF_VAL = #{mosn}
+     	WHERE 
+     		VC_INS_CNF_CODE = 'MOB_APP_MOSN'
+     		
+	</update>
+	
+</mapper>

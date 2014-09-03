@@ -45,6 +45,11 @@
 	<bean id="strageApplyService"
 		class="cn.com.dhcc.cgn.mobins.setting.service.impl.StrageApplyServiceImpl" >
 	</bean>
+	
+	<!-- mosn  -->
+	<bean id="mosnService"
+		class="cn.com.dhcc.cgn.mobins.setting.service.impl.MosnServiceImpl" >
+	</bean>
 	<!--  -->
 	<!-- PO -->
 	

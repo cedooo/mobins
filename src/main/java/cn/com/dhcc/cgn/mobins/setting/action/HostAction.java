@@ -70,7 +70,7 @@ public class HostAction extends JQGridAction {
 		int totals = (int)Math.ceil((records*1d)/rows);
 		pagging.setTotal(totals+"");
 		searchCondition.setTargetID(this.getTargetID());
-		LOG.info(searchCondition.toString());
+		LOG.debug("巡检主机搜索条件:" + searchCondition.toString());
 		this.listHost = hostService.listHostTarget(searchCondition);
 		return SUCCESS;
 	}

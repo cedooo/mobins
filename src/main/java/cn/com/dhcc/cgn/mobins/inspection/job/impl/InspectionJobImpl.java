@@ -56,10 +56,8 @@ public class InspectionJobImpl implements cn.com.dhcc.cgn.mobins.inspection.job.
 					//生成报告头部
 					InspectionReport report = generateReport(mobDestHost);
 					boolean addReportSucc = reportService.addReport(report);
-					LOG.info("生成巡检报告：" + report);
-	
 					if(addReportSucc){
-						LOG.debug("添加巡检记录报告成功：id = " + report.getInspectionReportID());
+						LOG.info("生成巡检报告：" + report);
 						//生成报告项目
 						Iterator<Entry<HostInspectionPoint, ExecutorResult>> iterator = resultsMap.entrySet().iterator();
 						while(iterator.hasNext()){
@@ -101,7 +99,7 @@ public class InspectionJobImpl implements cn.com.dhcc.cgn.mobins.inspection.job.
 			 * 结果解析
 			 */
 			int analysisResult = analysisService.analysis();
-			LOG.info("解析巡检记录.." + (analysisResult==1?"[成功]":"[失败]"));
+			LOG.info("解析巡检记录.." + (analysisResult==1?"[成功]":(analysisResult==2?"[部分成功]":"[失败]")));
 			LOG.info("异常扫描...");
 			alarmService.explore();
 			LOG.info("异常扫描完成...");

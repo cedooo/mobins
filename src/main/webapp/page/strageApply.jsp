@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   		{name:'targetName',index:'targetName', width:80,align:"center", sortable:false,editable:true,editrules:{required:true}},
 			   		{name:'targetNote',index:'targetNote', width:80,align:"center", sortable:false,editable:true,editrules:{required:true}},		
 			   		{name:'targetAddTime',index:'targetAddTime',align:"center", width:55, sortable:false, hidden:true},
-		   			{name:'act',index:'act', width:35,sortable:false,align:"center"},
+		   			{name:'act',index:'act', width:35,sortable:false,align:"center", hidden:true},
 	 				{name:"targetInsValid",index:"targetInsValid",width:140,align:"center", sortable:false, hidden:true}
 			   		//{name:'targetDelTime',index:'targetDelTime', width:90}
 			   	],
@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 				{name:"hostPasswd",index:"hostPasswd",width:70,align:"center",sortable:false, hidden:true},
 			 				{name:"hostAddTime",index:"hostAddTime",width:140,align:"center", sortable:false, hidden:true},
 			 				{name:"hostDelTime",index:"hostDelTime",width:140,align:"center", sortable:false, hidden:true},
-				   			{name:'act',index:'act', width:35,sortable:false,align:"center"},
+				   			{name:'act',index:'act', width:35,sortable:false,align:"center", hidden:true},
 			 				{name:"inspectValid",index:"inspectValid",width:140,align:"center", sortable:false, hidden:true}
 			 			],
 					   	rownumbers: true,

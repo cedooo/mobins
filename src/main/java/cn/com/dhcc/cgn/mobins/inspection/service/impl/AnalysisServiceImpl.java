@@ -114,6 +114,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 		}else if(updatedCount == list.size()){
 			rv = 1;
 		}
+		LOG.info("更新成功[" + updatedCount + "/" + list.size() + "]条");
 		return rv;
 	}
 	

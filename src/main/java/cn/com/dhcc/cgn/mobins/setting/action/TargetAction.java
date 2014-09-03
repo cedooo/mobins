@@ -95,7 +95,7 @@ public class TargetAction extends JQGridAction {
 		}
 		int totals = (int)Math.ceil((records*1d)/rows);
 		pagging.setTotal(totals+"");
-		System.out.println(searchCondition);
+		LOG.debug("搜索条件:" + searchCondition.toString());
 		listTarget = targetService.listTarget(searchCondition);
 		return SUCCESS;
 	}
