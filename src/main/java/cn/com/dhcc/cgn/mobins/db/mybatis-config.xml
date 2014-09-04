@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<properties resource="cn/com/dhcc/cgn/mobins/db/db-config.properties"></properties>
+	<properties resource="cn/com/dhcc/cgn/mobins/db/db-cfg.properties"></properties>
 	<environments default="devSQLServer2008">
 		<environment id="devSQLServer2008">
 			<transactionManager type="JDBC"/>
