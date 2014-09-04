@@ -34,7 +34,7 @@ public class DefaultAction extends JQGridAction {
 			boolean refSucc = this.mosnService.refreshMosn(mosn);
 			LOG.info("更新mosn: " + mosn + (refSucc?"[成功]":"[失败]"));
 		}else{
-			LOG.info("mosn = " + mosn + (mosn.matches(MOSN_REGEX)?"格式正确":"格式错误"));
+			LOG.info("mosn = " + mosn + "[格式错误]");
 		}
 		return SUCCESS;
 	}
