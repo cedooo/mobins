@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.dhcc.cgn.it100">
+	<resultMap type="cn.com.dhcc.cgn.it100.pojo.ITIMSResourceInfo" id="ITIMSResourceInfoMap">
+		<result column="VC_ITHUN_CICODE" property="primaryId" />
+		<result column="fMOType" property="MOType" />
+		<result column="fIP" property="ip" />
+		<result column="fVendor" property="vendor" />
+		<result column="fSysoid" property="sysoid" />
+		<result column="fIpStack" property="ipStack" />
+		<result column="fStatus" property="status" />
+		<result column="fModel" property="model" />
+	</resultMap>
+	<select id="selectCMO" resultMap="ITIMSResourceInfoMap">
+		SELECT  fMOType,fIP,fVendor,fSysoid,fIpStack,fStatus,fModel, maps.VC_ITHUN_CICODE as VC_ITHUN_CICODE
+  		FROM tcmo left join T_MOSN_CICODE_MAPS maps on tcmo.MOSN = maps.N_ITIMS_MOSN
+  		WHERE fIP IS NOT NULL AND fIP != ''
+	</select>
+</mapper>

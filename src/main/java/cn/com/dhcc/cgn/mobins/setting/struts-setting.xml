@@ -119,7 +119,6 @@
             </result>
 		</action>
 		
-		
 		<!-- 巡检策略应用 修改状态 -->
 		<action name="updateStrageApply" class="cn.com.dhcc.cgn.mobins.setting.action.StrageApplyAction" >
             <result type="json">

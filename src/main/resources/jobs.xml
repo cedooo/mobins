@@ -68,12 +68,29 @@
 		<!-- 每1分钟运行一次 -->
 		<property name="cronExpression" value="0 0 12 * * ?" />
 	</bean>
-	
+	<!-- 发送设备信息到IT100 -->
+		
+	<bean id="sendResourcesJob" class="cn.com.dhcc.cgn.it100.job.SendResourcesJob" ></bean>
+	<!-- 任务详细 -->
+	<bean id="sendResourcesInfoJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 指定任务类 -->
+		<property name="targetObject" ref="sendResourcesJob" />
+		<!-- 指定任务执行的方法 -->
+		<property name="targetMethod" value="execute" />
+	</bean>
+	<bean id="sendResourcesInfoJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="sendResourcesInfoJobDetail" />
+		<!-- 每周五运行一次 -->
+		<property name="cronExpression" value="0 0 1 ? * FRI" />
+	</bean>
 	<!-- 执行列表 -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
 				<ref bean="inspectionJobTrigger" />
+				<ref bean="sendResourcesInfoJobTrigger" />
 			</list>
 		</property>
 	</bean>

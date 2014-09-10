@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<properties resource="cn/com/dhcc/cgn/mobins/db/db.properties"></properties>
-	<environments default="devSQLServer2008">
+	<environments default="cgnSQLServer2008">
 		<environment id="devSQLServer2008">
 			<transactionManager type="JDBC"/>
 			<dataSource type="POOLED">
@@ -38,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="cn/com/dhcc/cgn/mobins/inspection/dao/wsclient-sqlmap.xml" />
 		<mapper resource="cn/com/dhcc/cgn/mobins/setting/dao/apply-sqlmap.xml" />
 		<mapper resource="cn/com/dhcc/cgn/mobins/setting/dao/mosn-sqlmap.xml" />
+		<mapper resource="cn/com/dhcc/cgn/it100/dao/cmo-sqlmap.xml" />
 		<!-- 
 		<mapper resource="cn/com/dhcc/inspection/collector/cnf/sqlmap/cnf-sqlmap.xml" />
 		-->
