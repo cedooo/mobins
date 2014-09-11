@@ -28,7 +28,8 @@ public class SendResourcesJob{
 		}
 		WebServiceImpl webServiceImpl = new WebServiceImpl();
 		int result = webServiceImpl.sendAllResouceInfo(listResouceInfo);
-System.out.println("发送所有网元设备信息：" + (result==1?"成功":(result==2?"部分成功":"失败")));
+		System.out.println("发送所有网元设备信息：" + (result==1?"成功":(result==2?"部分成功":"失败")));
+
 	}
 
 }
