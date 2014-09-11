@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.apache.ibatis.session.SqlSession;
 
-import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
+import cn.com.dhcc.cgn.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.po.InspectionRecords;
 import cn.com.dhcc.cgn.mobins.pojo.ConstantsAndCommon;
 

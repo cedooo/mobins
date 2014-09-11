@@ -2,7 +2,7 @@ package cn.com.dhcc.cgn.mobins.report.service.impl;
 
 import org.apache.ibatis.session.SqlSession;
 
-import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
+import cn.com.dhcc.cgn.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.po.InspectionRecords;
 import cn.com.dhcc.cgn.mobins.report.service.InspectionRecordsService;
 

@@ -1,4 +1,4 @@
-package cn.com.dhcc.cgn.mobins.db;
+package cn.com.dhcc.cgn.db;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -21,7 +21,7 @@ public final class DBFactoryBuilder {
 	static final private Logger log = LoggerFactory.getLogger(DBFactoryBuilder.class.getClass());
 	
 	static private SqlSessionFactory sqlSessionFactory;
-	static private final String resource = "cn/com/dhcc/cgn/mobins/db/mybatis-config.xml";
+	static private final String resource = "cn/com/dhcc/cgn/db/mybatis-config.xml";
 	static{
 		log.info("==============数据库连接初始化==============");
 		InputStream inputStream = null;

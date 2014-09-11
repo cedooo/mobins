@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
+import cn.com.dhcc.cgn.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.po.MobDestHost;
 import cn.com.dhcc.cgn.mobins.pojo.search.impl.DestHostSearchCondition;
 import cn.com.dhcc.cgn.mobins.setting.service.MobDestHostService;

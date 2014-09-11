@@ -158,6 +158,8 @@
 			<version>20140107</version>
 		</dependency>
 		
+		<!-- 自定义JAR -->
+		
 	</dependencies>
 	<build>
 		<finalName>mobins</finalName>

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
+import cn.com.dhcc.cgn.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.po.InspectionAlarmHold;
 import cn.com.dhcc.cgn.mobins.po.InspectionPoint;
 import cn.com.dhcc.cgn.mobins.pojo.search.impl.InspectionPointSearchCondition;

@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import cn.com.dhcc.cgn.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.it100.pojo.ITIMSResourceInfo;
 import cn.com.dhcc.cgn.it100.webservice.impl.WebServiceImpl;
-import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
 
 public class SendResourcesJob{
 	
@@ -26,15 +26,9 @@ public class SendResourcesJob{
 				sess.close();
 			}
 		}
-		/*
-		System.out.println("查询成功");
-		for (ITIMSResourceInfo itimsResourceInfo : listResouceInfo) {
-			System.out.println(itimsResourceInfo);
-		}
-		*/
 		WebServiceImpl webServiceImpl = new WebServiceImpl();
 		int result = webServiceImpl.sendAllResouceInfo(listResouceInfo);
-		System.out.println("发送所有网元设备信息：" + (result==1?"成功":(result==2?"部分成功":"失败")));
+System.out.println("发送所有网元设备信息：" + (result==1?"成功":(result==2?"部分成功":"失败")));
 	}
 
 }

@@ -1,4 +1,4 @@
-package cn.com.dhcc.cgn.mobins.db;
+package cn.com.dhcc.cgn.db;
 
 import static org.junit.Assert.*;
 

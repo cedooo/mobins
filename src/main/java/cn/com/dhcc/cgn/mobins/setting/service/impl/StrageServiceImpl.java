@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
-import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
+import cn.com.dhcc.cgn.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.po.InspectionAlarmHold;
 import cn.com.dhcc.cgn.mobins.po.InspectionStrage;
 import cn.com.dhcc.cgn.mobins.po.StrageApplyHost;

@@ -2,7 +2,7 @@ package cn.com.dhcc.cgn.mobins.setting.service.impl;
 
 import org.apache.ibatis.session.SqlSession;
 
-import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
+import cn.com.dhcc.cgn.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.setting.service.MosnService;
 
 public class MosnServiceImpl implements MosnService {

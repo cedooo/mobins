@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
+import cn.com.dhcc.cgn.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.inspection.client.Event;
 import cn.com.dhcc.cgn.mobins.inspection.client.EventFactory;
 import cn.com.dhcc.cgn.mobins.inspection.client.WSClient;

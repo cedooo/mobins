@@ -10,7 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
-import cn.com.dhcc.cgn.mobins.db.DBFactoryBuilder;
+import cn.com.dhcc.cgn.db.DBFactoryBuilder;
 import cn.com.dhcc.cgn.mobins.inspection.dao.AnalysisInfo;
 import cn.com.dhcc.cgn.mobins.inspection.match.ResultMatch;
 import cn.com.dhcc.cgn.mobins.inspection.match.result.MatchResult;
