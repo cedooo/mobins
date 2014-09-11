@@ -8,7 +8,7 @@
 	<bean id="hostInspectionPointService"
 		class="cn.com.dhcc.cgn.mobins.inspection.service.impl.HostInspectionPointServiceImpl" >
 	</bean>
-	<!-- 执行 -->
+	<!-- 巡检命令执行 -->
 	<bean id="commandExecutor"
 		class="cn.com.dhcc.cgn.mobins.inspection.job.executor.impl.SSHCommandListExecutor" >
 	</bean>
@@ -53,8 +53,9 @@
 	</bean>
 	
 	<!-- =================== -->
-	<!-- 巡检调度 -->
+	<!-- 任务调度 -->
 	<!-- =================== -->
+	<!-- 巡检 -->
 	<bean id="inspectionJobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!-- 指定任务类 -->
@@ -68,8 +69,8 @@
 		<!-- 每1分钟运行一次 -->
 		<property name="cronExpression" value="0 0 12 * * ?" />
 	</bean>
+	
 	<!-- 发送设备信息到IT100 -->
-		
 	<bean id="sendResourcesJob" class="cn.com.dhcc.cgn.it100.job.SendResourcesJob" ></bean>
 	<!-- 任务详细 -->
 	<bean id="sendResourcesInfoJobDetail"
@@ -85,7 +86,8 @@
 		<!-- 每周五运行一次 -->
 		<property name="cronExpression" value="0 0 1 ? * FRI" />
 	</bean>
-	<!-- 执行列表 -->
+	
+	<!-- 任务执行列表 -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>

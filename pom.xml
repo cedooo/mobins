@@ -159,7 +159,13 @@
 		</dependency>
 		
 		<!-- 自定义JAR -->
-		
+		<dependency>
+			<groupId>cn.com.dhcc.cgn</groupId>
+			<artifactId>it100</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>E:\DevLib\it100-0.0.1-SNAPSHOT.jar</systemPath>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>mobins</finalName>
