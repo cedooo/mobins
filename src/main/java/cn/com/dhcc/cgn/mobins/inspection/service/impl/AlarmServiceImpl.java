@@ -55,7 +55,7 @@ public class AlarmServiceImpl extends AlarmService {
 							}
 							if(level>0){
 								LOG.info("发出告警: " + event.toString());
-								//TODO client.postAlarm(event);
+								client.postAlarm(event);
 								excepCount++;
 							}
 						}

@@ -39,8 +39,5 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="cn/com/dhcc/cgn/mobins/setting/dao/apply-sqlmap.xml" />
 		<mapper resource="cn/com/dhcc/cgn/mobins/setting/dao/mosn-sqlmap.xml" />
 		<mapper resource="cn/com/dhcc/cgn/it100/dao/cmo-sqlmap.xml" />
-		<!-- 
-		<mapper resource="cn/com/dhcc/inspection/collector/cnf/sqlmap/cnf-sqlmap.xml" />
-		-->
 	</mappers>
 </configuration>
