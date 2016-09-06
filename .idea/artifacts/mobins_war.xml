@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="mobins:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="mobins.war">
+      <element id="artifact" artifact-name="mobins:war exploded" />
+    </root>
+  </artifact>
+</component>
