@@ -14,12 +14,12 @@ import cn.com.dhcc.cgn.mobins.po.MobInsTarget;
 
 public class ReportServiceImplTest {
 	private ReportServiceImpl serv = new ReportServiceImpl();
-	//@Test
+	@Test
 	public void testListReportAll() {
 		List<InspectionReport> list = serv.listReportAll();
 		assertEquals(true, list!=null);
 	}
-	@Test
+	//@Test
 	public void testAddReport(){
 		InspectionReport report = new InspectionReport();
 		report.setMaintUser("root");
