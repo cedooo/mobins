@@ -72,6 +72,7 @@
           <element id="library" level="project" name="Maven: org.apache.ant:ant-launcher:1.7.0" />
           <element id="library" level="project" name="Maven: org.apache.ws.commons.schema:XmlSchema:1.4.7" />
           <element id="library" level="project" name="Maven: org.json:json:20140107" />
+          <element id="library" level="project" name="Maven: com.hynnet:sqljdbc4-chs:4.0.2206.100" />
         </element>
       </element>
       <element id="directory" name="META-INF">
